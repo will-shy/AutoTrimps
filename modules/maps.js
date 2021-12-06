@@ -1616,6 +1616,10 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
+		if (getPageSetting('Rfrozencastle') != -1 && theMap.name == 'Frozen Castle' && game.global.world >= getPageSetting('Rfrozencastle')[0] && ((game.global.lastClearedCell + 1) >= getPageSetting('Rfrozencastle')[1])) {
+                    selectedMap = theMap.id;
+                    break;
+                }
             }
         }
     }
