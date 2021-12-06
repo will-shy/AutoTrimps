@@ -3618,7 +3618,8 @@ var fastimps =
 	"Beetlimp",
 	"Mantimp",
         "Butterflimp",
-	"Frosnimp"
+	"Frosnimp",
+	"Turkimp"
     ];
 
 function Rmanageequality() {
