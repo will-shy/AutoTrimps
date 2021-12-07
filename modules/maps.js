@@ -724,13 +724,17 @@ function autoMap() {
             lastMapWeWereIn = getCurrentMapObject();
         }
     }
-
+    console.log("farmWonders")
     // Experience Challenge
     if (getPageSetting('farmWonders') && game.global.challengeActive == "Experience") {
+        console.log("farmWonders in")
         if(game.global.world == game.challenges.Experience.nextWonder && wondersAmount > game.challenges.Experience.wonders) {
+            console.log("farmWonders valid")
             if(game.global.mapsOwnedArray[highestMap].level >= game.global.world) {
+                console.log("farmWonders selectMap")
                 selectedMap = game.global.mapsOwnedArray[highestMap].id
             } else {
+                console.log("farmWonders create")
                 selectedMap = "create";
             }
         }
