@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         AutoTrimps-Zek
 // @version      1.0-Zek
-// @namespace    https://Zorn192.github.io/AutoTrimps
-// @updateURL    https://Zorn192.github.io/AutoTrimps/.user.js
+// @namespace    https://Luterium.github.io/AutoTrimps
+// @updateURL    https://Luterium.github.io/AutoTrimps/.user.js
 // @description  Automate all the trimps!
 // @author       zininzinin, spindrjr, Ishkaru, genBTC, Zeker0
 // @include      *trimps.github.io*
 // @include      *kongregate.com/games/GreenSatellite/trimps
-// @connect      *Zorn192.github.io/AutoTrimps*
+// @connect      *Luterium.github.io/AutoTrimps*
 // @connect      *trimps.github.io*
 // @connect      self
 // @grant        GM_xmlhttpRequest 
