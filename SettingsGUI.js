@@ -1713,6 +1713,7 @@ function updateCustomButtons() {
     !radonon ? turnOn("AdvMapSpecialModifier"): turnOff("AdvMapSpecialModifier");
     !radonon ? turnOn("scryvoidmaps"): turnOff("scryvoidmaps");
     !radonon ? turnOn("buywepsvoid"): turnOff("buywepsvoid");
+    console.log("Highest cleared zone" + game.global.highestLevelCleared)
     game.global.highestLevelCleared > 600 ? turnOn("farmWonders") : turnOff("farmWonders");
     game.global.highestLevelCleared > 600 ? turnOn("wondersAmount") : turnOff("wondersAmount");
     game.global.highestLevelCleared > 600 ? turnOn("finishWondersAt") : turnOff("finishWondersAt");
