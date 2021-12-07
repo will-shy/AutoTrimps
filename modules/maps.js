@@ -739,12 +739,10 @@ function autoMap() {
     // Experience Challenge
     if (getPageSetting('farmWonders') && game.global.challengeActive == "Experience") {
         if(game.global.world >= game.challenges.Experience.nextWonder && getPageSetting('wondersAmount') > game.challenges.Experience.wonders) {
-            console.log("farmWonders valid")
             shouldFarmWonder = true
-            if(game.global.mapsOwnedArray.filter(function (map) {
+            if(!game.global.mapsActive && game.global.mapsOwnedArray.filter(function (map) {
                 return map.level == game.global.world;
             }).length >= 1) {
-                console.log("farmWonders selectMap")
                 var mapID = game.global.mapsOwnedArray.find(function (map) {
                     return map.level == game.global.world;
                 }).id;
@@ -752,8 +750,23 @@ function autoMap() {
                 selectMap(mapID);
                 runMap();
             } else {
-                console.log("farmWonders create")
-                selectedMap = "create";
+                maplvlpicked = game.global.world
+                debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
+                var result = buyMap();
+                if (result == -2) {
+                    debug("Too many maps, recycling now: ", "maps", 'th-large');
+                    recycleBelow(true);
+                    debug("Retrying, Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
+                    result = buyMap();
+                    if (result == -2) {
+                        recycleMap(lowestMap);
+                        result = buyMap();
+                        if (result == -2)
+                            debug("AutoMaps unable to recycle to buy map!");
+                        else
+                            debug("Retrying map buy after recycling lowest level map");
+                    }
+                }
             }
         }
     }
