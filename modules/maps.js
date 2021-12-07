@@ -29,6 +29,7 @@ var spireMapBonusFarming = !1;
 var spireTime = 0;
 var doMaxMapBonus = !1;
 var vanillaMapatZone = !1;
+var shouldFarmWonder = false;
 var additionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
 
 function updateAutoMapsStatus(get) {
@@ -690,6 +691,9 @@ function autoMap() {
             if (getPageSetting('AdvMapSpecialModifier'))
                 testMapSpecialModController();
             var maplvlpicked = parseInt($mapLevelInput.value) + (getPageSetting('AdvMapSpecialModifier') ? getExtraMapLevels() : 0);
+            if (shouldFarmWonder) {
+                maplvlpicked = game.global.world
+            }
             if (updateMapCost(true) > game.resources.fragments.owned) {
                 selectMap(game.global.mapsOwnedArray[highestMap].id);
                 debug("Can't afford the map we designed, #" + maplvlpicked, "maps", '*crying2');
@@ -729,9 +733,12 @@ function autoMap() {
         console.log("farmWonders in")
         if(game.global.world >= game.challenges.Experience.nextWonder && getPageSetting('wondersAmount') > game.challenges.Experience.wonders) {
             console.log("farmWonders valid")
+            shouldFarmWonder = true
             if(game.global.mapsOwnedArray[highestMap].level >= game.global.world) {
                 console.log("farmWonders selectMap")
-                selectedMap = game.global.mapsOwnedArray[highestMap].id
+                selectedMap = game.global.mapsOwnedArray.find(function (map) {
+                    return map.level == game.global.world;
+                }).id;
             } else {
                 console.log("farmWonders create")
                 selectedMap = "create";
