@@ -746,8 +746,11 @@ function autoMap() {
                 selectMap(mapID);
                 runMap();
             } else if (!game.globa.mapsActive) {
+                debug("Trying to buy map");
+                selectedMap = "create"
                 maplvlpicked = game.global.world
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
+                mapsClicked(true)
                 var result = buyMap();
                 if (result == -2) {
                     debug("Too many maps, recycling now: ", "maps", 'th-large');
