@@ -749,7 +749,7 @@ function autoMap() {
                     return map.level == game.global.world;
                 }).id;
                 selectedMap = mapID;
-                selectedMap(mapID);
+                selectMap(mapID);
                 runMap();
             } else {
                 console.log("farmWonders create")
