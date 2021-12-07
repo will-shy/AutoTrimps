@@ -692,6 +692,8 @@ function autoMap() {
                 testMapSpecialModController();
             var maplvlpicked = parseInt($mapLevelInput.value) + (getPageSetting('AdvMapSpecialModifier') ? getExtraMapLevels() : 0);
             if (shouldFarmWonder) {
+                console.log("Creating map?");
+                mapsClicked(true);
                 maplvlpicked = game.global.world
             }
             if (updateMapCost(true) > game.resources.fragments.owned) {
