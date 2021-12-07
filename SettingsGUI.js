@@ -1715,7 +1715,6 @@ function updateCustomButtons() {
     console.log("Highest cleared zone" + game.global.highestLevelCleared)
     game.global.highestLevelCleared > 600 ? turnOn("farmWonders") : turnOff("farmWonders");
     game.global.highestLevelCleared > 600 ? turnOn("wondersAmount") : turnOff("wondersAmount");
-    game.global.highestLevelCleared > 600 ? turnOn("finishWondersAt") : turnOff("finishWondersAt");
     
     //RMaps
     radonon ? turnOn("RAutoMaps"): turnOff("RAutoMaps");
