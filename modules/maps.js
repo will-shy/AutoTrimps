@@ -745,7 +745,7 @@ function autoMap() {
                 selectedMap = mapID;
                 selectMap(mapID);
                 runMap();
-            } else if (!game.globa.mapsActive) {
+            } else if (!game.global.mapsActive) {
                 debug("Trying to buy map");
                 selectedMap = "create"
                 maplvlpicked = game.global.world
