@@ -749,7 +749,7 @@ function autoMap() {
                 selectedMap = mapID;
                 selectMap(mapID);
                 runMap();
-            } else {
+            } else if (!game.globa.mapsActive) {
                 maplvlpicked = game.global.world
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
                 var result = buyMap();
