@@ -582,6 +582,11 @@ function autoMap() {
             mapsClicked();
         return;
     }
+
+    if (shouldFarmWonder) {
+        mapsClicked(true)
+    }
+
     if (!game.global.preMapsActive && game.global.mapsActive) {
         var doDefaultMapBonus = game.global.mapBonus < getPageSetting('MaxMapBonuslimit') - 1;
         if (selectedMap == game.global.currentMapId && (!getCurrentMapObject().noRecycle && (doDefaultMapBonus || vanillaMapatZone || doMaxMapBonus || shouldFarm || needPrestige || shouldDoSpireMaps))) {
@@ -730,17 +735,22 @@ function autoMap() {
             lastMapWeWereIn = getCurrentMapObject();
         }
     }
+
     // Experience Challenge
     if (getPageSetting('farmWonders') && game.global.challengeActive == "Experience") {
-        console.log("farmWonders in")
         if(game.global.world >= game.challenges.Experience.nextWonder && getPageSetting('wondersAmount') > game.challenges.Experience.wonders) {
             console.log("farmWonders valid")
             shouldFarmWonder = true
-            if(game.global.mapsOwnedArray[highestMap].level >= game.global.world) {
+            if(game.global.mapsOwnedArray.filter(function (map) {
+                return map.level == game.global.world;
+            }).length >= 1) {
                 console.log("farmWonders selectMap")
-                selectedMap = game.global.mapsOwnedArray.find(function (map) {
+                var mapID = game.global.mapsOwnedArray.find(function (map) {
                     return map.level == game.global.world;
                 }).id;
+                selectedMap = mapID;
+                selectedMap(mapID);
+                runMap();
             } else {
                 console.log("farmWonders create")
                 selectedMap = "create";
