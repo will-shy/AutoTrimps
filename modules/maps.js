@@ -741,7 +741,6 @@ function autoMap() {
                 selectMap(mapID);
                 runMap();
             } else if (!game.global.mapsActive) {
-                debug("Trying to buy map");
                 selectedMap = "create"
                 maplvlpicked = game.global.world
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
