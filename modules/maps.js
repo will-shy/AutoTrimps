@@ -724,6 +724,18 @@ function autoMap() {
             lastMapWeWereIn = getCurrentMapObject();
         }
     }
+
+    // Experience Challenge
+    if (getPageSetting('farmWonders') && game.global.challengeActive == "Experience") {
+        if(game.global.world == game.challenges.Experience.nextWonder) {
+            if(game.global.mapsOwnedArray[highestMap].level >= game.global.world) {
+                selectedMap = game.global.mapsOwnedArray[highestMap].id
+            } else {
+                selectedMap = "create";
+            }
+        }
+    }
+    
 }
 
 //Radon
