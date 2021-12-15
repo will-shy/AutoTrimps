@@ -706,7 +706,7 @@ function initializeAllSettings() {
     createSetting('Rchallengehideinsanity', 'Insanity', 'Set this on if you wish to hide the Insanity challenge settings. ', 'boolean', false, null, 'Challenges');
     createSetting('Rchallengehideexterminate', 'Exterminate', 'Set this on if you wish to hide the Exterminate challenge settings. ', 'boolean', false, null, 'Challenges');
     createSetting('Rchallengehidenurture', 'Nurture', 'Set this on if you wish to hide the Nurture challenge settings. ', 'boolean', false, null, 'Challenges');
-    createSetting('Rchallengehidepanda', 'Nurture', 'Set this on if you wish to hide the Pandemonium challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehidepanda', 'Pandemonium', 'Set this on if you wish to hide the Pandemonium challenge settings. ', 'boolean', false, null, 'Challenges');
     createSetting('Rchallengehidealchemy', 'Alchemy', 'Set this on if you wish to hide the Alchemy challenge settings. ', 'boolean', false, null, 'Challenges');
     createSetting('Rchallengehidehypothermia', 'Hypothermia', 'Set this on if you wish to hide the Hypothermia challenge settings. ', 'boolean', false, null, 'Challenges');
 
