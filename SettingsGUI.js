@@ -571,7 +571,7 @@ function initializeAllSettings() {
     createSetting('Rfrozencastle', 'Frozen Castle', '-1 to disable. When to run the map Frozen Castle. Use it like this: 200,91. The first number is what zone Frozen Castle should be run at, the second number is what Cell to run it at. In this example AutoMaps would run Frozen Castle at z200 cell 91. Must define both values. Works in any challenge so be careful. ', 'multiValue', [-1], null, 'Maps');
     
     //Timefarm
-    document.getElementById('Rmeltpoint').parentNode.insertAdjacentHTML('afterend', '<br>');
+    document.getElementById('Rfrozencastle').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rtimefarm', 'Time Farm', 'Turn this on if you want to use Time Farming. ', 'boolean', false, null, 'Maps');
     createSetting('Rtimefarmzone', 'TF: Zone', 'Farms for specified minutes in TF: Time at zone according to this settings value. Can use 59,61,62. ', 'multiValue', [-1], null, 'Maps');
     createSetting('Rtimefarmcell', 'TF: Cell', 'Time Farm at this Cell. -1 to run them at the default value, which is 1. ', 'value', '-1', null, 'Maps');
