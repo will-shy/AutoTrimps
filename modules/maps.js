@@ -1660,7 +1660,7 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
 		    }
-                    else if (getPageSetting('Rhypovoids') == false) {
+                    if (getPageSetting('Rhypovoids') == false) {
                     selectedMap = theMap.id;
                     break;
 		    }
