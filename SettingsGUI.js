@@ -1238,8 +1238,13 @@ function settingChanged(id) {
     }
     if (btn.type == 'dropdown') {
         btn.selected = document.getElementById(id).value;
-        if (id == "Prestige")
-            autoTrimpSettings["PrestigeBackup"].selected = document.getElementById(id).value;
+        if (id == "Prestige") {
+            autoTrimpSettings["PrestigeBackup"] = {
+              selected: document.getElementById(id).value,
+              name: "PrestigeBackup",
+              id: "PrestigeBackup"
+            };
+        }
     }
     updateCustomButtons();
     saveSettings();
