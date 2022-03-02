@@ -523,6 +523,9 @@ function autoMap() {
         for (var map in voidArraySorted) {
             var theMap = voidArraySorted[map];
             doVoids = true;
+            if (getPageSetting('novmsc2') == true && game.global.runningChallengeSquared) {
+		doVoids = false;
+	    }
             var eAttack = getEnemyMaxAttack(game.global.world, theMap.size, 'Voidsnimp', theMap.difficulty);
             if (game.global.world >= 181 || (game.global.challengeActive == "Corrupted" && game.global.world >= 60))
                 eAttack *= (getCorruptScale("attack") / 2).toFixed(1);
