@@ -696,11 +696,16 @@ function autoMap() {
                 testMapSpecialModController();
             var maplvlpicked = parseInt($mapLevelInput.value) + (getPageSetting('AdvMapSpecialModifier') ? getExtraMapLevels() : 0);
             if (updateMapCost(true) > game.resources.fragments.owned) {
-                selectMap(game.global.mapsOwnedArray[highestMap].id);
-                debug("Can't afford the map we designed, #" + maplvlpicked, "maps", '*crying2');
-                debug("...selected our highest map instead # " + game.global.mapsOwnedArray[highestMap].id + " Level: " + game.global.mapsOwnedArray[highestMap].level, "maps", '*happy2');
-                runMap();
-                lastMapWeWereIn = getCurrentMapObject();
+		if (game.jobs.Explorer.owned > 0) {
+                    selectMap(game.global.mapsOwnedArray[highestMap].id);
+                    debug("Can't afford the map we designed, #" + maplvlpicked, "maps", '*crying2');
+                    debug("...selected our highest map instead # " + game.global.mapsOwnedArray[highestMap].id + " Level: " + game.global.mapsOwnedArray[highestMap].level, "maps", '*happy2');
+                    runMap();
+                    lastMapWeWereIn = getCurrentMapObject();
+		}
+		else {
+		    selectedMap == "world"
+		}
             } else {
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
                 var result = buyMap();
