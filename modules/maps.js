@@ -696,7 +696,7 @@ function autoMap() {
                 testMapSpecialModController();
             var maplvlpicked = parseInt($mapLevelInput.value) + (getPageSetting('AdvMapSpecialModifier') ? getExtraMapLevels() : 0);
             if (updateMapCost(true) > game.resources.fragments.owned) {
-		if (game.jobs.Explorer.owned > 0) {
+		if (game.jobs.Explorer.owned > 0 || game.unlocks.imps.Flutimp == true) {
                     selectMap(game.global.mapsOwnedArray[highestMap].id);
                     debug("Can't afford the map we designed, #" + maplvlpicked, "maps", '*crying2');
                     debug("...selected our highest map instead # " + game.global.mapsOwnedArray[highestMap].id + " Level: " + game.global.mapsOwnedArray[highestMap].level, "maps", '*happy2');
