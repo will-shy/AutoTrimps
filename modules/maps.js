@@ -704,7 +704,7 @@ function autoMap() {
                     lastMapWeWereIn = getCurrentMapObject();
 		}
 		else {
-		    selectedMap == "world"
+		    selectedMap == "world";
 		}
             } else {
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
