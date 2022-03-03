@@ -636,7 +636,7 @@ function autoMap() {
             }
         }
     } else if (game.global.preMapsActive) {
-        if (selectedMap == "world") {
+        if (selectedMap == "world" || game.resources.fragments.owned <= 0) {
             mapsClicked();
         } else if (selectedMap == "create") {
             var $mapLevelInput = document.getElementById("mapLevelInput");
