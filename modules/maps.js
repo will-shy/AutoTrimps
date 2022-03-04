@@ -637,7 +637,7 @@ function autoMap() {
         }
     } else if (game.global.preMapsActive) {
         var minFragmentsNeeded = Math.floor((((game.global.world / 150) * (Math.pow(1.14, game.global.world - 1))) * game.global.world * 2) * Math.pow((1.03 + (game.global.world / 50000)), game.global.world))*2;
-        if (selectedMap == "world" || game.resources.fragments.owned < minFragmentsNeeded) {
+        if (selectedMap == "world") {
             mapsClicked();
         } else if (selectedMap == "create") {
             var $mapLevelInput = document.getElementById("mapLevelInput");
