@@ -1,13 +1,15 @@
 # AutoTrimps - Zek Fork
 
 ## Discussion / Discord Channel
-<a href="https://discord.gg/Ztcnfjr"><img src="https://png.icons8.com/color/180/discord-new-logo.png" width=48></a>
+<a href="https://discord.gg/Ztcnfjr"><img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" width=48></a>
 Discord is a chat program. Come to talk about AutoTrimps, for help, or suggestions for new features : https://discord.gg/Ztcnfjr
 
 ## Current Version - Ongoing Development!
-- Zek Fork. All changes made by Zek using GenBTC as base. Currently up-to-date as of 06/2020.
+- Zek Fork. All changes made by Zek using GenBTC as base. Currently up-to-date as of 03/2022.
 
 ## Script Installation
+
+- Browser
 
 Step 1: Install TamperMonkey
 
@@ -20,6 +22,14 @@ Click this link: https://github.com/Zorn192/AutoTrimps/raw/gh-pages/.user.js
 Step 3: 
 
 Configure settings. Will NOT work as intended with default settings. 
+
+- Steam
+
+Step 1: Download mods.js from this directory, or copy it and make your own mods.js in a text file.
+
+Step 2: Navigate to Steam\steamapps\common\Trimps and place mods.js into the folder. If you have other mods installed then just copy the text in AT's mods.js and place it somewhere in mods.js file.
+
+Step 3: Configure your settings. AT will not work properly if they are not configured!
 
 ## Equipment && Upgrade's colour explaination:
 
