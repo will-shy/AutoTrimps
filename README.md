@@ -23,11 +23,12 @@ If clicking the link does not work, copy the contents of user.js into a new scri
 
 If you are unsure how to do that, copy this:
 
-var script = document.createElement('script');
+```var script = document.createElement('script');
 script.id = 'AutoTrimps-Zek';
 script.src = 'https://Zorn192.github.io/AutoTrimps/AutoTrimps2.js';
 script.setAttribute('crossorigin',"anonymous");
 document.head.appendChild(script);
+```
 
 Press F12 inside the game, this opens the console, and paste the text into it and hit enter, this will load the script. You will have to do this everytime you refresh the game though so I recommend getting tampermonkey to do it for you!
 
