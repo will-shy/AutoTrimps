@@ -38,7 +38,7 @@ Configure settings. Will NOT work as intended with default settings.
 
 - Steam
 
-Step 1: Download mods.js from this directory, or copy it and make your own mods.js in a text file.
+Step 1: Download <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js">mods.js</a> from this directory (right click raw and save link as...), or copy it and make your own mods.js in a text file.
 
 Step 2: Navigate to Steam\steamapps\common\Trimps and place mods.js into the folder. If you have other mods installed then just copy the text in AT's mods.js and place it somewhere in mods.js file.
 
