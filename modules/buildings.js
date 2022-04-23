@@ -14,7 +14,7 @@ function safeBuyBuilding(building) {
         return false;
     var oldBuy = preBuy2();
 
-  if (game.talents.deciBuild.purchased) {
+  if (bwRewardUnlocked("DecaBuild")) {
         game.global.buyAmt = 10;
     if (!canAffordBuilding(building)) {
         game.global.buyAmt = 2;
@@ -247,7 +247,7 @@ function RsafeBuyBuilding(building) {
         return false;
     var oldBuy = preBuy2();
 
-  if (game.talents.deciBuild.purchased) {
+  if (bwRewardUnlocked("DecaBuild")) {
         game.global.buyAmt = 10;
     if (!canAffordBuilding(building)) {
         game.global.buyAmt = 2;
