@@ -664,6 +664,7 @@ function setGraphData(graph) {
             xTitle = "Zone";
             yTitle = "He/Hr % of LifetimeHe";
             yType = "Linear";
+            yminFloor = 0;
             precision = 4;
             break;
         case "He % / LifetimeHe":
@@ -672,6 +673,7 @@ function setGraphData(graph) {
             xTitle = "Zone";
             yTitle = "He % of LifetimeHe";
             yType = "Linear";
+            yminFloor = 0;
             precision = 4;
             break;
         case "Radon - Rn/Hr":
@@ -694,20 +696,22 @@ function setGraphData(graph) {
             yTitle = "Radon";
             yType = "Linear";
             break;
-        case "RnHr % / LifetimeHe":
+        case "RnHr % / LifetimeRn":
             graphData = allPurposeGraph("rnhr", true, "string");
-            title = "Rn/Hr % of LifetimeHe";
+            title = "Rn/Hr % of LifetimeRn";
             xTitle = "Zone";
-            yTitle = "Rn/Hr % of LifetimeHe";
+            yTitle = "Rn/Hr % of LifetimeRn";
             yType = "Linear";
+            yminFloor = 0;
             precision = 4;
             break;
-        case "Rn % / LifetimeHe":
+        case "Rn % / LifetimeRn":
             graphData = allPurposeGraph("rnlife", true, "string");
             title = "Rn % of LifetimeRn";
             xTitle = "Zone";
             yTitle = "Rn % of LifetimeRn";
             yType = "Linear";
+            yminFloor = 0;
             precision = 4;
             break;
         case "Void Map History":
