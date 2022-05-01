@@ -103,12 +103,12 @@ function addDarkGraphs() {
     var a = document.getElementById("dark-graph.css");
     if (!a) {
         var b = document.createElement("link");
-        (b.rel = "stylesheet"), (b.type = "text/css"), (b.id = "dark-graph.css"), (b.href = basepath + "dark-graph.css"), document.head.appendChild(b), debug("Adding dark-graph.css file", "graphs");
+        (b.rel = "stylesheet"), (b.type = "text/css"), (b.id = "dark-graph.css"), (b.href = basepath + "dark-graph.css"), document.head.appendChild(b), debug2("Adding dark-graph.css file", "graphs");
     }
 }
 function removeDarkGraphs() {
     var a = document.getElementById("dark-graph.css");
-    a && (document.head.removeChild(a), debug("Removing dark-graph.css file", "graphs"));
+    a && (document.head.removeChild(a), debug2("Removing dark-graph.css file", "graphs"));
 }
 function toggleDarkGraphs() {
     if (game) {
@@ -284,7 +284,7 @@ function getTotalDarkEssenceCount() {
 }
 
 function pushData() {
-    debug("Starting Zone " + game.global.world, "graphs");
+    debug2("Starting Zone " + game.global.world, "graphs");
     var getPercent = (game.stats.heliumHour.value() / (game.global.totalHeliumEarned - (game.global.heliumLeftover + game.resources.helium.owned))) * 100;
     var lifetime = (game.resources.helium.owned / (game.global.totalHeliumEarned - game.resources.helium.owned)) * 100;
     var RgetPercent = (game.stats.heliumHour.value() / (game.global.totalRadonEarned - (game.global.radonLeftover + game.resources.radon.owned))) * 100;
