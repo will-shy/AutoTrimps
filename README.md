@@ -46,7 +46,7 @@ Configure settings. Will NOT work as intended with default settings.
 
 Step 1: 
 
-Download <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js">mods.js</a> from this directory (right click raw and save link as...), or copy it and make your own mods.js in a text file.
+Download <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js">mods.js</a> from this directory (First, go to the file, then right click Raw and save link as..., DO NOT RIGHT CLICK THIS ONE), or copy it and make your own mods.js in a text file.
 
 Step 2: 
 
@@ -91,7 +91,7 @@ Enjoy your Graphs!
 
 Step 1: 
 
-Download <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/modsGRAPH.js">modsGRAPH.js</a> from this directory (right click raw and save link as...), or copy it and make your own modsGRAPH.js in a text file.
+Download <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/modsGRAPH.js">modsGRAPH.js</a> from this directory (First, go to the file, then right click Raw and save link as..., DO NOT RIGHT CLICK THIS ONE), or copy it and make your own modsGRAPH.js in a text file.
 
 Step 2: 
 
