@@ -51,6 +51,9 @@ Inside this folder, navigate to the mods folder (you should be in Steam\steamapp
 Advanced users: If you have other mods installed then just copy the text in AT's mods.js and place it somewhere in your existing mods.js file.
 
 Step 3:  
+Restart the game, or if the game is already running, hit F5 to refresh.
+
+Step 4:  
 Configure your settings. AT will not work properly if they are not configured!
 
 ## Graphs only Script Installation
@@ -94,6 +97,9 @@ Inside this folder, navigate to the mods folder (you should be in Steam\steamapp
 Advanced users: If you have other mods installed then just copy the text in AT's mods.js and place it somewhere in your existing mods.js file.
 
 Step 4:  
+Restart the game, or if the game is already running, hit F5 to refresh.
+
+Step 5:  
 Enjoy your Graphs!
 
 ## Equipment && Upgrade's colour explaination:
