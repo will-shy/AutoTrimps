@@ -37,7 +37,7 @@ Configure settings. Will NOT work as intended with default settings.
 ### Steam
 Step 1:  
 Go to this link to open the mods.js file on Github: <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js">mods.js</a>  
-Then, right click the Raw button, hit Save File as, and save the mods.js file somewhere to your computer where you can find it, like desktop.  
+Then, right click the Raw button, hit Save link as, and save the mods.js file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)  
 
 Step 2:  
@@ -77,7 +77,7 @@ Enjoy your Graphs!
 ### Steam
 Step 1:  
 Go to this link to open the modsGRAPH.js file on Github: <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/modsGRAPH.js">modsGRAPH.js</a>  
-Then, right click the Raw button, hit Save File as, and save the modsGRAPH.js file somewhere to your computer where you can find it, like desktop.  
+Then, right click the Raw button, hit Save link as, and save the modsGRAPH.js file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)  
 
 Step 2:  
