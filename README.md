@@ -36,9 +36,11 @@ Configure settings. Will NOT work as intended with default settings.
 
 ### Steam
 Step 1:  
-Go to this link to open the mods.js file on Github: <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js" download>mods.js</a>  
+Go to this link to open the mods.js file on Github: <a href="https://github.com/Zorn192/AutoTrimps/blob/gh-pages/mods.js">mods.js</a>  
 Then, right click the Raw button, hit Save link as, and save the mods.js file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)  
+
+<a href="https://github.com/Zorn192/AutoTrimps/raw/gh-pages/mods.js" download>Download</a>
 
 Step 2:  
 In your Steam Library (where you see all your games in the Steam app), right click on Trimps, go to Manage, then Browse local files.  
