@@ -66,7 +66,8 @@ Step 2:
 Click this link: https://github.com/Zorn192/AutoTrimps/blob/gh-pages/GraphsOnly.user.js  
 If clicking the link does not work, copy the contents of GraphsOnly.user.js into a new script inside tampermonkey.  
 If you are unsure how to do that, copy this:  
-```var script = document.createElement('script');
+```
+var script = document.createElement('script');
 script.id = 'AutoTrimps-Graphs';
 script.src = 'https://Zorn192.github.io/AutoTrimps/GraphsOnly.js';
 script.setAttribute('crossorigin',"anonymous");
