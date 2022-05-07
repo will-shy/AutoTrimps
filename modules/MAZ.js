@@ -34,7 +34,7 @@ function MAZLookalike(titleText, varPrefix, isItIn, event){
 	if (!titleText.includes('Quagmire Farm')) tooltipText += "<div class='windowLevel'>Map Level</div>"
 	if (titleText.includes('Tribute Farm')) tooltipText += "<div class='windowTributes'>Tributes</div>"
 	if (titleText.includes('Tribute Farm')) tooltipText += "<div class='windowMets'>Mets</div>"
-	if (titleText.includes('Time Farm')) tooltipText += "<div class='windowRepeat'>Repeat Count</div>"
+	if (titleText.includes('Time Farm')) tooltipText += "<div class='windowTime'>Time</div>"
 	if (titleText.includes('Quagmire Farm')) tooltipText += "<div class='windowBogs'>Bogs</div>"
 	if (titleText.includes('Insanity Farm')) tooltipText += "<div class='windowInsanity'>Insanity</div>"
 	if (titleText.includes('Alchemy Farm')) tooltipText += "<div class='windowPotionType'>Potion Type</div>"
@@ -52,7 +52,7 @@ function MAZLookalike(titleText, varPrefix, isItIn, event){
 			cell: 81,
 			level: -1,
 			special: 0,
-			repeat: 1,
+			time: 1,
 			gather: 0,
 			tributes: 0,
 			mets: 0,
@@ -67,7 +67,7 @@ function MAZLookalike(titleText, varPrefix, isItIn, event){
 			vals.world = autoTrimpSettings[varPrefix+"Zone"].value[x]
 			vals.cell = autoTrimpSettings[varPrefix+"Cell"].value[x] ? autoTrimpSettings[varPrefix+"Cell"].value[x] : 81;
 			if (!titleText.includes('Quagmire Farm')) vals.level = autoTrimpSettings[varPrefix+"MapLevel"].value[x]
-			if (titleText.includes('Time Farm')) vals.repeat = autoTrimpSettings[varPrefix+"Repeat"].value[x] ? autoTrimpSettings[varPrefix+"Repeat"].value[x] : 1;
+			if (titleText.includes('Time Farm')) vals.time = autoTrimpSettings[varPrefix+"time"].value[x] ? autoTrimpSettings[varPrefix+"time"].value[x] : 1;
 			if (titleText.includes('Tribute Farm')) vals.tributes = autoTrimpSettings[varPrefix+"Tributes"].value[x] ? autoTrimpSettings[varPrefix+"Tributes"].value[x] : 0;
 			if (titleText.includes('Tribute Farm')) vals.mets = autoTrimpSettings[varPrefix+"Mets"].value[x] ? autoTrimpSettings[varPrefix+"Mets"].value[x] : 0;
 			if (titleText.includes('Quagmire Farm')) vals.bogs = autoTrimpSettings[varPrefix+"Bog"].value[x] ? autoTrimpSettings[varPrefix+"Bog"].value[x] : 0;
@@ -88,7 +88,7 @@ function MAZLookalike(titleText, varPrefix, isItIn, event){
 		tooltipText += "<div class='windowWorld'><input value='" + vals.world + "' type='number' id='windowWorld" + x + "'/></div>";
 		tooltipText += "<div class='windowCell'><input value='" + vals.cell + "' type='number' id='windowCell" + x + "'/></div>";
 		if (!titleText.includes('Quagmire Farm')) tooltipText += "<div class='windowLevel'><input value='" + vals.level + "' type='number' id='windowLevel" + x + "'/></div>";
-		if (titleText.includes('Time Farm')) tooltipText += "<div class='windowRepeat'><input value='" + vals.repeat + "' type='number' id='windowRepeat" + x + "'/></div>";
+		if (titleText.includes('Time Farm')) tooltipText += "<div class='windowTime'><input value='" + vals.time + "' type='number' id='windowTime" + x + "'/></div>";
 		if (titleText.includes('Tribute Farm')) tooltipText += "<div class='windowTributes'><input value='" + vals.tributes + "' type='number' id='windowTributes" + x + "'/></div>";
 		if (titleText.includes('Tribute Farm')) tooltipText += "<div class='windowMets'><input value='" + vals.mets + "' type='number' id='windowMets" + x + "'/></div>";
 		if (titleText.includes('Quagmire Farm')) tooltipText += "<div class='windowBogs'><input value='" + vals.bogs + "' type='number' id='windowBogs" + x + "'/></div>";
@@ -138,7 +138,7 @@ function settingsWindowSave(titleText, varPrefix, reopen){
 		world = parseInt(document.getElementById('windowWorld' + x).value, 10);
 		var cell = parseInt(document.getElementById('windowCell' + x).value, 10);
 		if (!titleText.includes('Quag')) var level = parseInt(document.getElementById('windowLevel' + x).value, 10);
-		if (titleText.includes('Time Farm')) var repeat = parseInt(document.getElementById('windowRepeat' + x).value, 10);
+		if (titleText.includes('Time Farm')) var time = parseInt(document.getElementById('windowTime' + x).value, 10);
 		if (titleText.includes('Time Farm') || titleText.includes('Alch')) var special = document.getElementById('windowSpecial' + x).value;
 		if (titleText.includes('Tribute')) var tributes = parseInt(document.getElementById('windowTributes' + x).value, 10);
 		if (titleText.includes('Tribute')) var mets = parseInt(document.getElementById('windowMets' + x).value, 10);
@@ -163,13 +163,13 @@ function settingsWindowSave(titleText, varPrefix, reopen){
 		if (cell < 1) cell = 1;
 		if (cell > 100) cell = 100;
 
-		if (repeat < 0) repeat = 0;
+		if (time < 0) time = 0;
 		
 		var thisSetting = {
 			world: world,
 			cell: cell,
 			level: level,
-			repeat: repeat,
+			time: time,
 			special: special,
 			tributes: tributes,
 			mets: mets,
@@ -193,7 +193,7 @@ function settingsWindowSave(titleText, varPrefix, reopen){
 	autoTrimpSettings[varPrefix+"Zone"].value = [];
 	autoTrimpSettings[varPrefix+"Cell"].value  = [];
 	if (!titleText.includes('Quag')) autoTrimpSettings[varPrefix+"MapLevel"].value = [];
-	if (titleText.includes('Time Farm')) autoTrimpSettings[varPrefix+"Repeat"].value  = [];
+	if (titleText.includes('Time Farm')) autoTrimpSettings[varPrefix+"time"].value  = [];
 	if (titleText.includes('Time Farm') || varPrefix.includes('Alch')) autoTrimpSettings[varPrefix+"Special"].value = [];
 	if (titleText.includes('Tribute Farm')) autoTrimpSettings[varPrefix+"Tributes"].value = [];
 	if (titleText.includes('Tribute Farm')) autoTrimpSettings[varPrefix+"Mets"].value = [];
@@ -206,7 +206,7 @@ function settingsWindowSave(titleText, varPrefix, reopen){
 			autoTrimpSettings[varPrefix+"Zone"].value[x] = setting[x].world
 			autoTrimpSettings[varPrefix+"Cell"].value[x] = setting[x].cell
 			if (!titleText.includes('Quag')) autoTrimpSettings[varPrefix+"MapLevel"].value[x] = setting[x].level
-			if (titleText.includes('Time Farm')) autoTrimpSettings[varPrefix+"Repeat"].value[x] = setting[x].repeat
+			if (titleText.includes('Time Farm')) autoTrimpSettings[varPrefix+"time"].value[x] = setting[x].time
 			if (titleText.includes('Time Farm') || titleText.includes('Alch')) autoTrimpSettings[varPrefix+"Special"].value[x] = setting[x].special
 			if (titleText.includes('Tribute')) autoTrimpSettings[varPrefix+"Tributes"].value[x] = setting[x].tributes
 			if (titleText.includes('Tribute')) autoTrimpSettings[varPrefix+"Mets"].value[x] = setting[x].mets
