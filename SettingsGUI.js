@@ -1737,7 +1737,7 @@ function updateCustomButtons() {
     radonon ? turnOn("RDisableFarm"): turnOff("RDisableFarm");
 
     radonon ? turnOn("Rtimefarm"): turnOff("Rtimefarm");
-    (radonon && getPageSetting('Rtimefarm') == true) turnOn("Rtimefarmmaz"): turnOff("Rtimefarmmaz");
+    (radonon && getPageSetting('Rtimefarm') == true) ? turnOn("Rtimefarmmaz"): turnOff("Rtimefarmmaz");
     turnOff("Rtimefarmzone");
     turnOff("Rtimefarmcell");
     turnOff("Rtimefarmtime");
