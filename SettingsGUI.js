@@ -573,8 +573,8 @@ function initializeAllSettings() {
     //Timefarm
     document.getElementById('Rfrozencastle').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rtimefarm', 'Time Farm', 'Turn this on if you want to use Time Farming. ', 'boolean', false, null, 'Maps');
-    createSetting('Rtimefarmmaz', 'Time Farm Settings', 'Click to open the Time Farm settings. ', 'boolean', true, null, 'Μaps');
-    //document.getElementById('Rtimefarmmaz').setAttribute('onclick', 'MAZLookalike("Time Farm", "Rtimefarm")');
+    createSetting('Rtimefarmmaz', 'Time Farm Settings', 'Click to open the Time Farm settings. ', 'infoclick', 'false', null, 'maps');
+    document.getElementById('Rtimefarmmaz').setAttribute('onclick', 'MAZLookalike("Time Farm", "Rtimefarm")');
     createSetting('Rtimefarmzone', 'TF: Zone', 'Farms for specified minutes in TF: Time at zone according to this settings value. Can use 59,61,62. ', 'multiValue', [-1], null, 'Maps');
     createSetting('Rtimefarmcell', 'TF: Cell', 'Time Farm at this Cell. -1 to run them at the default value, which is 1. ', 'multiValue', [-1], null, 'Μaps');
     createSetting('Rtimefarmtime', 'TF: Time', 'How many minutes to farm at zone specified in TF. Can use 2,3,4. These values should match up to your TF zones. If using TF and TF: Times examples (59 and 2) it will farm at z59 for 2 minutes. ', 'multiValue', [-1], null, 'Maps');
