@@ -378,3 +378,6 @@ function mainCleanup() {
     }
 }
 function throwErrorfromMain(){throw new Error("We have successfully read the thrown error message out of the main file")}
+
+if (document.getElementById('tooltipDiv').classList.contains('tooltipExtraLg') === false)
+document.getElementById('tooltipDiv').style.overflowY = '';
