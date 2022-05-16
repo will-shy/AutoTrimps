@@ -562,6 +562,19 @@ function RbuyJobs() {
             allIn = "Scientist";
         }
     }
+    if (Rdshouldtimefarm) {
+        var dtimefarmzone = getPageSetting('Rdtimefarmzone');
+        var dtimefarmlevelindex = dtimefarmzone.indexOf(game.global.world);
+        if (autoTrimpSettings.Rdtimefarmspecial.value[dtimefarmlevelindex].includes('wc')) {
+            allIn = "Lumberjack";
+        } else if (autoTrimpSettings.Rdtimefarmspecial.value[dtimefarmlevelindex].includes('sc')) {
+            allIn = "Farmer";
+        } else if (autoTrimpSettings.Rdtimefarmspecial.value[dtimefarmlevelindex].includes('mc')) {
+            allIn = "Miner";
+        } else if (autoTrimpSettings.Rdtimefarmspecial.value[dtimefarmlevelindex].includes('rc')) {
+            allIn = "Scientist";
+        }
+    }
     if (Rshouldtributefarm) {
         var tributefarmzone = getPageSetting('Rtributefarmzone');
         var tributefarmlevelindex = tributefarmzone.indexOf(game.global.world);
