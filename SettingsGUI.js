@@ -1845,7 +1845,7 @@ function updateCustomButtons() {
     turnOff("Rtimefarmgather");
 
     radonon ? turnOn("Rtributefarm") : turnOff("Rtributefarm");
-    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmmaz"): turnOff("Rtributfarmmaz");
+    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmmaz"): turnOff("Rtributefarmmaz");
     turnOff("Rtributefarmzone");
     turnOff("Rtributefarmcell");
     turnOff("Rtributefarmamount");
