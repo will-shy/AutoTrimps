@@ -1622,7 +1622,7 @@ function RautoMap() {
         var hypofarmcell;
         var hypofarmzone = getPageSetting('Rhypofarmzone');
         var hypoamountfarmindex = hypofarmzone.indexOf(game.global.world);
-        hypofarmcell = ((getPageSetting('Rhypofarmcell') != 0) ? getPageSetting('Rhypofarmcell')[hypostacksfarmindex] : 1);
+        hypofarmcell = ((getPageSetting('Rhypofarmcell') != 0) ? getPageSetting('Rhypofarmcell')[hypoamountfarmindex] : 1);
         Rhypofarm = (getPageSetting('Rhypoon') == true && ((hypofarmcell <= 1) || (hypofarmcell > 1 && (game.global.lastClearedCell + 1) >= hypofarmcell)) && game.global.world > 5 && (game.global.challengeActive == "Hypothermia" && getPageSetting('Rhypofarmzone')[0] > 0 && getPageSetting('Rhypofarmstack').length > 0));
         if (Rhypofarm) {
             var hypofarmzone;
