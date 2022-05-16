@@ -161,7 +161,7 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
 	width: 9%;
 }
 
-.windowTributes, .windowMets, .windowBogs, .windowInsanity, .windowBonfire{
+.windowTributes, .windowMets, .windowBogs, .windowInsanity, .windowBonfire, windowMap, windowSetting{
 	width: 16%;
 }
 
@@ -173,11 +173,11 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
     width: 18%;
 }
 .windowPreset, .windowSpecial{
-	width: 18%;
+	width: 16%;
 }
-/* .windowGather{
-	width: 10%;
-} */
+.windowGather{
+	width: 12%;
+}
 
 .windowRepeat{
 	width: 8.5%;
