@@ -199,7 +199,22 @@ function RmanualLabor2() {
         if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "Science") {
             setGather('science');
         }
-    } else if (Rshouldtimefarm) {
+    } else if (Rdshouldtimefarm) {
+        var dtimefarmzone = getPageSetting('Rdtimefarmzone');
+        var dtimefarmlevelindex = dtimefarmzone.indexOf(game.global.world);
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Food") {
+            setGather('food');
+        }
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Wood") {
+            setGather('wood');
+        }
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Metal") {
+            setGather('metal');
+        }
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Science") {
+            setGather('science');
+        }
+    } else if (Rshouldtributefarm) {
         var tributefarmzone = getPageSetting('Rtributefarmzone');
         var tributefarmlevelindex = tributefarmzone.indexOf(game.global.world);
         if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "Food") {
