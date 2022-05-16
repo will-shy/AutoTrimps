@@ -129,7 +129,7 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
 	margin-top: 0.5vw;
 }
 
-.windowDelete, .windowWorld, .windowCheckbox, .windowPreset, .windowRepeat, .windowRepeatUntil, .windowExit, .windowBwWorld, .windowCell, .windowTimes, .windowThrough, .windowRx, .windowPrio, .windowTx, .windowLevel, .windowRepeat, .windowGather, .windowSpecial, .windowTributes, .windowMets, .windowBogs, .windowInsanity, .windowPotionType, .windowPotionNumber, .windowBonfire {
+.windowDelete, .windowWorld, .windowZone, .windowCheckbox, .windowPreset, .windowRepeat, .windowRepeatUntil, .windowExit, .windowBwWorld, .windowCell, .windowTimes, .windowThrough, .windowRx, .windowPrio, .windowTx, .windowLevel, .windowRepeat, .windowGather, .windowSpecial, .windowTributes, .windowMets, .windowBogs, .windowInsanity, .windowPotionType, .windowPotionNumber, .windowBonfire, .windowBoneDropdown, .windowBoneBelow, .windowBoneAmount, .windowBoneGather, .windowJobRatio {
 	display: inline-block;
 }
 
@@ -152,8 +152,13 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
 	cursor: pointer;
 }
 
-.windowWorld, .windowCell, .windowThrough, .windowLevel, .windowRepeat, .windowPotionNumber{
-	width: 10%;
+.windowJobRatio{
+	width: 15%;
+	cursor: pointer;
+}
+
+.windowWorld, .windowZone, .windowCell, .windowThrough, .windowLevel, .windowRepeat, .windowPotionNumber{
+	width: 9%;
 }
 
 .windowTributes, .windowMets, .windowBogs, .windowInsanity, .windowBonfire{
@@ -165,11 +170,14 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
 }
 
 .windowPotionType {
-    width: 21%;
+    width: 18%;
 }
-.windowPreset, .windowGather, .windowSpecial{
-	width: 26%;
+.windowPreset, .windowSpecial{
+	width: 18%;
 }
+/* .windowGather{
+	width: 10%;
+} */
 
 .windowRepeat{
 	width: 8.5%;
@@ -187,15 +195,23 @@ background: -webkit-linear-gradient(left, #323341 12%,#626368 29.5%,#727275 47%,
 	width: 17%;
 }
 
-.windowBwZoneOn .windowRepeatUntil, .windowRxOn .windowRepeatUntil{
-	width: 10%;
+.windowBoneGather {
+    width: 10%;
 }
 
-.windowBwZoneOff .windowBwWorld, .windowRxOff .windowRx{
+.windowBoneDropdown, .windowBoneBelow, .windowBoneAmount {
+    width: 10%;
+}
+
+.windowBwZoneOn .windowRepeatUntil, .windowGatherOn .windowSpecial{
+	width: 16%;
+}
+
+.windowBwZoneOff .windowBwWorld, .windowGatherOff .windowGather{
 	display: none;
 }
 
-.windowBwZoneOn .windowBwWorld, .windowRxOn .windowRx{
+.windowBwZoneOn .windowBwWorld, .windowGatherOn .windowGather{
 	width: 10%;
 }
 
