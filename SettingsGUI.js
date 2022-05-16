@@ -1601,6 +1601,9 @@ function updateCustomButtons() {
     //DRaid
     !radonon ? turnOn("dPraidingzone") : turnOff("dPraidingzone");
     !radonon ? turnOn("dPraidingcell") : turnOff("dPraidingcell");
+    !radonon ? turnOn("dPraidingHD") : turnOff("dPraidingHD");
+    !radonon ? turnOn("dPraidingP") : turnOff("dPraidingP");
+    !radonon ? turnOn("dPraidingI") : turnOff("dPraidingI");
     !radonon && getPageSetting('dPraidingzone') != -1 ? turnOn('dPraidHarder') : turnOff('dPraidHarder');
     !radonon && getPageSetting('dPraidHarder') ? turnOn('dPraidFarmFragsZ') : turnOff('dPraidFarmFragsZ');
     !radonon && getPageSetting('dPraidHarder') ? turnOn('dPraidBeforeFarmZ') : turnOff('dPraidBeforeFarmZ');
