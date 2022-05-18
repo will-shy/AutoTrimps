@@ -62,8 +62,8 @@ function safeFireJob(job, amount) {
     }
     var old = preBuy2();
     game.global.firing = true;
-    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
-    while (x >= 1 && freeWorkers == Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed()) {
+    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
+    while (x >= 1 && freeWorkers == Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed) {
         game.global.buyAmt = x;
         buyJob(job, true, true);
         x *= 2;
@@ -301,7 +301,7 @@ function RsafeBuyJob(jobTitle, amount) {
         return false;
     }
     var old = preBuy2();
-    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
+    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
     var result;
     if (amount < 0) {
         amount = Math.abs(amount);
@@ -342,8 +342,8 @@ function RsafeFireJob(job, amount) {
     }
     var old = preBuy2();
     game.global.firing = true;
-    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
-    while (x >= 1 && freeWorkers == Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed()) {
+    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
+    while (x >= 1 && freeWorkers == Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed) {
         game.global.buyAmt = x;
         buyJob(job, true, true);
         x *= 2;
@@ -380,7 +380,7 @@ function RworkerRatios() {
 
 function RquestbuyJobs() {
 
-    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
+    var freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
     var totalDistributableWorkers = freeWorkers + game.jobs.Farmer.owned + game.jobs.Miner.owned + game.jobs.Lumberjack.owned;
 
     var farmerRatio = 0;
@@ -411,7 +411,7 @@ function RquestbuyJobs() {
         }
     }
 
-    freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
+    freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
     totalDistributableWorkers = freeWorkers + game.jobs.Farmer.owned + game.jobs.Miner.owned + game.jobs.Lumberjack.owned;
 
     if (scientistNumber > (totalDistributableWorkers * 0.00001) && !game.jobs.Scientist.locked) {
@@ -428,7 +428,7 @@ function RquestbuyJobs() {
         RsafeBuyJob("Explorer", 1);
     }
 
-    freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - trimpsEffectivelyEmployed();
+    freeWorkers = Math.ceil(game.resources.trimps.realMax() / 2) - game.resources.trimps.employed;
     totalDistributableWorkers = freeWorkers + game.jobs.Farmer.owned + game.jobs.Miner.owned + game.jobs.Lumberjack.owned;
 
     var farmerkeep = totalDistributableWorkers * 0.01;
