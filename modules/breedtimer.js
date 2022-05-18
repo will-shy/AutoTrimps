@@ -7,7 +7,7 @@ function trimpsEffectivelyEmployed() {
 
     //Multitasking
     if (game.permaBoneBonuses.multitasking.owned)
-        employedTrimps *= (1 - game.permaBoneBonuses.multitasking.mult());
+        employedTrimps *= (1 + game.permaBoneBonuses.multitasking.mult());
 
     return employedTrimps;
 }
