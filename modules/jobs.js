@@ -542,7 +542,7 @@ function RbuyJobs() {
     // Explicit firefox handling because Ff specifically reduces free workers to 0.
     var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-    var reserveMod = isFirefox ? 1 + (game.resources.trimps.owned / 1e10) : 1;
+    var reserveMod = isFirefox || isSteam ? 1 + (game.resources.trimps.owned / 1e10) : 1;
 
     freeWorkers -= (game.resources.trimps.owned > 1e6) ? reservedJobs * reserveMod : 0;
 
