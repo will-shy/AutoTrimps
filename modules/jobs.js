@@ -470,7 +470,7 @@ function RbuyJobs() {
 
     if (game.jobs.Farmer.locked || game.resources.trimps.owned == 0) return;
 
-    var freeWorkers = Math.ceil(Math.min(game.resources.trimps.realMax() / 2), game.resources.trimps.owned) - trimpsEffectivelyEmployed();
+    var freeWorkers = Math.ceil(Math.min(game.resources.trimps.realMax() / 2), game.resources.trimps.owned) - game.resources.trimps.employed;
     if (freeWorkers <= 0) return;
 
     // Do non-ratio/limited jobs first
