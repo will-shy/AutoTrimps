@@ -16,6 +16,8 @@ function ATscriptUnload(a) {
 }
 ATscriptLoad(modulepath, 'utils');
 
+var isSteam = false;
+
 function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('', 'SettingsGUI');
