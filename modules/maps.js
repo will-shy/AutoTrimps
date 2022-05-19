@@ -946,25 +946,25 @@ You can also add a final case called "default:" that will only be used if all ot
 		case Rshouldpanda:
 			status = 'Pandemonium';
 			break;
-		case Rshoulddopraid:
+		case Rshoulddopraid
 			status = 'Praiding';
 			break;
-		case Rdshoulddopraid:
+		case Rdshoulddopraid
 			status = 'Daily Praiding';
 			break;
-		case Rshoulddoquest:
+		case Rshoulddoquest
 			status = 'Questing';
 			break;
-		case Rshouldtimefarm:
+		case Rshouldtimefarm
 			status = 'Time Farming';
 			break;
-		case Rdshouldtimefarm:
+		case Rdshouldtimefarm
 			status = 'Daily Time Farming';
 			break;
-		case Rshouldtributefarm:
+		case Rshouldtributefarm
 			status = 'Tribute Farming';
 			break;
-		case Rshoulddobogs:
+		case Rshoulddobogs
 			status = 'Black Bogs';
 			break;
 		case RdoMaxMapBonus:
