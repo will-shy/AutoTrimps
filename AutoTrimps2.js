@@ -16,7 +16,7 @@ function ATscriptUnload(a) {
 }
 ATscriptLoad(modulepath, 'utils');
 
-var isSteam = false;
+//var isSteam = false;
 
 function initializeAutoTrimps() {
     loadPageVariables();
