@@ -1553,6 +1553,7 @@ function RautoMap() {
 				}
 			}
         }
+        }
     }
 
     //Insanity Farm
