@@ -127,7 +127,7 @@ function testMapSpecialModController() {
 
 function autoMap() {
 
-    mano();
+    //mano();
 
     //Failsafes
     if (!game.global.mapsUnlocked || calcOurDmg("avg", false, true) <= 0) {
