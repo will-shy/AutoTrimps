@@ -19,6 +19,10 @@ var prestraid = !1,
     minMaxMapCost, fMap, pMap, shouldFarmFrags = !1,
     praidDone = !1;
 
+function mano() {
+    console.log('Console opened!');
+}
+
 function armydeath() {
     if (game.global.mapsActive) return !1;
     var e = game.global.lastClearedCell + 1,
