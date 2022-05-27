@@ -415,12 +415,25 @@ function autoMap() {
         selectedMap = "create";
 
     //Uniques
-    var runUniques = (getPageSetting('AutoMaps') == 1);
+    var runUniques = (getPageSetting('AutoMaps') > 0);
+    var AMUwall = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUwall') == true);
+    var AMUblock = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUblock') == true);
+    var AMUanger = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUanger') == true);
+    var AMUtrimple = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUtrimple') == true);
+    var AMUprison = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUprison') == true);
+    var AMUstar = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUstar') == true);
+  
     if (runUniques) {
         for (var map in game.global.mapsOwnedArray) {
             var theMap = game.global.mapsOwnedArray[map];
             if (theMap.noRecycle) {
                 if (theMap.name == 'The Wall' && game.upgrades.Bounty.allowed == 0 && !game.talents.bounty.purchased) {
+                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                    if (game.global.world < 15 + theMapDifficulty) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                else if (theMap.name == 'The Wall' && AMUwall) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 15 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
@@ -432,8 +445,20 @@ function autoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
+                else if (theMap.name == 'Dimension of Anger' && AMUanger) {
+                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                    if (game.global.world < 20 + theMapDifficulty) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
                 var runningC2 = game.global.runningChallengeSquared;
                 if (theMap.name == 'The Block' && !game.upgrades.Shieldblock.allowed && ((game.global.challengeActive == "Scientist" || game.global.challengeActive == "Trimp") && !runningC2 || getPageSetting('BuyShieldblock'))) {
+                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                    if (game.global.world < 11 + theMapDifficulty) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                else if (theMap.name == 'The Block' && AMUblock) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 11 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
@@ -448,8 +473,20 @@ function autoMap() {
                         setPageSetting('TrimpleZ', 0);
                     break;
                 }
+                else if (theMap.name == 'Trimple Of Doom' && AMUtrimple) {
+                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                    if (game.global.world < 33 + theMapDifficulty) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
                 if (!runningC2) {
                     if (theMap.name == 'The Prison' && (game.global.challengeActive == "Electricity" || game.global.challengeActive == "Mapocalypse")) {
+                        var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                        if (game.global.world < 80 + theMapDifficulty) continue;
+                        selectedMap = theMap.id;
+                        break;
+                    }
+                    else if (theMap.name == 'The Prison' && AMUprison) {
                         var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                         if (game.global.world < 80 + theMapDifficulty) continue;
                         selectedMap = theMap.id;
@@ -461,6 +498,12 @@ function autoMap() {
                         selectedMap = theMap.id;
                         break;
                     }
+                }
+                if (theMap.name == 'Imploding Star' && AMUstar) {
+                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                    if (game.global.world < 170 + theMapDifficulty) continue;
+                    selectedMap = theMap.id;
+                    break;
                 }
             }
         }
