@@ -585,8 +585,17 @@ function initializeAllSettings() {
     //Maps
 
     //Line 1
-    createSetting('AutoMaps', ["Auto Maps Off", "Auto Maps On", "Auto Maps No Unique"], 'Automaps. The no unique setting will not run unique maps such as dimensions of anger. Recommended ON. Do not use MaZ, it will not work. ', 'multitoggle', 1, null, "Maps");
+    createSetting('AutoMaps', ["Auto Maps Off", "Auto Maps On", "Auto Maps: Unique"], 'Automaps. Recommended ON. Do not use MaZ, it will not work. Automaps: Unique will unlock settings for each unique map. Select which unique maps you would like to run\, but otherwise functions the same. ', 'multitoggle', 1, null, "Maps");
+    createSetting('AMUblock', 'AMU: The Block', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUwall', 'AMU: The Wall', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUanger', 'AMU: Dimension of Anger', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUtrimple', 'AMU: Trimple', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUprison', 'AMU: Prison', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUstar', 'AMU: Imploding Star', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('automapsportal', 'AM Portal', 'Makes sure Auto Maps is on after portalling. Turn this off to disable this and remember your choice. ', 'boolean', true, null, 'Maps');
+    document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
+    
+    //Line 2
     createSetting('DynamicSiphonology', 'Dynamic Siphonology', 'Recommended Always ON. Use the right level of siphonology based on your damage output. IE: Only uses  siphonology if you are weak. With this OFF it means it ALWAYS uses the lowest siphonology map you can create. Siphonology is a perk you get at level 115-125ish, and means you receive map bonus stacks for running maps below your current zone - Up to 3 zones below (1 per perk level).', 'boolean', true, null, 'Maps');
     createSetting('PreferMetal', 'Prefer Metal Maps', 'Always prefer metal maps, intended for manual use, such as pre-spire farming. Remember to turn it back off after you\'re done farming!', 'boolean', false, null, 'Maps');
     createSetting('mapselection', 'Map Selection', 'Select which you prefer to use. Recommend Plentiful (Gardens) if you have unlocked it. ', 'dropdown', 'Mountain', ["Random", "Mountain", "Forest", "Sea", "Depths", "Gardens"], 'Maps');
@@ -595,7 +604,7 @@ function initializeAllSettings() {
     createSetting('MaxMapBonushealth', 'Max MapBonus Health', 'Limit the amount of map bonuses you get when AutoMaps requires more health. Default is 10. ', 'value', '10', null, 'Maps');
     createSetting('mapcuntoff', 'Map Cut Off', 'Decides when to get max map bonus. 4 is default. This means it will take 1 hit to kill an enemy if in D stance. ', 'value', '4', null, 'Maps');
 
-    //Line 2
+    //Line 3
     createSetting('DisableFarm', 'Farming H:D', 'If H:D goes above this value, it will farm for Damage & Health. The lower this setting, the more it will want to farm. Default is <b>16<b/>. <b>-1 to disable farming!</b>', 'value', -1, null, 'Maps');
     createSetting('LowerFarmingZone', 'Lower Farming Zone', 'Lowers the zone used during Farming mode. Uses the dynamic siphonology code, to Find the minimum map level you can successfully one-shot, and uses this level for any maps done after the first 10 map stacks. The difference being it goes LOWER than what Siphonology gives you map-bonus for, but after 10 stacks you dont need bonus, you just want to do maps that you can one-shot. Goes as low as 10 below current zone if your damage is that bad, but this is extreme and indicates you should probably portal.', 'boolean', true, null, 'Maps');
     createSetting('FarmWhenNomStacks7', 'Farm on >7 NOMstacks', 'Optional. If Improbability already has 5 NOMstacks, stack 30 Anticipation. If the Improbability has >7 NOMstacks on it, get +200% dmg from MapBonus. If we still cant kill it, enter Farming mode at 30 stacks, Even with DisableFarming On! (exits when we get under 10x). Farms if we hit 100 stacks in the world. If we ever hit (100) nomstacks in a map (likely a voidmap), farm, (exit the voidmap) and (prevent void from running, until situation is clear). Restarts any voidmaps if we hit 100 stacks. ', 'boolean', false, null, 'Maps');
@@ -605,7 +614,7 @@ function initializeAllSettings() {
     createSetting('runnewvoidspoison', 'New Voids Poison', 'Only run new voids in poison zones.', 'boolean', false, null, 'Maps');
     createSetting('onlystackedvoids', 'Stacked Voids Only', 'Only run stacked voids. ', 'boolean', false, null, 'Maps');
 
-    //Line 3
+    //Line 4
     createSetting('TrimpleZ', 'Trimple Z', 'I don\'t really think doing this automatically is a good idea. You might want to farm for a bit before this, but I\'m not sure if it\'s meaningful at all to make a \'farm X minutes before trimple\' parameter to go along with it. Set it to the zone you want and it will run Trimple of Doom for Ancient Treasure AFTER farming and getting map stacks. If it is a negative number, this will be disabled after a successful run so you can set it differently next time.', 'valueNegative', 0, null, 'Maps');
     createSetting('AdvMapSpecialModifier', 'Map Special Modifier', '<b>BELOW 300 ONLY</b><br> Attempt to select the BEST map special modifier. When starting a map for <b>Prestige</b> it will use <i>Prestigious</i>. When starting a map for <b>Farming</b> (for equipment) it will use your best metal cache. In any other case (such as farming for map stacks) it will use <i>Fast Attacks</i>. In all cases it uses the best modifier that can be afforded.', 'boolean', true, null, 'Maps');
     createSetting('scryvoidmaps', 'VM Scryer', 'Only use if you have Scryhard II, for er, obvious reasons. Works without the scryer options. ', 'boolean', false, null, 'Maps');
@@ -1803,7 +1812,15 @@ function updateCustomButtons() {
 
     //Maps
     !radonon ? turnOn("AutoMaps") : turnOff("AutoMaps");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUblock") : turnOff("AMUblock");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUwall") : turnOff("AMUwall");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUanger") : turnOff("AMUanger");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUtrimple") : turnOff("AMUtrimple");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUprison") : turnOff("AMUprison");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUstar") : turnOff("AMUstar");
     !radonon ? turnOn("automapsportal") : turnOff("automapsportal");
+    
+    
     !radonon ? turnOn("mapselection") : turnOff("mapselection");
     !radonon ? turnOn("DynamicSiphonology") : turnOff("DynamicSiphonology");
     !radonon ? turnOn("PreferMetal") : turnOff("PreferMetal");
