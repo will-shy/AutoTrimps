@@ -591,6 +591,7 @@ function initializeAllSettings() {
     createSetting('AMUanger', 'AMU: Dimension of Anger', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUtrimple', 'AMU: Trimple', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUprison', 'AMU: Prison', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
+    createSetting('AMUbw', 'AMU: BW', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUstar', 'AMU: Imploding Star', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('automapsportal', 'AM Portal', 'Makes sure Auto Maps is on after portalling. Turn this off to disable this and remember your choice. ', 'boolean', true, null, 'Maps');
     document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
@@ -1817,6 +1818,7 @@ function updateCustomButtons() {
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUanger") : turnOff("AMUanger");
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUtrimple") : turnOff("AMUtrimple");
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUprison") : turnOff("AMUprison");
+    (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUbw") : turnOff("AMUbw");
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUstar") : turnOff("AMUstar");
     !radonon ? turnOn("automapsportal") : turnOff("automapsportal");
     
