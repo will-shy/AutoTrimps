@@ -421,6 +421,7 @@ function autoMap() {
     var AMUanger = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUanger') == true);
     var AMUtrimple = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUtrimple') == true);
     var AMUprison = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUprison') == true);
+    var AMUbw = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUbw') == true);
     var AMUstar = (getPageSetting('AutoMaps') == 2 && getPageSetting('AMUstar') == true);
   
     if (runUniques) {
@@ -493,6 +494,12 @@ function autoMap() {
                         break;
                     }
                     if (theMap.name == 'Bionic Wonderland' && game.global.challengeActive == "Crushed") {
+                        var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
+                        if (game.global.world < 125 + theMapDifficulty) continue;
+                        selectedMap = theMap.id;
+                        break;
+                    }
+                    else if (theMap.name == 'Bionic Wonderland' && AMUbw) {
                         var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                         if (game.global.world < 125 + theMapDifficulty) continue;
                         selectedMap = theMap.id;
