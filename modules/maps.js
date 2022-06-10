@@ -517,6 +517,10 @@ function autoMap() {
     }
 
     //Voids
+    if (getPageSetting('novmsc2') == true && game.global.runningChallengeSquared) {
+        needToVoid = false;
+    }
+   
     if (needToVoid) {
         var voidArray = [];
         var prefixlist = {
