@@ -81,6 +81,7 @@ var $u2Graph = document.getElementById("graphFooterLine1"),
         "Void Map History",
         "Coordinations",
         "OverkillCells",
+        "Smithies",
         "Scruffy XP",
         "Scruffy XP PerHour",
     ],
@@ -313,6 +314,7 @@ function pushData() {
         fluffy: game.global.fluffyExp,
         scruffy: game.global.fluffyExp2,
         nursery: game.buildings.Nursery.purchased,
+        smithies: game.buildings.Smithy.owned,
         amals: game.jobs.Amalgamator.owned,
         radonOwned: game.resources.radon.owned,
         rnhr: RgetPercent.toFixed(4),
@@ -845,6 +847,13 @@ function setGraphData(graph) {
             yTitle = "Scruffy XP/Hour";
             yType = "Linear";
             xminFloor = 1;
+            break;
+        case "Smithies":
+            graphData = allPurposeGraph("smithies", true, "number");
+            title = "Smithy History";
+            xTitle = "Zone";
+            yTitle = "Smithies";
+            yType = "Linear";
             break;
         case "OverkillCells":
             var currentPortal = -1;
