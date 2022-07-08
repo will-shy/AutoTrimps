@@ -1842,8 +1842,10 @@ function updateCustomButtons() {
     !radonon ? turnOn("AdvMapSpecialModifier") : turnOff("AdvMapSpecialModifier");
     !radonon ? turnOn("scryvoidmaps") : turnOff("scryvoidmaps");
     !radonon ? turnOn("buywepsvoid") : turnOff("buywepsvoid");
-    game.global.highestLevelCleared > 600 && !radonon ? turnOn("farmWonders") : turnOff("farmWonders");
-    game.global.highestLevelCleared > 600 && !radonon ? turnOn("wondersAmount") : turnOff("wondersAmount");
+    !radonon ? turnOn("farmWonders") : turnOff("farmWonders");
+    !radonon ? turnOn("wondersAmount") : turnOff("wondersAmount");
+    !radonon ? turnOn("maxExpZone") : turnOff("maxExpZone");
+    !radonon ? turnOn("finishExpOnBw") : turnOff("finishExpOnBw");
 
     //RMaps
     radonon ? turnOn("RAutoMaps") : turnOff("RAutoMaps");
