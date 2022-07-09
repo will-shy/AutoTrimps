@@ -1845,9 +1845,9 @@ function updateCustomButtons() {
     !radonon ? turnOn("scryvoidmaps") : turnOff("scryvoidmaps");
     !radonon ? turnOn("buywepsvoid") : turnOff("buywepsvoid");
     !radonon ? turnOn("farmWonders") : turnOff("farmWonders");
-    !radonon ? turnOn("wondersAmount") : turnOff("wondersAmount");
-    !radonon ? turnOn("maxExpZone") : turnOff("maxExpZone");
-    !radonon ? turnOn("finishExpOnBw") : turnOff("finishExpOnBw");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("wondersAmount") : turnOff("wondersAmount");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("maxExpZone") : turnOff("maxExpZone");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("finishExpOnBw") : turnOff("finishExpOnBw");
 
     //RMaps
     radonon ? turnOn("RAutoMaps") : turnOff("RAutoMaps");
