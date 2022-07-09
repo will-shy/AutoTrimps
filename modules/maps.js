@@ -797,9 +797,6 @@ function autoMap() {
             var pageSetting = getPageSetting('finishExpOnBw');
             pageSetting = pageSetting < 125 ? 125 : pageSetting;
             pageSetting = pageSetting != -1 ? (Math.floor((pageSetting - 125) / 15) * 15) + 125 : -1;
-            if (pageSetting != getPageSetting('finishExpOnBw')){
-                debug("Invalid BW number detected to finish XP on BW: " + getPageSetting('finishExpOnBw') + ". Set to nearest lowest BW, " + pageSetting + ".");
-            }
             return pageSetting;
         })();
         var bionics = game.global.mapsOwnedArray
