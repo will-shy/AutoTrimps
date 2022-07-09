@@ -836,7 +836,8 @@ function autoMap() {
                     }
                 }
             }
-        } else if (game.global.world > 600 && !game.global.mapsActive && game.global.world != 700 && game.global.world >= wondersFromZ && finishOnBw != -1) {
+        } else if (game.global.world > 600 && !game.global.mapsActive && game.global.world != 700
+            && wondersFromZ != -1 && game.global.world >= wondersFromZ && finishOnBw != -1) {
             // Finish challenge with target BW. If for some reason we've raided past it, pick the lowest BW available.
             // If we somehow did not raid for it, pick the highest available which will climb if necessary to 605.
             // If at 700, clear the zone to complete instead.
