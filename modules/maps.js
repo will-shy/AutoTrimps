@@ -28,7 +28,7 @@ var spireMapBonusFarming = !1;
 var spireTime = 0;
 var doMaxMapBonus = !1;
 var vanillaMapatZone = !1;
-var shouldFarmWonder = false;
+var farmingWonder = !1;
 var additionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
 
 function updateAutoMapsStatus(get) {
@@ -64,6 +64,7 @@ function updateAutoMapsStatus(get) {
     else if (!enoughHealth && !enoughDamage) status = 'Want Health & Damage';
     else if (!enoughDamage) status = 'Want ' + calcHDratio().toFixed(4) + 'x &nbspmore damage';
     else if (!enoughHealth) status = 'Want more health';
+    else if (farmingWonder) status = 'Experiencing Wonder';
     else if (enoughHealth && enoughDamage) status = 'Advancing';
 
     if (skippedPrestige)
@@ -789,14 +790,28 @@ function autoMap() {
     }
 
     // Experience Challenge
-    if (getPageSetting('farmWonders') && game.global.challengeActive == "Experience") {
-        if (game.global.world >= game.challenges.Experience.nextWonder && getPageSetting('wondersAmount') > game.challenges.Experience.wonders) {
-            shouldFarmWonder = true
-            if (!game.global.mapsActive && game.global.mapsOwnedArray.filter(function(map) {
-                    return map.level == game.global.world;
-                }).length >= 1) {
-                var mapID = game.global.mapsOwnedArray.find(function(map) {
-                    return map.level == game.global.world;
+    if (game.global.challengeActive == "Experience" && getPageSetting('farmWonders')) {
+        var wondersFromZ = getPageSetting('maxExpZone');
+        var wondersAmount = getPageSetting('wondersAmount');
+        var wondersFloorZ = wondersFromZ - ((getPageSetting('wondersAmount') - 1) * 5);
+        var finishOnBw = (() => {
+            var pageSetting = getPageSetting('finishExpOnBw');
+            pageSetting = pageSetting < 125 ? 125 : pageSetting;
+            pageSetting = pageSetting != -1 ? (Math.floor((pageSetting - 125) / 15) * 15) + 125 : -1;
+            return pageSetting;
+        })();
+        var bionics = game.global.mapsOwnedArray
+            .filter((map) => map.location == "Bionic")
+            .sort((a, b) => b.level - a.level)
+        if (game.global.world >= game.challenges.Experience.nextWonder
+            && wondersAmount > game.challenges.Experience.wonders
+            && game.global.world >= wondersFloorZ) {
+            farmingWonder = true;
+            if (!game.global.mapsActive && game.global.mapsOwnedArray.filter(function (map) {
+                return map.level == game.global.world && map.location != 'Bionic';
+            }).length >= 1) {
+                var mapID = game.global.mapsOwnedArray.find(function (map) {
+                    return map.level == game.global.world && map.location != 'Bionic';
                 }).id;
                 selectedMap = mapID;
                 selectMap(mapID);
@@ -822,9 +837,26 @@ function autoMap() {
                     }
                 }
             }
-        } else if (shouldFarmWonder) {
-            shouldFarmWonder = false
-            selectedMap = "world"
+        } else if (game.global.world > 600 && !game.global.mapsActive && game.global.world != 700
+            && wondersFromZ != -1 && game.global.world >= wondersFromZ && finishOnBw != -1) {
+            // Finish challenge with target BW. If for some reason we've raided past it, pick the lowest BW available.
+            // If we somehow did not raid for it, pick the highest available which will climb if necessary to 605.
+            // If at 700, clear the zone to complete instead.
+            farmingWonder = true;
+            var finishBw = bionics.find(map => map.level == finishOnBw);
+            if (finishBw) {
+                selectMap(finishBw.id);
+            } else {
+                if (bionics.every((map) => map.level > finishOnBw)) {
+                    selectMap(bionics[bionics.length - 1].id);
+                } else {
+                    selectMap(bionics[0].id);
+                }
+            }
+            runMap();
+        } else {
+            farmingWonder = false;
+            selectedMap = "world";
         }
     }
 

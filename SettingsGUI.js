@@ -622,6 +622,8 @@ function initializeAllSettings() {
     createSetting('buywepsvoid', 'VM Buy Weps', 'Buys gear in Void maps regardless of your H:D ratio. Useful if you want to overkill as much as possible. ', 'boolean', false, null, 'Maps');
     createSetting('farmWonders', 'Farm Wonders', 'Farms wonders until the selected amount and does BW at given zone to finish the challenge', 'boolean', false, null, 'Maps')
     createSetting('wondersAmount', 'Wonders Amount', 'Select the amount of Wonders you want to farm in each given run, <b> 0 to disable </b>', 'value', '0', null, "Maps");
+    createSetting('maxExpZone', "Max XP Zone", 'Acquire Wonders from this zone down. <b>This must have a value or other Experience settings will not work.</b> If >z600, will complete Experience by running BW on this zone as well. For example, targeting three Wonders with a Max XP Zone of 600 will obtain the Wonders at: 600, 595, 590.', 'value', '600', null, 'Maps');
+    createSetting('finishExpOnBw', 'Finish XP on BW', 'Finish Experience challenge by completing this level of BW. <b>This level of BW should already be in your inventory.</b> Use BW Raiding module if you want to raid to a specific level of BW before 601, or else you may accidentally complete the challenge at a lower or higher BW than intended using this setting. If this is an invalid BW value, it will run the next lowest valid BW zone (e.g. 606 will run 605).', 'value', '605', null, 'Maps');
 
     //RMaps
 
@@ -1842,8 +1844,10 @@ function updateCustomButtons() {
     !radonon ? turnOn("AdvMapSpecialModifier") : turnOff("AdvMapSpecialModifier");
     !radonon ? turnOn("scryvoidmaps") : turnOff("scryvoidmaps");
     !radonon ? turnOn("buywepsvoid") : turnOff("buywepsvoid");
-    game.global.highestLevelCleared > 600 && !radonon ? turnOn("farmWonders") : turnOff("farmWonders");
-    game.global.highestLevelCleared > 600 && !radonon ? turnOn("wondersAmount") : turnOff("wondersAmount");
+    !radonon ? turnOn("farmWonders") : turnOff("farmWonders");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("wondersAmount") : turnOff("wondersAmount");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("maxExpZone") : turnOff("maxExpZone");
+    (!radonon && getPageSetting("farmWonders")) ? turnOn("finishExpOnBw") : turnOff("finishExpOnBw");
 
     //RMaps
     radonon ? turnOn("RAutoMaps") : turnOff("RAutoMaps");
