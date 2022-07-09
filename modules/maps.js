@@ -28,7 +28,7 @@ var spireMapBonusFarming = !1;
 var spireTime = 0;
 var doMaxMapBonus = !1;
 var vanillaMapatZone = !1;
-var shouldFarmWonder = false;
+var farmingWonder = !1;
 var additionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
 
 function updateAutoMapsStatus(get) {
@@ -64,6 +64,7 @@ function updateAutoMapsStatus(get) {
     else if (!enoughHealth && !enoughDamage) status = 'Want Health & Damage';
     else if (!enoughDamage) status = 'Want ' + calcHDratio().toFixed(4) + 'x &nbspmore damage';
     else if (!enoughHealth) status = 'Want more health';
+    else if (farmingWonder) status = 'Experiencing Wonder';
     else if (enoughHealth && enoughDamage) status = 'Advancing';
 
     if (skippedPrestige)
