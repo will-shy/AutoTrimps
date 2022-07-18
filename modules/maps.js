@@ -1852,7 +1852,7 @@ function RautoMap() {
 
     //Uniques
     var runUniques = (getPageSetting('RAutoMaps') == 1);
-    if (runUniques || Rshoulddobogs || Rshouldtimefarmbogs || Rshouldcastle) {
+    if (runUniques || Rshoulddobogs || Rshouldcastle) {
         for (var map in game.global.mapsOwnedArray) {
             var theMap = game.global.mapsOwnedArray[map];
             if (Rshoulddobogs && theMap.name == 'The Black Bog') {
