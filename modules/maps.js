@@ -2158,8 +2158,8 @@ function RautoMap() {
                     var shiplevelzones = shipfarmlevel[shipfarmlevelindex];
                     if (shiplevelzones > 0) {
                         for (var map in game.global.mapsOwnedArray) {
-                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level)) {
-                                selectedMap = "create";//game.global.mapsOwnedArray[map].id;
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level) && game.global.mapsOwnedArray[map].bonus == "lmc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
                                 break;
                             } else {
                                 selectedMap = "create";
@@ -2167,8 +2167,8 @@ function RautoMap() {
                         }
                     } else if (shiplevelzones == 0) {
                         for (var map in game.global.mapsOwnedArray) {
-                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
-                                selectedMap = "create";//game.global.mapsOwnedArray[map].id;
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level && game.global.mapsOwnedArray[map].bonus == "lmc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
                                 break;
                             } else {
                                 selectedMap = "create";
@@ -2176,8 +2176,8 @@ function RautoMap() {
                         }
                     } else if (shiplevelzones < 0) {
                         for (var map in game.global.mapsOwnedArray) {
-                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level)) {
-                                selectedMap = "create";//game.global.mapsOwnedArray[map].id;
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level) && game.global.mapsOwnedArray[map].bonus == "lmc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
                                 break;
                             } else {
                                 selectedMap = "create";
