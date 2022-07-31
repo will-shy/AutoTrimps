@@ -2272,16 +2272,6 @@ function RautoMap() {
                     }
                 }
             } else if (Rshouldtributefarm && !Rshouldequipfarm) {
-                if (getPageSetting('Rtributefarmlevel') == 0) {
-                    for (var map in game.global.mapsOwnedArray) {
-                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
-                            selectedMap = game.global.mapsOwnedArray[map].id;
-                            break;
-                        } else {
-                            selectedMap = "create";
-                        }
-                    }
-                } else if (getPageSetting('Rtributefarmlevel') != 0) {
                     var tributefarmzone = getPageSetting('Rtributefarmzone');
                     var tributefarmlevel = getPageSetting('Rtributefarmlevel');
                     var tributefarmlevelindex = tributefarmzone.indexOf(game.global.world);
@@ -2314,7 +2304,6 @@ function RautoMap() {
                             }
                         }
                     }
-                }
             } else if (Rshouldequipfarm) {
                 for (var map in game.global.mapsOwnedArray) {
                     if (!game.global.mapsOwnedArray[map].noRecycle && equipminus <= 0 && ((game.global.world + equipminus) == game.global.mapsOwnedArray[map].level)) {
