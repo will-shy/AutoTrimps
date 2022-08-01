@@ -876,7 +876,7 @@ function initializeAllSettings() {
     createSetting('Rmanageequality', 'Manage Equality', 'Manages Equality for you. Sets Equality to 0 on Slow enemies, and Autoscaling on for Fast enemies. ', 'boolean', 'false', null, 'Combat');
     createSetting('Rcalcfrenzy', 'Frenzy Calc', '<b>Experimental. </b><br>Adds frenzy to the calc. Be warned\, it will not farm as much with this on as it expects 100% frenzy uptime. ', 'boolean', 'false', null, 'Combat');
     createSetting('Rmutecalc', 'Mute Calc', 'What zone to start calculating Mutations at. 0 to disable.', 'value', '-1', null, 'Combat');
-    createSetting('Rmutecalcattack', 'Mute Attack', 'What kind of mutation attack to calculate for your H:D. The higher the multiplier you select here the more it will farm. ', 'dropdown', 'Off', ["Off", "x5 Half Nova", "x10 Full Nova"], 'Combat');
+    createSetting('Rmutecalcattack', 'Mute Attack', 'What kind of mutation attack to calculate for your H:D. The higher the multiplier you select here the more it will farm. Recommend half nova, as that will also calculate rage pretty well. Full nova can be used on certain runs if you need to farm a lot more. ', 'dropdown', 'Off', ["Off", "x5 Half Nova", "x10 Full Nova"], 'Combat');
 
 
     //Scryer
