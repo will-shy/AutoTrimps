@@ -3628,7 +3628,7 @@ var fastimps = [
 function Rmanageequality() {
 
     if (!(game.global.challengeActive == "Exterminate" && getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminateeq') == true && !game.global.mapsActive)) {
-        if (fastimps.includes(getCurrentEnemy().name) || (game.global.mapsActive && getCurrentMapObject().location == "Void") || (!game.global.mapsActive && game.global.gridArray[game.global.lastClearedCell+1].u2Mutation.length > 0) || (game.global.mapsActive && game.global.mapGridArray[game.global.lastClearedMapCell+1].u2Mutation.length > 0 )) {
+        if (fastimps.includes(getCurrentEnemy().name) || (game.global.mapsActive && getCurrentMapObject().location == "Void" && game.global.voidBuff == 'doubleAttack') || (!game.global.mapsActive && game.global.gridArray[game.global.lastClearedCell+1].u2Mutation.length > 0)) {
             if (!game.portal.Equality.scalingActive) {
                 game.portal.Equality.scalingActive = true;
                 manageEqualityStacks();
