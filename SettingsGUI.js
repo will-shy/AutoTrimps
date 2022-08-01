@@ -875,6 +875,8 @@ function initializeAllSettings() {
     createSetting('Rcalcmaxequality', ['Equality Calc Off', 'EC: On', 'EC: Health'], '<b>Experimental. </b><br>Adds Equality Scaling levels to the battlecalc. Will always calculate equality based on actual scaling levels when its turned off by other settings. Assumes you use Equality Scaling. Turning this on allows in-game Equality Scaling to adjust your Health accordingly. EC: Health only decreases enemies attack in the calculation which may improve speed. ', 'multitoggle', 0, null, 'Combat');
     createSetting('Rmanageequality', 'Manage Equality', 'Manages Equality for you. Sets Equality to 0 on Slow enemies, and Autoscaling on for Fast enemies. ', 'boolean', 'false', null, 'Combat');
     createSetting('Rcalcfrenzy', 'Frenzy Calc', '<b>Experimental. </b><br>Adds frenzy to the calc. Be warned\, it will not farm as much with this on as it expects 100% frenzy uptime. ', 'boolean', 'false', null, 'Combat');
+    createSetting('Rmutecalc', 'Mute Calc', 'What zone to start calculating Mutations at. 0 to disable.', 'value', '-1', null, 'Combat');
+    createSetting('Rmutecalcattack', 'Mute Attack', 'What kind of mutation attack to calculate for your H:D. The higher the multiplier you select here the more it will farm. ', 'dropdown', 'Off', ["Off", "x5 Half Nova", "x10 Full Nova"], 'Combat');
 
 
     //Scryer
@@ -1976,6 +1978,8 @@ function updateCustomButtons() {
     radonon ? turnOn("Rcalcmaxequality") : turnOff("Rcalcmaxequality");
     radonon ? turnOn("Rmanageequality") : turnOff("Rmanageequality");
     radonon ? turnOn("Rcalcfrenzy") : turnOff("Rcalcfrenzy");
+    radonon ? turnOn("Rmutecalc") : turnOff("Rmutecalc");
+    radonon &&  getPageSetting('Rmutecalc') > 0 ? turnOn("Rmutecalcattack") : turnOff("Rmutecalcattack");
 
 
 
@@ -2306,6 +2310,7 @@ function updateCustomButtons() {
     document.getElementById('RdHeliumHourChallenge').value = autoTrimpSettings.RdHeliumHourChallenge.selected;
     document.getElementById('mapselection').value = autoTrimpSettings.mapselection.selected;
     document.getElementById('Rmapselection').value = autoTrimpSettings.Rmapselection.selected;
+    document.getElementById('Rmutecalcattack').value = autoTrimpSettings.Rmutecalcattack.selected;
     document.getElementById('Prestige').value = autoTrimpSettings.Prestige.selected;
     document.getElementById('AutoGoldenUpgrades').value = autoTrimpSettings.AutoGoldenUpgrades.selected;
     document.getElementById('dAutoGoldenUpgrades').value = autoTrimpSettings.dAutoGoldenUpgrades.selected;
