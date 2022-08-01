@@ -942,9 +942,15 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
     if (game.global.world > 200) {
         number *= Math.pow(1.01, (game.global.world - 201));
 	number *= game.global.novaMutStacks > 0 ? (u2Mutations.types.Nova.enemyAttackMult() * 1.2) : 1;
+	var nova = false;
+        for (var x = 0; x < game.global.gridArray.length; x++) {
+            if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1)) {
+                nova = true;
+            }
+        }
         if (getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc') && getPageSetting('Rmutecalcattack') != "Off") {
             if (getPageSetting('Rmutecalcattack') == "x5 Half Nova") number *= 5;
-            else if (getPageSetting('Rmutecalcattack') == "x10 Full Nova") number *= 10;
+            else if (nova && getPageSetting('Rmutecalcattack') == "x10 Full Nova") number *= 10;
         }
     }
     if (game.global.challengeActive == "Daily") {
