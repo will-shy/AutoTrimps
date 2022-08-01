@@ -721,8 +721,11 @@ function RcalcOurDmg(minMaxAvg, equality) {
         number *= sugarRush.getAttackStrength();
     }
     
-    if (u2Mutations.tree.Attack.purchased)	{
-		number *= 1.5;
+    if (u2Mutations.tree.Attack.purchased) {
+	number *= 1.5;
+    }
+    if (game.global.world > 200) {
+       number *= game.global.novaMutStacks > 0 ? (u2Mutations.types.Nova.trimpAttackMult() * 0.98) : 1;
     }
 
     // Challenges
@@ -938,6 +941,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
     }
     if (game.global.world > 200) {
         number *= Math.pow(1.01, (game.global.world - 201));
+	number *= game.global.novaMutStacks > 0 ? (u2Mutations.types.Nova.enemyAttackMult() * 1.2) : 1;
         if (getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc') && getPageSetting('Rmutecalcattack') != "Off") {
             if (getPageSetting('Rmutecalcattack') == "x5 Half Nova") number *= 5;
             else if (getPageSetting('Rmutecalcattack') == "x10 Full Nova") number *= 10;
