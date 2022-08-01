@@ -1028,8 +1028,8 @@ function RcalcEnemyHealth(world) {
     if (world == false) world = game.global.world;
     var health = RcalcEnemyBaseHealth(world, 50, "Snimp");
     if (game.global.world > 200) {
-        number *= 2;
-        number *= Math.pow(1.02, (game.global.world - 201));
+        health *= 2;
+        health *= Math.pow(1.02, (game.global.world - 201));
     }
     if (getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminatecalc') == true) {
         health = RcalcEnemyBaseHealth(world, 90, "Beetlimp");
