@@ -3622,7 +3622,8 @@ var fastimps = [
     "Mantimp",
     "Butterflimp",
     "Frosnimp",
-    "Turkimp"
+    "Turkimp",
+    "Ubersmith"
 ];
 
 function Rmanageequality() {
