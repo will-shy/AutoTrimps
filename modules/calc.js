@@ -753,6 +753,9 @@ function RcalcOurDmg(minMaxAvg, equality) {
     if (game.global.challengeActive == "Alchemy") {
         number *= alchObj.getPotionEffect("Potion of Strength");
     }
+    if (game.global.challengeActive === 'Smithless') {
+	if (game.challenges.Smithless.fakeSmithies > 0) number *= Math.pow(1.25, game.challenges.Smithless.fakeSmithies);
+    }
 
     // Dailies
     var minDailyMod = 1;
@@ -886,6 +889,10 @@ function RcalcOurHealth() {
 
     //Alchemy Mult
     health *= alchObj.getPotionEffect('Potion of Strength');
+	
+    if (game.global.challengeActive === 'Smithless') {
+	if (game.challenges.Smithless.fakeSmithies > 0) health *= Math.pow(1.25, game.challenges.Smithless.fakeSmithies);
+    }
 
     //AutoBattle
     health *= autoBattle.bonuses.Stats.getMult();
@@ -1116,6 +1123,9 @@ function RcalcEnemyHealthMod(world, cell, name) {
     if (game.global.challengeActive == "Glass") {
         health *= 0.01;
         health *= game.challenges.Glass.healthMult();
+    }
+    if (game.global.challengeActive === 'Smithless') {
+	if (game.challenges.Smithless.fakeSmithies > 0) health *= Math.pow(1.25, game.challenges.Smithless.fakeSmithies);
     }
     return health;
 }
