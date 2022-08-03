@@ -973,7 +973,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
 	    if (comp) number *= 3;
             else if (rage) number *= 5;
             else if (nova) number *= 10;
-	    else if (novarage) number *= 15;
+	    else if (novarage) number *= 50;
         }
     }
     if (game.global.challengeActive == "Daily") {
