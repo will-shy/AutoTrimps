@@ -945,22 +945,35 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
 	var nova = false;
 	var rage = false;
 	var comp = false;
+	var novarage = false;
 	var compcells = 0;
         for (var x = 0; x < game.global.gridArray.length; x++) {
-            if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1)) {
-                nova = true;
-            }
-	    if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('RGE') != -1)) {
-                rage = true;
-            }
 	    if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('CMP') != -1)) {
                 comp = true;
             }
+	    if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('RGE') != -1)) {
+		comp = false;
+                rage = true;
+            }
+            if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1)) {
+		comp = false;
+		nova = false;
+                nova = true;
+            }
+	    if (game.global.gridArray[x].u2Mutation.length > 0 && (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1 && game.global.gridArray[x].u2Mutation.indexOf('RGE') != -1)) {
+		comp = false;
+		nova = false;
+                nova = false;
+		novarage = true;
+            }
+	    
+	    
         }
         if (getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
 	    if (comp) number *= 3;
             else if (rage) number *= 5;
             else if (nova) number *= 10;
+	    else if (novarage) number *= 15;
         }
     }
     if (game.global.challengeActive == "Daily") {
