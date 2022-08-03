@@ -915,8 +915,14 @@ function RcalcDailyAttackMod(number) {
         if (typeof game.global.dailyChallenge.badStrength !== 'undefined') {
             number *= dailyModifiers.badStrength.getMult(game.global.dailyChallenge.badStrength.strength);
         }
+	if (typeof game.global.dailyChallenge.badHealth !== 'undefined') {
+            number *= dailyModifiers.badHealth.getMult(game.global.dailyChallenge.badHealth.strength);
+        }
         if (typeof game.global.dailyChallenge.badMapStrength !== 'undefined' && game.global.mapsActive) {
             number *= dailyModifiers.badMapStrength.getMult(game.global.dailyChallenge.badMapStrength.strength);
+        }
+	if (typeof game.global.dailyChallenge.empower !== 'undefined') {
+            number *= dailyModifiers.empower.getMult(game.global.dailyChallenge.empower.strength, game.global.dailyChallenge.empower.stacks);
         }
         if (typeof game.global.dailyChallenge.bloodthirst !== 'undefined') {
             number *= dailyModifiers.bloodthirst.getMult(game.global.dailyChallenge.bloodthirst.strength, game.global.dailyChallenge.bloodthirst.stacks);
@@ -1155,6 +1161,9 @@ function RcalcEnemyHealthPre(world) {
     if (getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminatecalc') == true) {
         health = RcalcEnemyBaseHealth(world, 90, "Beetlimp");
     }
+    if (game.global.challengeActive == "Daily") {
+        health = RcalcDailyAttackMod(health);
+    }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
     }
@@ -1245,6 +1254,9 @@ function RcalcEnemyHealth(world) {
     if (game.global.challengeActive == "Extermination" && getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminatecalc') == true) {
         health = RcalcEnemyBaseHealth(world, 90, "Beetlimp");
     }
+    if (game.global.challengeActive == "Daily") {
+        health = RcalcDailyAttackMod(health);
+    }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
     }
@@ -1292,6 +1304,7 @@ function RcalcEnemyHealth(world) {
     if (game.global.challengeActive === 'Smithless') {
 	if (game.challenges.Smithless.fakeSmithies > 0) health *= Math.pow(1.25, game.challenges.Smithless.fakeSmithies);
     }
+
     return health;
 }
 
@@ -1336,6 +1349,9 @@ function RcalcEnemyHealthMod(world, cell, name) {
 	    health *= compHealth;
         }
     }*/
+    if (game.global.challengeActive == "Daily") {
+        health = RcalcDailyAttackMod(health);
+    }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
     }
