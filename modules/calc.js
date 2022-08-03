@@ -1264,72 +1264,6 @@ function RcalcEnemyHealth(world) {
     return health;
 }
 
-function Rmutemod(mod) {
-        var nova = false;
-	var rage = false;
-	var comp = false;
-	var novarage = false;
-	var compHealth = 1;
-	var compAttack = 1;
-	var atk = 1;
-	var hp = 1;
-        for (var x = 0; x < game.global.gridArray.length; x++ && game.global.gridArray[x].u2Mutation.length > 0) {
-	    comp = true;
-	    if (game.global.gridArray[i].u2Mutation.indexOf('CMP') != -1) {
-                var compressedMutations = [];
-                var compCount = u2Mutations.types.Compression.cellCount();
-                for (var x = 0; x < compCount; x++) {
-                    var novad = (game.global.gridArray[i + x].u2Mutation.indexOf('NVX') != -1);
-                    compressedMutations.push([i + x, game.global.gridArray[i + x].name, ...game.global.gridArray[i + x].u2Mutation]);
-                    compHealth += game.badGuys[game.global.gridArray[i + x].name].health * RcalcEnemyHealth(game.global.world) * (novad ? 100 : 10);
-                    compAttack += game.badGuys[game.global.gridArray[i + x].name].attack *  RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0)) * (novad ? 10 : 1);
-                }
-
-	        compHealth /= RcalcEnemyHealth(game.global.world);
-	        compAttack /= RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
-	    }
- 
-	    if (game.global.gridArray[x].u2Mutation.indexOf('RGE') != -1) {
-		if (compAttack < 5) {
-		    comp = false;
-                    rage = true;
-		}
-            }
-            if (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1) {
-		if (compAttack < 10) {
-		   comp = false;
-                   nova = true;
-		}
-            }
-	    if (game.global.gridArray[x].u2Mutation.indexOf('NVX') != -1 && game.global.gridArray[x].u2Mutation.indexOf('RGE') != -1) {
-		if (compAttack < 50) {
-		    comp = false;
-                    nova = false;
-		    novarage = true;
-		}
-            }
-        }
-        if (getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
-	    if (comp) atk = compAttack;
-            else if (rage) {
-	        if (u2Mutations.tree.Unrage.purchased) {
-		    atk = 4;
-		}
-		else atk = 5;
-	    }
-            else if (nova) atk = 10;
-	    else if (novarage) {
-	        if (u2Mutations.tree.Unrage.purchased) {
-		    atk = 40;
-		}
-		else atk = 50;
-	}
-	if (mod == attack) return atk;
-	else if (mod == health) return hp;
-	else return 1;
-    }
-}
-
 function RcalcEnemyHealthMod(world, cell, name) {
     if (world == false) world = game.global.world;
     var health = RcalcEnemyBaseHealth(world, cell, name);
@@ -1410,7 +1344,7 @@ function RcalcHDratio() {
     var ratio = 0;
     var ourBaseDamage = RcalcOurDmg("avg", false, true);
 
-    ratio = (RcalcEnemyHealth(game.global.world) * Rmutemod(health)) / ourBaseDamage;
+    ratio = (RcalcEnemyHealth(game.global.world) / ourBaseDamage);
     return ratio;
 }
 
