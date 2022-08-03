@@ -931,6 +931,18 @@ function RcalcDailyAttackMod(number) {
     return number;
 }
 
+function RcalcDailyHealthMod(number) {
+    if (game.global.challengeActive == "Daily") {
+	if (typeof game.global.dailyChallenge.badHealth !== 'undefined') {
+            number *= dailyModifiers.badHealth.getMult(game.global.dailyChallenge.badHealth.strength);
+        }
+	if (typeof game.global.dailyChallenge.empower !== 'undefined') {
+            number *= dailyModifiers.empower.getMult(game.global.dailyChallenge.empower.strength, game.global.dailyChallenge.empower.stacks);
+        }
+    }
+    return number;
+}
+
 function RcalcBadGuyDmgPre(enemy, attack, equality) {
     var number;
     if (enemy)
@@ -946,7 +958,7 @@ function RcalcBadGuyDmgPre(enemy, attack, equality) {
         number *= Math.pow(game.portal.Equality.modifier, game.portal.Equality.scalingCount);
     }
     if (game.global.challengeActive == "Daily") {
-        number = RcalcDailyAttackMod(number);
+        number = RcalcDailyHealthMod(number);
     }
     if (game.global.challengeActive == "Unbalance") {
         number *= 1.5;
@@ -1079,7 +1091,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
         }
     }*/
     if (game.global.challengeActive == "Daily") {
-        number = RcalcDailyAttackMod(number);
+        number = RcalcDailyHealthMod(number);
     }
     if (game.global.challengeActive == "Unbalance") {
         number *= 1.5;
@@ -1162,7 +1174,7 @@ function RcalcEnemyHealthPre(world) {
         health = RcalcEnemyBaseHealth(world, 90, "Beetlimp");
     }
     if (game.global.challengeActive == "Daily") {
-        health = RcalcDailyAttackMod(health);
+        health = RcalcDailyHealthMod(health);
     }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
@@ -1255,7 +1267,7 @@ function RcalcEnemyHealth(world) {
         health = RcalcEnemyBaseHealth(world, 90, "Beetlimp");
     }
     if (game.global.challengeActive == "Daily") {
-        health = RcalcDailyAttackMod(health);
+        health = RcalcDailyHealthMod(health);
     }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
@@ -1350,7 +1362,7 @@ function RcalcEnemyHealthMod(world, cell, name) {
         }
     }*/
     if (game.global.challengeActive == "Daily") {
-        health = RcalcDailyAttackMod(health);
+        health = RcalcDailyHealthMod(health);
     }
     if (game.global.challengeActive == "Unbalance") {
         health *= 2;
