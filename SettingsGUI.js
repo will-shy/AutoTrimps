@@ -408,8 +408,15 @@ function initializeAllSettings() {
     createSetting('dlowdmg', 'DHS: Low Damage', '<b>LOW DAMAGE HEIRLOOM</b><br><br>Enter the name of your low damage heirloom. This is the heirloom that you will use for windstacking in dailies. ', 'textValue', 'undefined', null, 'Daily');
 
 
-    //Portal Line
+    //RHeirloom
     document.getElementById('dlowdmg').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Rdhsshield', 'Daily Shields', 'Toggle to swap Shields in Dailies', 'boolean', false, null, 'Daily');
+    createSetting('Rdhsz', 'DHS: Zone', 'Which zone to swap from your first heirloom you have defined to your second heirloom you have defined. I.e if this value is 75 it will switch to the second heirloom <b>on z75</b>', 'value', '-1', null, 'Dailies');
+    createSetting('Rdhs1', 'DHS: First', '<b>First Heirloom to use</b><br><br>Enter the name of your first heirloom. This is the heirloom that you will use before swapping to the second heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Dailies');
+    createSetting('Rdhs2', 'DHS: Second', '<b>Second Heirloom to use</b><br><br>Enter the name of your second heirloom. This is the heirloom that you will use after swapping from the first heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Dailies');
+    
+    //Portal Line
+    document.getElementById('Rdhs2').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('AutoStartDaily', 'Auto Start Daily', 'Starts Dailies for you. When you portal with this on, it will select the oldest Daily and run it. Use the settings in this tab to decide whats next. ', 'boolean', false, null, 'Daily');
     createSetting('u2daily', 'Daily in U2', 'If this is on, you will do your daily in U2. ', 'boolean', false, null, 'Daily');
     createSetting('AutoPortalDaily', ['Daily Portal Off', 'DP: He/Hr', 'DP: Custom'], '<b>DP: He/Hr:</b> Portals when your world zone is above the minium you set (if applicable) and the buffer falls below the % you have defined. <br><b>DP: Custom:</b> Portals after clearing the zone you have defined in Daily Custom Portal. ', 'multitoggle', '0', null, "Daily");
@@ -1683,6 +1690,17 @@ function updateCustomButtons() {
     turnOff("Rdtimefarmmap");
     turnOff("Rdtimefarmspecial");
     turnOff("Rdtimefarmgather");
+    
+    //RDHeirloom Swapping
+    radonon ? turnOn('Rdhs') : turnOff('Rdhs');
+    var dhson = (getPageSetting('Rdhs') == true);
+
+    //RDShields
+    radonon && dhson ? turnOn('Rdhsshield') : turnOff('Rdhsshield');
+    var dhsshieldon = (getPageSetting('Rdhsshield') == true);
+    radonon && dhson && dhsshieldon ? turnOn('Rdhsz') : turnOff('Rdhsz');
+    radonon && dhson && dhsshieldon ? turnOn('Rdhs1') : turnOff('Rdhs1');
+    radonon && dhson && dhsshieldon ? turnOn('Rdhs2') : turnOff('Rdhs2');
 
     //RDPortal
     radonon ? turnOn("RAutoStartDaily") : turnOff("RAutoStartDaily");
