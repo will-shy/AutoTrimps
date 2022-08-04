@@ -324,8 +324,11 @@ function mainLoop() {
         if (getPageSetting('Rmanageequality') == true && game.global.fighting) Rmanageequality();
 
         //RHeirlooms
-        if (getPageSetting('Rhs') == true) {
+        if (getPageSetting('Rhs') == true && game.global.challengeActive != 'Daily') {
             Rheirloomswap();
+        }
+        if (getPageSetting('Rdhs') == true && game.global.challengeActive == 'Daily') {
+            Rdheirloomswap();
         }
 
         //RGolden
