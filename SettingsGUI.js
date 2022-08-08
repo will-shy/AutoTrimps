@@ -410,21 +410,21 @@ function initializeAllSettings() {
 
     //RHeirloom
     document.getElementById('dlowdmg').parentNode.insertAdjacentHTML('afterend', '<br>');
-    createSetting('Rdhs', ['DHS: Off', 'DHS: On', 'DHS: Normal'], 'Heirloom swapping master button for Dailies. Turn this on to allow heirloom swapping and its associated settings. ', 'multitoggle', 0, null, 'Daily');
+    createSetting('Rdhs', ['DHS: Off', 'DHS: On', 'DHS: Normal'], 'Heirloom swapping master button for Dailies. Turn this on to allow heirloom swapping and its associated settings. Use DHS: Normal to use the non-daily settings. ', 'multitoggle', 0, null, 'Daily');
     
     //DShield Swapping
     document.getElementById('Rdhs').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rdhsshield', 'Daily Shields', 'Toggle to swap Shields in Dailies', 'boolean', false, null, 'Daily');
-    createSetting('Rdhsz', 'DHS: Zone', 'Which zone to swap from your first heirloom you have defined to your second heirloom you have defined. I.e if this value is 75 it will switch to the second heirloom <b>on z75</b>', 'value', '-1', null, 'Daily');
-    createSetting('Rdhs1', 'DHS: First', '<b>First Heirloom to use</b><br><br>Enter the name of your first heirloom. This is the heirloom that you will use before swapping to the second heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Daily');
-    createSetting('Rdhs2', 'DHS: Second', '<b>Second Heirloom to use</b><br><br>Enter the name of your second heirloom. This is the heirloom that you will use after swapping from the first heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Daily');
+    createSetting('Rdhsz', 'DHSh: Zone', 'Which zone to swap from your first heirloom you have defined to your second heirloom you have defined. I.e if this value is 75 it will switch to the second heirloom <b>on z75</b>', 'value', '-1', null, 'Daily');
+    createSetting('Rdhs1', 'DHSh: First', '<b>First Heirloom to use</b><br><br>Enter the name of your first heirloom. This is the heirloom that you will use before swapping to the second heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Daily');
+    createSetting('Rdhs2', 'DHSh: Second', '<b>Second Heirloom to use</b><br><br>Enter the name of your second heirloom. This is the heirloom that you will use after swapping from the first heirloom at the zone you have defined in the HS: Zone. ', 'textValue', 'undefined', null, 'Daily');
     
     //DStaff Swapping
     document.getElementById('Rdhs2').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rdhsstaff', 'Daily Staffs', 'Toggle to swap Staffs', 'boolean', false, null, 'Daily');
-    createSetting('Rdhsworldstaff', 'DHS: World', '<b>World Staff</b><br><br>Enter the name of your world staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
-    createSetting('Rdhsmapstaff', 'DHS: Map', '<b>Mapping staff</b><br><br>Enter the name of your mapping staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
-    createSetting('Rdhstributestaff', 'DHS: Tribute', '<b>Tribute farming staff</b><br><br>Enter the name of the staff you would like to equip during tribute farming for Dailies', 'textValue', 'undefined', null, 'Daily');
+    createSetting('Rdhsworldstaff', 'DHSt: World', '<b>World Staff</b><br><br>Enter the name of your world staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
+    createSetting('Rdhsmapstaff', 'DHSt: Map', '<b>Mapping staff</b><br><br>Enter the name of your mapping staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
+    createSetting('Rdhstributestaff', 'DHSt: Tribute', '<b>Tribute farming staff</b><br><br>Enter the name of the staff you would like to equip during tribute farming for Dailies', 'textValue', 'undefined', null, 'Daily');
     
     //Portal Line
     document.getElementById('Rdhs2').parentNode.insertAdjacentHTML('afterend', '<br>');
