@@ -324,10 +324,10 @@ function mainLoop() {
         if (getPageSetting('Rmanageequality') == true && game.global.fighting) Rmanageequality();
 
         //RHeirlooms
-        if (getPageSetting('Rhs') == true && game.global.challengeActive != 'Daily') {
+        if ((getPageSetting('Rhs') == true && game.global.challengeActive != 'Daily') || (getPageSetting('Rdhs') == 2 && game.global.challengeActive == 'Daily')) {
             Rheirloomswap();
         }
-        if (getPageSetting('Rdhs') == true && game.global.challengeActive == 'Daily') {
+        if (getPageSetting('Rdhs') == 1 && game.global.challengeActive == 'Daily') {
             Rdheirloomswap();
         }
 
