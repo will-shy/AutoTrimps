@@ -2865,9 +2865,11 @@ function RautoMap() {
 
                     if (insanityfarmzone.includes(game.global.world)) {
                         if (insanitylevelzones > 0) {
+                            insanityfragmin(insanitylevelzones);
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = insanitylevelzones;
                         } else if (insanitylevelzones < 0) {
+                            insanityfragmin(insanitylevelzones);
                             document.getElementById("mapLevelInput").value = (game.global.world + insanitylevelzones);
                             document.getElementById("advExtraLevelSelect").value = 0;
                         }
