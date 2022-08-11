@@ -3021,12 +3021,15 @@ function RautoMap() {
 
                     if (hypofarmzone.includes(game.global.world)) {
                         if (hypolevelzones > 0) {
+                            hypofragmin(hypolevelzones);
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = hypolevelzones;
                         } else if (hypolevelzones == 0) {
+                            hypofragmin(hypolevelzones);
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = 0;
                         } else if (hypolevelzones < 0) {
+                            hypofragmin(hypolevelzones);
                             document.getElementById("mapLevelInput").value = (game.global.world + hypolevelzones);
                             document.getElementById("advExtraLevelSelect").value = 0;
                         }
@@ -3099,17 +3102,21 @@ function RautoMap() {
 
                     if (shipfarmzone.includes(game.global.world)) {
                         if (shiplevelzones > 0) {
+                            shipfragmin(shiplevelzones);
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = shiplevelzones;
                         } else if (shiplevelzones == 0) {
+                            shipfragmin(shiplevelzones);
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = 0;
                         } else if (shiplevelzones < 0) {
+                            shipfragmin(shiplevelzones);
                             document.getElementById("mapLevelInput").value = (game.global.world + shiplevelzones);
                             document.getElementById("advExtraLevelSelect").value = 0;
                         }
                     }
                 }
+          
                 updateMapCost();
             }
             if (Rshouldtimefarm && !Rdshouldtimefarm && !Rshouldtributefarm && !Rshoulddoquest) {
