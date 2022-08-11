@@ -1210,7 +1210,9 @@ function RautoMap() {
             if (game.global.lastClearedCell + 2 >= timefarmcell && timezones > time && timezones > 0) {
                 Rshouldtimefarm = true;
             }
-            Rshouldtimefarm = (game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') != 2) ? false : true;
+            if (game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') != 2) {
+                Rshouldtimefarm = false;
+            }
         }
     }
 
@@ -1286,7 +1288,9 @@ function RautoMap() {
     var Rdopraid = false;
     Rshoulddopraid = false;
     Rdopraid = (game.global.world > 5 && (((getPageSetting('RAMPraid') == true) || (game.global.challengeActive == "Daily" && getPageSetting('RdAMPraid') == 2)) && getPageSetting('RAMPraidzone')[0] > 0 && getPageSetting('RAMPraidraid')[0] > 0));
-    Rdopraid = (game.global.challengeActive == 'Daily' && getPageSetting('RdAMPraid') != 2) ? false : true;
+    if (game.global.challengeActive == 'Daily' && getPageSetting('RdAMPraid') != 2) {
+        Rdopraid = false;
+    }
     if (Rdopraid) {
         var praidzone = getPageSetting('RAMPraidzone');
         var raidzone = getPageSetting('RAMPraidraid');
