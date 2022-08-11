@@ -125,7 +125,7 @@ MODULES["gather"].RminScienceAmount = 200;
 
 function RmanualLabor2() {
 	
-	//Vars
+    //Vars
     var lowOnTraps = game.buildings.Trap.owned < 5;
     var trapTrimpsOK = getPageSetting('RTrapTrimps');
     var hasTurkimp = game.talents.turkimp2.purchased || game.global.turkimpTimer > 0;
@@ -175,7 +175,7 @@ function RmanualLabor2() {
     }
 	
     //QUEST
-    else if (game.global.challengeActive == "Quest") {
+    if (game.global.challengeActive == "Quest") {
         if (questcheck() == 10 || questcheck() == 20) {
             setGather('food');
 	}
@@ -204,16 +204,16 @@ function RmanualLabor2() {
     else if (Rshouldtimefarm) {
         var timefarmzone = getPageSetting('Rtimefarmzone');
         var timefarmlevelindex = timefarmzone.indexOf(game.global.world);
-        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "Food") {
+        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "food") {
             setGather('food');
         }
-        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "Wood") {
+        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "wood") {
             setGather('wood');
         }
-        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "Metal") {
+        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "metal") {
             setGather('metal');
         }
-        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "Science") {
+        if (autoTrimpSettings.Rtimefarmgather.value[timefarmlevelindex] == "science") {
             setGather('science');
         }
     } 
@@ -222,16 +222,16 @@ function RmanualLabor2() {
     else if (Rdshouldtimefarm) {
         var dtimefarmzone = getPageSetting('Rdtimefarmzone');
         var dtimefarmlevelindex = dtimefarmzone.indexOf(game.global.world);
-        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Food") {
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "food") {
             setGather('food');
         }
-        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Wood") {
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "wood") {
             setGather('wood');
         }
-        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Metal") {
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "metal") {
             setGather('metal');
         }
-        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "Science") {
+        if (autoTrimpSettings.Rdtimefarmgather.value[dtimefarmlevelindex] == "science") {
             setGather('science');
         }
     } 
@@ -240,16 +240,16 @@ function RmanualLabor2() {
     else if (Rshouldtributefarm) {
         var tributefarmzone = getPageSetting('Rtributefarmzone');
         var tributefarmlevelindex = tributefarmzone.indexOf(game.global.world);
-        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "Food") {
+        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "food") {
             setGather('food');
         }
-        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "Wood") {
+        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "wood") {
             setGather('wood');
         }
-        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "Metal") {
+        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "metal") {
             setGather('metal');
         }
-        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "Science") {
+        if (autoTrimpSettings.Rtributegatherselection.value[tributefarmlevelindex] == "science") {
             setGather('science');
         }
     }
