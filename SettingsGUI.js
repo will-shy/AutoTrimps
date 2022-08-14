@@ -679,7 +679,7 @@ function initializeAllSettings() {
     //Tributefarm
     document.getElementById('Rtimefarmgather').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rtributefarm', 'Tribute Farm', 'Turn this on if you want to use Tribute Farming. ', 'boolean', false, null, 'Maps');
-    createSetting('Rtributefarmmaz', 'Tribute Farm Settings', 'Click to open the Tribute Farm settings. <br> <b>Zone:</b> What zone to start tribute farming. It will also put all your workers into farming. <br> <b>Cell:</b> What cell to start tribute farming at. <br> <b>Tributes:</b> How many tributes to farm. <br> <b>Level:</b> How many map levels above your zone to use. <br> <b>Map:</b> What kind of map you want to use. <br> <b>Special:</b> What type of special you want to use. <br> <b>Gather:</b> What resource you would like to gather. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Tributes: 1000\, Level: 5\, Map: Gardens\, Special: Large Savory Cache\, Gather: Food\, you will farm at zone 30 at cell 10 for 1000 tributes in a +5 Gardens map that has a Large Savory Cache while gathering food. ', 'infoclick', false, null, 'Maps');
+    createSetting('Rtributefarmmaz', 'Tribute Farm Settings', 'Click to open the Tribute Farm settings. <br> <b>Zone:</b> What zone to start tribute farming. It will also put all your workers into farming. <br> <b>Cell:</b> What cell to start tribute farming at. <br> <b>Tributes:</b> How many tributes to farm. <br> <b>Level:</b> How many map levels above your zone to use. <br> <b>Map:</b> What kind of map you want to use. <br> <b>Special:</b> What type of special you want to use. <br> <b>Gather:</b> What resource you would like to gather. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Tributes: 1000\, Level: 5\, Map: Gardens\, Special: Large Savory Cache\, Gather: Food\, you will farm at zone 40 at cell 10 for 1000 tributes in a +5 Gardens map that has a Large Savory Cache while gathering food. ', 'infoclick', false, null, 'Maps');
     createSetting('Rtributefarmzone', 'TrF: Zone', 'zone', 'multiValue', [-1], null, 'Maps');
     createSetting('Rtributefarmcell', 'TrF: Cell', 'cell', 'multiValue', [-1], null, 'Maps');
     createSetting('Rtributefarmamount', 'TrF: Tributes', 'tributes', 'multiValue', [-1], null, 'Maps');
@@ -687,7 +687,14 @@ function initializeAllSettings() {
     createSetting('Rtributemapselection', 'TrF: Map Selection', 'map', 'textValue', 'undefined', null, 'Maps');
     createSetting('Rtributespecialselection', 'TrF: Special Selection', 'special', 'textValue', 'undefined', null, 'Maps');
     createSetting('Rtributegatherselection', 'TrF: Gather Selection', 'gather', 'textValue', 'undefined', null, 'Maps');
-
+    
+    //Shrine
+    document.getElementById('Rtributegatherselection').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Rshrine', 'AutoShrine', 'Turn this on if you want to use Shrines automatically. ', 'boolean', false, null, 'Maps');
+    createSetting('Rshrinemaz', 'AutoShrine Settings', 'Click to open AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10. ', 'infoclick', false, null, 'Maps');
+    createSetting('Rshrinezone', 'AutoShrine: Zone', 'zone', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rshrineamount', 'AutoShrine: Amount', 'cell', 'multiValue', [-1], null, 'Maps');
 
 
     //Spire
@@ -1076,6 +1083,7 @@ function initializeAllSettings() {
     document.getElementById('Rtimefarmmaz').setAttribute('onclick', 'MAZLookalike("Time Farm", "Rtimefarm")');
     document.getElementById('Rdtimefarmmaz').setAttribute('onclick', 'MAZLookalike("dTime Farm", "Rdtimefarm")');
     document.getElementById('Rtributefarmmaz').setAttribute('onclick', 'MAZLookalike("Tribute Farm", "Rtributefarm")');
+    document.getElementById('Rshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine", "Rshrine")');
     document.getElementById('Rblackbogmaz').setAttribute('onclick', 'MAZLookalike("Quagmire", "Rblackbog")');
     document.getElementById('Rinsanitymaz').setAttribute('onclick', 'MAZLookalike("Insanity", "Rinsanityon")');
     document.getElementById('Ralchfarmmaz').setAttribute('onclick', 'MAZLookalike("Alch", "Ralchon")');
@@ -1917,6 +1925,12 @@ function updateCustomButtons() {
     turnOff("Rtributemapselection");
     turnOff("Rtributespecialselection");
     turnOff("Rtributegatherselection");
+    
+    radonon ? turnOn("Rshrine") : turnOff("Rshrine");
+    (radonon && getPageSetting('Rshrine') == true) ? turnOn("Rshrinemaz"): turnOff("Rshrinemaz");
+    turnOff("Rshrinezone");
+    turnOff("Rshrinecell");
+    turnOff("Rshrineamount");
 
     radonon ? turnOn("RVoidMaps") : turnOff("RVoidMaps");
     radonon ? turnOn("Rvoidscell") : turnOff("Rvoidscell");
