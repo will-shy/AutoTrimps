@@ -4107,3 +4107,31 @@ function hypofrag() {
         else return false;
     }
 }
+
+function autoshrine() {
+    if (getPageSetting('Rshrine') && game.permaBoneBonuses.boosts.charges > 0) {
+        var shrinezone = getPageSetting('Rshrinezone');
+        if (shrinezone.includes(game.global.world)) {
+            var shrinezone;
+            var shrineamount;
+            var shrineindex = shrinezone.indexOf(game.global.world);
+            var shrinecell = getPageSetting('Rshrinecell')[shrineindex];
+
+            shrinezone = getPageSetting('Rshrinezone');
+            shrineamount = getPageSetting('Rshrineamount');
+
+            var shrineindex = shrinezone.indexOf(game.global.world);
+            var shrinezones = shrineamount[shrineindex];
+
+            if (game.global.lastClearedCell + 2 >= shrinecell && shrinezones > 0) {
+                autoshrinecharge(shrinezones)
+            }
+        }
+    }
+}
+
+function autoshrinecharge(amount) {
+    if (amount != null) {
+
+    }
+}
