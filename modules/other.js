@@ -4148,7 +4148,7 @@ function dautoshrine() {
 
 var old_nextWorld = nextWorld;
 nextWorld = function() {
-    var retVal = old_nextWorld(arguments);
+    var retVal = old_nextWorld(...arguments);
     autoTrimpSettings.Rshrinecharge.value = 0;
     return retVal;
 }
