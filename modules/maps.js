@@ -1242,16 +1242,10 @@ function RautoMap() {
     if (getPageSetting('Rtributefarm')) {
         var tributefarmzone = getPageSetting('Rtributefarmzone');
         if (tributefarmzone.includes(game.global.world)) {
-            var tributefarmzone;
-            var tributefarmtribute;
+            var tributefarmtribute = getPageSetting('Rtributefarmamount');
             var tributefarmindex = tributefarmzone.indexOf(game.global.world);
             var tributefarmcell = getPageSetting('Rtributefarmcell')[tributefarmindex];
             var tributes = game.buildings.Tribute.owned;
-
-            tributefarmzone = getPageSetting('Rtributefarmzone');
-            tributefarmtribute = getPageSetting('Rtributefarmamount');
-
-            var tributefarmindex = tributefarmzone.indexOf(game.global.world);
             var tributezones = tributefarmtribute[tributefarmindex];
 
             if (game.global.lastClearedCell + 2 >= tributefarmcell && tributezones > tributes && tributezones > 0) {
