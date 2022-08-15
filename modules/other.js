@@ -4132,6 +4132,7 @@ function autoshrine() {
 
 var old_nextWorld = nextWorld;
 nextWorld = function() {
-    old_nextWorld(arguments);
+    var retVal = old_nextWorld(arguments);
     autoTrimpSettings.Rshrinecharge.value = 0;
+    return retVal;
 }
