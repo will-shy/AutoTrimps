@@ -4127,6 +4127,25 @@ function autoshrine() {
     }
 }
 
+function dautoshrine() {
+    if (getPageSetting('Rdshrine') && game.permaBoneBonuses.boosts.charges > 0) {
+        var dshrinezone = getPageSetting('Rdshrinezone');
+        if (dshrinezone.includes(game.global.world)) {
+            var dshrineamount = getPageSetting('Rdshrineamount');
+            var dshrineindex = dshrinezone.indexOf(game.global.world);
+            var dshrinecell = getPageSetting('Rdshrinecell')[dshrineindex];
+            var dshrinezones = dshrineamount[dshrineindex];
+
+            dshrinezones = dshrinezones - autoTrimpSettings.Rshrinecharge.value;
+
+            if (game.global.lastClearedCell + 2 >= dshrinecell && dshrinezones > 0) {
+                game.permaBoneBonuses.boosts.consume();
+                autoTrimpSettings.Rshrinecharge.value++;
+            }
+        }
+    }
+}
+
 var old_nextWorld = nextWorld;
 nextWorld = function() {
     var retVal = old_nextWorld(arguments);
