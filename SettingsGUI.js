@@ -1095,6 +1095,7 @@ function initializeAllSettings() {
     //Display
 
     //Line 1
+    createSetting('zonetracker', 'Zone', 'tracks zones you wil lnot see this huehue', 'value', 1, null, 'Display');
     createSetting('EnhanceGrids', 'Enhance Grids', 'Apply slight visual enhancements to world and map grids that highlights with drop shadow all the exotic, powerful, skeletimps and other special imps.', 'boolean', false, null, 'Display');
     createSetting('showbreedtimer', 'Enable Breed Timer', 'Enables the display of the hidden breedtimer. Turn this off to reduce memory. ', 'boolean', true, null, 'Display');
     createSetting('showautomapstatus', 'Enable AutoMap Status', 'Enables the display of the map status. Turn this off to reduce memory. ', 'boolean', true, null, 'Display');
@@ -1110,6 +1111,7 @@ function initializeAllSettings() {
     //SPAM
 
     //Line 1
+    
     createSetting('SpamGeneral', 'General Spam', 'General Spam = Notification Messages, Auto He/Hr', 'boolean', true, null, 'Display');
     createSetting('SpamUpgrades', 'Upgrades Spam', 'Upgrades Spam', 'boolean', true, null, 'Display');
     createSetting('SpamEquipment', 'Equipment Spam', 'Equipment Spam', 'boolean', true, null, 'Display');
@@ -2293,6 +2295,7 @@ function updateCustomButtons() {
 
     //Display
     (game.worldUnlocks.easterEgg.locked == false) ? turnOn('AutoEggs'): turnOff('AutoEggs');
+    turnOff("zonetracker");
 
 
     //Memory
