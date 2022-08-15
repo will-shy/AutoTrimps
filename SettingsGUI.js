@@ -426,6 +426,14 @@ function initializeAllSettings() {
     createSetting('Rdhsmapstaff', 'DHSt: Map', '<b>Mapping staff</b><br><br>Enter the name of your mapping staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
     createSetting('Rdhstributestaff', 'DHSt: Tribute', '<b>Tribute farming staff</b><br><br>Enter the name of the staff you would like to equip during tribute farming for Dailies', 'textValue', 'undefined', null, 'Daily');
     
+    //DShrine
+    document.getElementById('Rdhstributestaff').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Rdshrine', ['Daily AutoShrine Off', 'Daily AutoShrine On', 'DAS: Normal'], 'Turn this on if you want to use Shrines automatically in Dailies. Use DAS: Normal if you want to use the settings in the Maps tab if do not wish to copy them here. ', 'multitoggle', 0, null, 'Daily');
+    createSetting('Rdshrinemaz', 'Daily AutoShrine Settings', 'Click to open Daily AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10 in a Daily. ', 'infoclick', false, null, 'Daily');
+    createSetting('Rdshrinezone', 'AutoShrine: Zone', 'zone', 'multiValue', [-1], null, 'Daily');
+    createSetting('Rdshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Daily');
+    createSetting('Rdshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Daily');
+    
     //Portal Line
     document.getElementById('Rdhs2').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('AutoStartDaily', 'Auto Start Daily', 'Starts Dailies for you. When you portal with this on, it will select the oldest Daily and run it. Use the settings in this tab to decide whats next. ', 'boolean', false, null, 'Daily');
@@ -1085,6 +1093,7 @@ function initializeAllSettings() {
     document.getElementById('Rdtimefarmmaz').setAttribute('onclick', 'MAZLookalike("dTime Farm", "Rdtimefarm")');
     document.getElementById('Rtributefarmmaz').setAttribute('onclick', 'MAZLookalike("Tribute Farm", "Rtributefarm")');
     document.getElementById('Rshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine", "Rshrine")');
+    document.getElementById('Rdshrinemaz').setAttribute('onclick', 'MAZLookalike("dShrine", "Rdshrine")');
     document.getElementById('Rblackbogmaz').setAttribute('onclick', 'MAZLookalike("Quagmire", "Rblackbog")');
     document.getElementById('Rinsanitymaz').setAttribute('onclick', 'MAZLookalike("Insanity", "Rinsanityon")');
     document.getElementById('Ralchfarmmaz').setAttribute('onclick', 'MAZLookalike("Alch", "Ralchon")');
@@ -1704,7 +1713,7 @@ function updateCustomButtons() {
 
     //RDTime Farm
     radonon ? turnOn("Rdtimefarm") : turnOff("Rdtimefarm");
-    (radonon && getPageSetting('Rdtimefarm') == true) ? turnOn("Rdtimefarmmaz"): turnOff("Rdtimefarmmaz");
+    (radonon && getPageSetting('Rdtimefarm') == 1) ? turnOn("Rdtimefarmmaz"): turnOff("Rdtimefarmmaz");
     turnOff("Rdtimefarmzone");
     turnOff("Rdtimefarmcell");
     turnOff("Rdtimefarmtime");
@@ -1730,6 +1739,13 @@ function updateCustomButtons() {
     radonon && dhson && dhsstaffon ? turnOn('Rdhsworldstaff') : turnOff('Rdhsworldstaff');
     radonon && dhson && dhsstaffon ? turnOn('Rdhsmapstaff') : turnOff('Rdhsmapstaff');
     radonon && dhson && dhsstaffon ? turnOn('Rdhstributestaff') : turnOff('Rdhstributestaff');
+    
+    //RDShrine
+    radonon ? turnOn("Rdshrine") : turnOff("Rdshrine");
+    (radonon && getPageSetting('Rdshrine') == 1) ? turnOn("Rdshrinemaz"): turnOff("Rdshrinemaz");
+    turnOff("Rdshrinezone");
+    turnOff("Rdshrinecell");
+    turnOff("Rdshrineamount");
 
 
     //RDPortal
