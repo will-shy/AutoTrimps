@@ -4111,10 +4111,15 @@ function hypofrag() {
 function autoshrinecharge(amount) {
     var zone;
     if (amount != null) {
+    console.log("amount was not null");
         if (amount != 0) {
+            console.log("amount was not 0 and here is amount: " + amount);
             game.permaBoneBonuses.boosts.consume();
+            console.log("CONSUMED");
             autoTrimpSettings.Rshrinecharge.value++;
+            console.log("charge up in value and heres value now: " + autoTrimpSettings.Rshrinecharge.value);
             zone = autoTrimpSettings.zonetracker;
+            console.log("zone: " + zone);
         }
     }
     if (zone != game.global.world) {
@@ -4124,7 +4129,9 @@ function autoshrinecharge(amount) {
 
 function autoshrine() {
     if (getPageSetting('Rshrine') && game.permaBoneBonuses.boosts.charges > 0) {
+        console.log("Rshrine returned true");
         var shrinezone = getPageSetting('Rshrinezone');
+        console.log("shrinezone is: " + shrinezone);
         if (shrinezone.includes(game.global.world)) {
             var shrinezone = [0];
             var shrineamount = [0];
@@ -4136,11 +4143,16 @@ function autoshrine() {
 
             var shrineindex = shrinezone.indexOf(game.global.world);
             var shrinezones = shrineamount[shrineindex];
+            
+            console.log("shrinezones is: " + shrinezones);
 
             shrinezones = shrinezones - autoTrimpSettings.Rshrinecharge.value;
+            
+            console.log("shrinezones is after charge setting: " + shrinezones);
 
             if (game.global.lastClearedCell + 2 >= shrinecell && shrinezones > 0) {
                 autoshrinecharge(shrinezones);
+                console.log("executing autoshrinecharge");
             }
         }
     }
