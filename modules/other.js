@@ -4133,7 +4133,6 @@ function autoshrine() {
         var shrinezone = getPageSetting('Rshrinezone');
         console.log("shrinezone is: " + shrinezone);
         if (shrinezone.includes(game.global.world)) {
-            var shrinezone = [0];
             var shrineamount = [0];
             var shrineindex = shrinezone.indexOf(game.global.world);
             var shrinecell = getPageSetting('Rshrinecell')[shrineindex];
