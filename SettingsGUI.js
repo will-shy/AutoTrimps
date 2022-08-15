@@ -435,7 +435,7 @@ function initializeAllSettings() {
     createSetting('Rdshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Daily');
     
     //Portal Line
-    document.getElementById('Rdhs2').parentNode.insertAdjacentHTML('afterend', '<br>');
+    document.getElementById('Rdshrineamount').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('AutoStartDaily', 'Auto Start Daily', 'Starts Dailies for you. When you portal with this on, it will select the oldest Daily and run it. Use the settings in this tab to decide whats next. ', 'boolean', false, null, 'Daily');
     createSetting('u2daily', 'Daily in U2', 'If this is on, you will do your daily in U2. ', 'boolean', false, null, 'Daily');
     createSetting('AutoPortalDaily', ['Daily Portal Off', 'DP: He/Hr', 'DP: Custom'], '<b>DP: He/Hr:</b> Portals when your world zone is above the minium you set (if applicable) and the buffer falls below the % you have defined. <br><b>DP: Custom:</b> Portals after clearing the zone you have defined in Daily Custom Portal. ', 'multitoggle', '0', null, "Daily");
