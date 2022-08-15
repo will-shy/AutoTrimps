@@ -158,6 +158,9 @@ function mainLoop() {
             easterEggClicked();
         setTitle();
     }
+    if (game.global.world != autoTrimpSettings.zonetracker) {
+        autoTrimpSettings.zonetracker = game.global.world;
+    }
 
     //Logic for Universe 1
     if (game.global.universe == 1) {
@@ -364,6 +367,7 @@ function mainCleanup() {
             autoTrimpSettings["RAutoMaps"].value = 1;
         return true;
     }
+    autoTrimpSettings.zonetracker = 1;
 }
 
 function throwErrorfromMain() {
