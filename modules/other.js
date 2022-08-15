@@ -4124,9 +4124,7 @@ function autoshrinecharge(amount) {
 
 function autoshrine() {
     if (getPageSetting('Rshrine') && game.permaBoneBonuses.boosts.charges > 0) {
-        console.log("Rshrine returned true");
         var shrinezone = getPageSetting('Rshrinezone');
-        console.log("shrinezone is: " + shrinezone);
         if (shrinezone.includes(game.global.world)) {
             var shrineamount = getPageSetting('Rshrineamount');
             var shrineindex = shrinezone.indexOf(game.global.world);
