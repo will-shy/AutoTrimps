@@ -694,7 +694,8 @@ function initializeAllSettings() {
     createSetting('Rshrinemaz', 'AutoShrine Settings', 'Click to open AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10. ', 'infoclick', false, null, 'Maps');
     createSetting('Rshrinezone', 'AutoShrine: Zone', 'zone', 'multiValue', [-1], null, 'Maps');
     createSetting('Rshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Maps');
-    createSetting('Rshrineamount', 'AutoShrine: Amount', 'cell', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rshrinecharge', 'AutoShrine: Charge', 'charge count you will never see this setting hehehehe', 'value', 0, null, 'Maps');
 
 
     //Spire
@@ -1931,6 +1932,7 @@ function updateCustomButtons() {
     turnOff("Rshrinezone");
     turnOff("Rshrinecell");
     turnOff("Rshrineamount");
+    turnOff("Rshrinecharge");
 
     radonon ? turnOn("RVoidMaps") : turnOff("RVoidMaps");
     radonon ? turnOn("Rvoidscell") : turnOff("Rvoidscell");
