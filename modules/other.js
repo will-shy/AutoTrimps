@@ -4108,6 +4108,20 @@ function hypofrag() {
     }
 }
 
+function autoshrinecharge(amount) {
+    var zone;
+    if (amount != null) {
+        if (amount != 0) {
+            game.permaBoneBonuses.boosts.consume();
+            autoTrimpSettings.Rshrinecharge.value++;
+            zone = autoTrimpSettings.zonetracker;
+        }
+    }
+    if (zone != game.global.world) {
+        autoTrimpSettings.Rshrinecharge.value = 0;
+    }
+}
+
 function autoshrine() {
     if (getPageSetting('Rshrine') && game.permaBoneBonuses.boosts.charges > 0) {
         var shrinezone = getPageSetting('Rshrinezone');
@@ -4129,19 +4143,5 @@ function autoshrine() {
                 autoshrinecharge(shrinezones);
             }
         }
-    }
-}
-
-function autoshrinecharge(amount) {
-    var zone;
-    if (amount != null) {
-        while (amount != 0) {
-            game.permaBoneBonuses.boosts.consume();
-            autoTrimpSettings.Rshrinecharge.value++;
-            zone = autoTrimpSettings.zonetracker;
-        }
-    }
-    if (zone != game.global.world) {
-        autoTrimpSettings.Rshrinecharge.value = 0;
     }
 }
