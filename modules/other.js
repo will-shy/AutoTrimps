@@ -4125,7 +4125,13 @@ function autoshrine() {
             }
         }
     }
-    if (game.global.world > getHighestLevelCleared()) {
+    /*if (game.global.world > getHighestLevelCleared()) {
         autoTrimpSettings.Rshrinecharge.value = 0;
-    }
+    }*/
+}
+
+var old_nextWorld = nextWorld;
+nextWorld = function() {
+    old_nextWorld(arguments);
+    autoTrimpSettings.Rshrinecharge.value = 0;
 }
