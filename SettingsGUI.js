@@ -753,6 +753,7 @@ function initializeAllSettings() {
     //Windstacking
 
     //Line 1
+    createSetting('windstackingfiller', 'Use Daily Tab for Dailies!', 'These settings are for fillers ONLY. ', 'boolean', 'false', null, 'Windstacking');
     createSetting('turnwson', 'Turn WS On!', 'Turn on Windstacking Stance in Combat to see the settings! ', 'boolean', 'false', null, 'Windstacking');
     createSetting('WindStackingMin', 'Windstack Min Zone', 'For use with Windstacking Stance, enables windstacking in zones above and inclusive of the zone set. (Get specified windstacks then change to D, kill bad guy, then repeat). This is designed to force S use until you have specified stacks in wind zones, overriding scryer settings. All windstack settings apart from WS MAX work off this setting. ', 'value', '-1', null, 'Windstacking');
     createSetting('WindStackingMinHD', 'Windstack H:D', 'For use with Windstacking Stance, if your H:D is below this number it will use W inside windlight and S outside of it. If it is above it will start manually windstacking using heirloom swapping and stancing. If you just want to use W stance just set this to something impossibly high like 1e30. ', 'value', '-1', null, 'Windstacking');
