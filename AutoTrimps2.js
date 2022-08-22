@@ -33,7 +33,7 @@ var changelogList = [];
 changelogList.push({
     date: "17/08/2022",
     version: "v5.1.1",
-    description: "<b>Trimps v5.8.0</b>AutoShrine added. Daily Heirloom Swap added. Various bug fixes. ",
+    description: "<b>Trimps v5.8.0</b> AutoShrine added. Daily Heirloom Swap added. Various bug fixes. ",
     isNew: true
 });
 changelogList.push({
