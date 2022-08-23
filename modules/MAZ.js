@@ -37,11 +37,11 @@ function MAZLookalike(titleText, isItIn, event) {
         map = 'Rtributemapselection';
         special = 'Rtributespecialselection';
         gather = 'Rtributegatherselection';
-    } else if (titleText.includes('Shrine')) {
+    } else if (titleText == 'Shrine') {
         zone = 'Rshrinezone';
         cell = 'Rshrinecell';
         setting = 'Rshrineamount';
-    } else if (titleText.includes('dShrine')) {
+    } else if (titleText == 'dShrine') {
         zone = 'Rdshrinezone';
         cell = 'Rdshrinecell';
         setting = 'Rdshrineamount';
@@ -118,9 +118,9 @@ function MAZLookalike(titleText, isItIn, event) {
         tooltipText += "<div class='windowLevel'>Level</div>"
         tooltipText += "<div class='windowSpecial'>Special</div>"
         tooltipText += "<div class='windowGather'>Gather</div>"
-    } else if (titleText.includes('Shrine')) {
+    } else if (titleText == 'Shrine') {
         tooltipText += "<div class='windowSetting'>Amount</div>"
-    } else if (titleText.includes('dShrine')) {
+    } else if (titleText == 'dShrine') {
         tooltipText += "<div class='windowSetting'>Amount</div>"
     } else if (titleText.includes('Quagmire')) {
         tooltipText += "<div class='windowSetting'>Black Bogs</div>"
@@ -131,7 +131,6 @@ function MAZLookalike(titleText, isItIn, event) {
         tooltipText += "<div class='windowSetting'>Potions</div>"
         tooltipText += "<div class='windowMap'>Map</div>"
         tooltipText += "<div class='windowLevel'>Level</div>"
-
     } else if (titleText.includes('Hypo')) {
         tooltipText += "<div class='windowSetting'>Bonfires</div>"
         tooltipText += "<div class='windowLevel'>Level</div>"
@@ -182,9 +181,9 @@ function MAZLookalike(titleText, isItIn, event) {
                 vals.level = autoTrimpSettings[level].value[x] ? autoTrimpSettings[level].value[x] : 0;
                 vals.special = autoTrimpSettings[special].value[x] ? autoTrimpSettings[special].value[x] : 0;
                 vals.gather = autoTrimpSettings[gather].value[x] ? autoTrimpSettings[gather].value[x] : 0;
-            } else if (titleText.includes('Shrine')) {
+            } else if (titleText == 'Shrine') {
                 vals.setting = autoTrimpSettings[setting].value[x] ? autoTrimpSettings[setting].value[x] : 0;
-            } else if (titleText.includes('dShrine')) {
+            } else if (titleText == 'dShrine') {
                 vals.setting = autoTrimpSettings[setting].value[x] ? autoTrimpSettings[setting].value[x] : 0;
             } else if (titleText.includes('Quagmire')) {
                 vals.setting = autoTrimpSettings[setting].value[x] ? autoTrimpSettings[setting].value[x] : 0;
@@ -235,9 +234,9 @@ function MAZLookalike(titleText, isItIn, event) {
             tooltipText += "<div class='windowLevel'><input value='" + vals.level + "' type='number' id='windowLevel" + x + "'/></div>";
             tooltipText += "<div class='windowSpecial' onchange='updateWindowPreset(" + x + ")'><select value='" + vals.special + "' id='windowSpecial" + x + "'>" + specialsDropdown + "</select></div>"
             tooltipText += "<div class='windowGather' onchange='updateWindowPreset(" + x + ")'><select value='" + vals.gather + "' id='windowGather" + x + "'>" + gatherDropdown + "</select></div>"
-        } else if (titleText.includes('Shrine')) {
+        } else if (titleText == 'Shrine') {
             tooltipText += "<div class='windowSetting'><input value='" + vals.setting + "' type='number' id='windowSetting" + x + "'/></div>";
-        } else if (titleText.includes('dShrine')) {
+        } else if (titleText == 'dShrine') {
             tooltipText += "<div class='windowSetting'><input value='" + vals.setting + "' type='number' id='windowSetting" + x + "'/></div>";
         } else if (titleText.includes('Quagmire')) {
             tooltipText += "<div class='windowSetting'><input value='" + vals.setting + "' type='number' id='windowSetting" + x + "'/></div>";
@@ -330,11 +329,11 @@ function settingsWindowSave(titleText, reopen) {
             map = 'Rtributemapselection';
             special = 'Rtributespecialselection';
             gather = 'Rtributegatherselection';
-        } else if (titleText.includes('Shrine')) {
+        } else if (titleText == 'Shrine') {
             zone = 'Rshrinezone';
             cell = 'Rshrinecell';
             setting = 'Rshrineamount';
-        } else if (titleText.includes('dShrine')) {
+        } else if (titleText == 'dShrine') {
             zone = 'Rdshrinezone';
             cell = 'Rdshrinecell';
             setting = 'Rdshrineamount';
@@ -400,9 +399,9 @@ function settingsWindowSave(titleText, reopen) {
             map = document.getElementById('windowMap' + x).value;
             special = document.getElementById('windowSpecial' + x).value;
             gather = document.getElementById('windowGather' + x).value;
-        } else if (titleText.includes('Shrine')) {
+        } else if (titleText == 'Shrine') {
             setting = document.getElementById('windowSetting' + x).value;
-        } else if (titleText.includes('dShrine')) {
+        } else if (titleText == 'dShrine') {
             setting = document.getElementById('windowSetting' + x).value;
         } else if (titleText.includes('Quagmire')) {
             setting = document.getElementById('windowSetting' + x).value;
@@ -491,9 +490,9 @@ function settingsWindowSave(titleText, reopen) {
         autoTrimpSettings[setting].value = [];
         autoTrimpSettings[special].value = [];
         autoTrimpSettings[gather].value = [];
-    } else if (titleText.includes('Shrine')) {
+    } else if (titleText == 'Shrine') {
         autoTrimpSettings[setting].value = [];
-    } else if (titleText.includes('dShrine')) {
+    } else if (titleText == 'dShrine') {
         autoTrimpSettings[setting].value = [];
     } else if (titleText.includes('Quagmire')) {
         autoTrimpSettings[setting].value = [];
@@ -537,9 +536,9 @@ function settingsWindowSave(titleText, reopen) {
             autoTrimpSettings[setting].value[x] = thisSetting[x].setting
             autoTrimpSettings[special].value[x] = thisSetting[x].special
             autoTrimpSettings[gather].value[x] = thisSetting[x].gather
-        } else if (titleText.includes('Shrine')) {
+        } else if (titleText == 'Shrine') {
             autoTrimpSettings[setting].value[x] = thisSetting[x].setting
-        } else if (titleText.includes('dShrine')) {
+        } else if (titleText == 'dShrine') {
             autoTrimpSettings[setting].value[x] = thisSetting[x].setting
         } else if (titleText.includes('Quagmire')) {
             autoTrimpSettings[setting].value[x] = thisSetting[x].setting
