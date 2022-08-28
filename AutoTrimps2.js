@@ -185,6 +185,7 @@ function mainLoop() {
         if (getPageSetting('AutoNatureTokens') && game.global.world > 229) autoNatureTokens();
         if (getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
         if (getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
+        if ((getPageSetting('Hshrine') == true) || (getPageSetting('Hdshrine') == 1) || (getPageSetting('Hdshrine') == 2)) autoshrine();
 
         //Buildings
         if (getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
@@ -276,8 +277,7 @@ function mainLoop() {
         if (getPageSetting('RManualGather2') == 1) RmanualLabor2();
         if (getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
         if (game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
-        if ((getPageSetting('Rshrine') == true && game.global.challengeActive != "Daily") || (game.global.challengeActive == "Daily" && getPageSetting('Rdshrine') == 2)) autoshrine();
-        if (getPageSetting('Rdshrine') == 1 && game.global.challengeActive == "Daily") dautoshrine();
+        if ((getPageSetting('Rshrine') == true) || (getPageSetting('Rdshrine') == 1) || (getPageSetting('Rdshrine') == 2)) autoshrine();
 
         //AB
         if (game.stats.highestRadLevel.valueTotal() >= 75 && getPageSetting('RAB') == true) {
