@@ -1709,6 +1709,13 @@ function updateCustomButtons() {
     !radonon && getPageSetting('AutoPortalDaily') == 1 ? turnOn("dHeHrDontPortalBefore") : turnOff("dHeHrDontPortalBefore");
     !radonon && getPageSetting('AutoPortalDaily') == 1 ? turnOn("dHeliumHrBuffer") : turnOff("dHeliumHrBuffer");
     !radonon && getPageSetting('AutoPortalDaily') > 0 ? turnOn("dHeliumHourChallenge") : turnOff("dHeliumHourChallenge");
+    
+    //Shrine - U1 (Daily)
+    !radonon ? turnOn("Hdshrine") : turnOff("Hdshrine");
+    (!radonon && getPageSetting('Hdshrine') == 1) ? turnOn("Hdshrinemaz"): turnOff("Hdshrinemaz");
+    turnOff("Hdshrinezone");
+    turnOff("Hdshrinecell");
+    turnOff("Hdshrineamount");
 
 
     //RDaily
@@ -1759,7 +1766,7 @@ function updateCustomButtons() {
     radonon && dhson && dhsstaffon ? turnOn('Rdhsmapstaff') : turnOff('Rdhsmapstaff');
     radonon && dhson && dhsstaffon ? turnOn('Rdhstributestaff') : turnOff('Rdhstributestaff');
     
-    //Shrine - U2
+    //Shrine - U2 (Daily)
     radonon ? turnOn("Rdshrine") : turnOff("Rdshrine");
     (radonon && getPageSetting('Rdshrine') == 1) ? turnOn("Rdshrinemaz"): turnOff("Rdshrinemaz");
     turnOff("Rdshrinezone");
@@ -1972,6 +1979,7 @@ function updateCustomButtons() {
     turnOff("Rtributespecialselection");
     turnOff("Rtributegatherselection");
     
+    // Shrine - U2
     radonon ? turnOn("Rshrine") : turnOff("Rshrine");
     (radonon && getPageSetting('Rshrine') == true) ? turnOn("Rshrinemaz"): turnOff("Rshrinemaz");
     turnOff("Rshrinezone");
