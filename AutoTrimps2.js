@@ -161,6 +161,9 @@ function mainLoop() {
     if (game.global.world != autoTrimpSettings.zonetracker) {
         autoTrimpSettings.zonetracker = game.global.world;
     }
+    
+    //Universal Logic
+    if (getPageSetting('AutoBoneChargeMax') != 0) autoBoneChargeWhenMax();
 
     //Logic for Universe 1
     if (game.global.universe == 1) {

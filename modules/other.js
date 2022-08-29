@@ -4181,3 +4181,41 @@ nextWorld = function() {
     autoTrimpSettings.Rshrinecharge.value = 0;
     return retVal;
 }
+
+function autoBoneChargeWhenMax() {
+  // Uses bone charges when they are at max charges automatically.
+
+  // If "Daily Only" was chosen and we're not on a daily challenge, exit.
+  if (
+    getPageSetting("AutoBoneChargeMax") === 2 &&
+    !(game.global.challengeActive == "Daily")
+  ) {
+    return;
+  }
+
+  // If the option is enabled but no zone is specified, set a default value to
+  // the highest zone cleared - 10% or 60 (broken planet equipment discount)
+  // if the HZC value would be less than 60. Otherwise use the user value.
+  const autoBoneChargeEnabled =
+    getPageSetting("AutoBoneChargeMax") > 0 ? true : false;
+  const autoBoneChargeZoneSet =
+    getPageSetting("AutoBoneChargeMaxStartZone") > 0 ? true : false;
+  const highestZoneCleared = game.global.highestLevelCleared;
+  const percentOfHZC = Math.round((10 / 100) * highestZoneCleared);
+  const optimalChargeZone =
+    highestZoneCleared - percentOfHZC > 60
+      ? highestZoneCleared - percentOfHZC
+      : 60;
+  const chargeZone = !autoBoneChargeZoneSet
+    ? optimalChargeZone
+    : autoTrimpSettings.AutoBoneChargeMaxStartZone.value;
+  const boneChargesAvailable = game.permaBoneBonuses.boosts.charges;
+  const currentZone = game.global.world;
+
+  // If we have more than 10 bone charges and our current world zone is
+  // greater than or equal to the charge zone set; use a bone charge.
+  if (boneChargesAvailable === 10 && currentZone >= chargeZone) {
+    game.permaBoneBonuses.boosts.consume();
+    debug("Max bone charges reached! Used a bone charge.", "general", "*bolt");
+  }
+}
