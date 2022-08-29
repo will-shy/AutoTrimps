@@ -3110,7 +3110,6 @@ function RautoMap() {
                             document.getElementById("mapLevelInput").value = game.global.world;
                             document.getElementById("advExtraLevelSelect").value = 0;
                         } else if (shiplevelzones < 0) {
-                            shipfragmin(shiplevelzones);
                             document.getElementById("mapLevelInput").value = (game.global.world + shiplevelzones);
                             document.getElementById("advExtraLevelSelect").value = 0;
                         }
