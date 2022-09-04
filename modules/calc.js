@@ -972,7 +972,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
         number *= Math.pow(game.portal.Equality.modifier, game.portal.Equality.scalingCount);
     }
     if (game.global.challengeActive == "Daily") {
-        number = RcalcDailyHealthMod(number);
+        number = RcalcDailyAttackMod(number);
     }
     if (game.global.challengeActive == "Unbalance") {
         number *= 1.5;
