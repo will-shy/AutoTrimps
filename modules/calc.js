@@ -956,8 +956,17 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
     if (game.global.world > 200 && getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
         for (var i = game.global.lastClearedCell + 1; i < game.global.gridArray.length; i++) {
             var cell = game.global.gridArray[i];
+	    var hasRage = game.global.gridArray[i].u2Mutation.includes('RGE');
+            if (game.global.gridArray[i].u2Mutation.includes('CMP') && !game.global.gridArray[i].u2Mutation.includes('RGE')) {
+                for (var y = i; y < i + u2Mutations.types.Compression.cellCount(); y++) {
+                    if (game.global.gridArray[y].u2Mutation.includes('RGE')) {
+                        hasRage = true;
+                        break;
+                    }
+                }
+            }
             if (cell.u2Mutation && cell.u2Mutation.length) {
-                highest = Math.max(u2Mutations.getAttack(cell), highest);
+                highest = Math.max(u2Mutations.getAttack(cell) * (hasRage ? (u2Mutations.tree.Unrage.purchased ? 4 : 5) : 1), highest);
 	        mute = true;
 	        number = highest;
             }
