@@ -958,7 +958,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
             var cell = game.global.gridArray[i];
 	    var hasRage = game.global.gridArray[i].u2Mutation.includes('RGE');
             if (game.global.gridArray[i].u2Mutation.includes('CMP') && !game.global.gridArray[i].u2Mutation.includes('RGE')) {
-                for (var y = i; y < i + u2Mutations.types.Compression.cellCount(); y++) {
+                for (var y = i + 1; y < i + u2Mutations.types.Compression.cellCount(); y++) {
                     if (game.global.gridArray[y].u2Mutation.includes('RGE')) {
                         hasRage = true;
                         break;
