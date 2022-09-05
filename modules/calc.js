@@ -626,10 +626,10 @@ function rMutationAttack(cell) {
     var baseAttack;
     var addAttack = 0;
     if (cell.cs) {
-        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name, 'world', true);
+        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name);
     }
     else
-        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name, 'world', true);
+        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name);
     if (cell.cc) addAttack = u2Mutations.types.Compression.attack(cell, baseAttack);
     if (cell.u2Mutation.indexOf('NVA') != -1) baseAttack *= 0.01;
     else if (cell.u2Mutation.indexOf('NVX') != -1) baseAttack *= 10;
@@ -678,19 +678,13 @@ function rMutationHealth(cell) {
 function rCalcMutationHealth() {
     var health;
     var highest = 1;
-    var mute = false;
-    if (game.global.world > 200 && getPageSetting('rMutationCalc')) {
-        for (var i = 0; i < game.global.gridArray.length; i++) {
-            var cell = game.global.gridArray[i];
-            if (cell.u2Mutation && cell.u2Mutation.length) {
-                highest = Math.max(rMutationHealth(cell), highest);
-                mute = true;
-                health = highest;
-            }
+    for (var i = 0; i < game.global.gridArray.length; i++) {
+        var cell = game.global.gridArray[i];
+        if (cell.u2Mutation && cell.u2Mutation.length) {
+            highest = Math.max(rMutationHealth(cell), highest);
+            health = highest;
         }
     }
-    if (!mute) health = RcalcEnemyBaseHealth("world", game.global.world, 99, 'Gorillimp');
-
     return health;
 }
 
