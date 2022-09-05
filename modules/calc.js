@@ -1021,7 +1021,7 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
 	
     if (game.global.world > 200 && getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
         mute = true;
-        health = rCalcMutationAttack();
+        number = rCalcMutationAttack();
     }
     if (game.global.challengeActive == "Extermination" && getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminatecalc') == true) {
         number = RgetEnemyMaxAttack(game.global.world, 90, 'Mantimp', 1.0)
