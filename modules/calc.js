@@ -622,6 +622,79 @@ function calcCurrentStance() {
     }
 }
 
+function rMutationAttack(cell) {
+    var baseAttack;
+    var addAttack = 0;
+    if (cell.cs) {
+        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name, 'world', true);
+    }
+    else
+        baseAttack = RgetEnemyMaxAttack(game.global.world, cell.level, cell.name, 'world', true);
+    if (cell.cc) addAttack = u2Mutations.types.Compression.attack(cell, baseAttack);
+    if (cell.u2Mutation.indexOf('NVA') != -1) baseAttack *= 0.01;
+    else if (cell.u2Mutation.indexOf('NVX') != -1) baseAttack *= 10;
+    baseAttack += addAttack;
+    baseAttack *= Math.pow(1.01, (game.global.world - 201));
+    return baseAttack;
+}
+
+function rCalcMutationAttack() {
+    var number;
+    var highest = 1;
+
+    for (var i = 0; i < game.global.gridArray.length; i++) {
+        var hasRage = game.global.gridArray[i].u2Mutation.includes('RGE');
+        if (game.global.gridArray[i].u2Mutation.includes('CMP') && !game.global.gridArray[i].u2Mutation.includes('RGE')) {
+            for (var y = i + 1; y < i + u2Mutations.types.Compression.cellCount(); y++) {
+                if (game.global.gridArray[y].u2Mutation.includes('RGE')) {
+                    hasRage = true;
+                    break;
+                }
+            }
+        }
+        var cell = game.global.gridArray[i];
+        if (cell.u2Mutation && cell.u2Mutation.length) {
+            highest = Math.max(rMutationAttack(cell) * (hasRage ? (u2Mutations.tree.Unrage.purchased ? 4 : 5) : 1), highest);
+            number = highest;
+        }
+    }
+
+    return number;
+}
+
+function rMutationHealth(cell) {
+    var baseHealth;
+    var addHealth = 0;
+
+    baseHealth = RcalcEnemyBaseHealth('world', game.global.world, cell.level, cell.name, false);
+    if (cell.cc) addHealth = u2Mutations.types.Compression.health(cell, baseHealth);
+    if (cell.u2Mutation.indexOf('NVA') != -1) baseHealth *= 0.01;
+    else if (cell.u2Mutation.indexOf('NVX') != -1) baseHealth *= 0.1;
+    baseHealth += addHealth;
+    baseHealth *= 2;
+    baseHealth *= Math.pow(1.02, (game.global.world - 201));
+    return baseHealth;
+}
+
+function rCalcMutationHealth() {
+    var health;
+    var highest = 1;
+    var mute = false;
+    if (game.global.world > 200 && getPageSetting('rMutationCalc')) {
+        for (var i = 0; i < game.global.gridArray.length; i++) {
+            var cell = game.global.gridArray[i];
+            if (cell.u2Mutation && cell.u2Mutation.length) {
+                highest = Math.max(rMutationHealth(cell), highest);
+                mute = true;
+                health = highest;
+            }
+        }
+    }
+    if (!mute) health = RcalcEnemyBaseHealth("world", game.global.world, 99, 'Gorillimp');
+
+    return health;
+}
+
 //Radon
 
 function RgetCritMulti() {
@@ -954,23 +1027,8 @@ function RcalcBadGuyDmg(enemy, attack, equality) {
         number = attack;
 	
     if (game.global.world > 200 && getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
-        for (var i = game.global.lastClearedCell + 1; i < game.global.gridArray.length; i++) {
-            var cell = game.global.gridArray[i];
-	    var hasRage = game.global.gridArray[i].u2Mutation.includes('RGE');
-            if (game.global.gridArray[i].u2Mutation.includes('CMP') && !game.global.gridArray[i].u2Mutation.includes('RGE')) {
-                for (var y = i + 1; y < i + u2Mutations.types.Compression.cellCount(); y++) {
-                    if (game.global.gridArray[y].u2Mutation.includes('RGE')) {
-                        hasRage = true;
-                        break;
-                    }
-                }
-            }
-            if (cell.u2Mutation && cell.u2Mutation.length) {
-                highest = Math.max(u2Mutations.getAttack(cell) * (hasRage ? (u2Mutations.tree.Unrage.purchased ? 4 : 5) : 1), highest);
-	        mute = true;
-	        number = highest;
-            }
-        }
+        mute = true;
+        health = rCalcMutationAttack();
     }
     if (game.global.challengeActive == "Extermination" && getPageSetting('Rexterminateon') == true && getPageSetting('Rexterminatecalc') == true) {
         number = RgetEnemyMaxAttack(game.global.world, 90, 'Mantimp', 1.0)
@@ -1062,14 +1120,8 @@ function RcalcEnemyHealth(world) {
     var mute = false;
     var health;
     if (game.global.world > 200 && getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
-        for (var i = game.global.lastClearedCell + 1; i < game.global.gridArray.length; i++) {
-            var cell = game.global.gridArray[i];
-            if (cell.u2Mutation && cell.u2Mutation.length) {
-                highest = Math.max(u2Mutations.getHealth(cell), highest);
-	        mute = true;
-	        health = highest;
-            }
-        }
+	mute = true;
+        health = rCalcMutationHealth();
     }
 
     if (world == false) world = game.global.world;
@@ -1139,14 +1191,8 @@ function RcalcEnemyHealthMod(world, cell, name) {
     var mute = false;
     var health;
     if (game.global.world > 200 && getPageSetting('Rmutecalc') > 0 && game.global.world >= getPageSetting('Rmutecalc')) {
-        for (var i = game.global.lastClearedCell + 1; i < game.global.gridArray.length; i++) {
-            var cell = game.global.gridArray[i];
-            if (cell.u2Mutation && cell.u2Mutation.length) {
-                highest = Math.max(u2Mutations.getHealth(cell), highest);
-	        mute = true;
-	        health = highest;
-            }
-        }
+        mute = true;
+        health = rCalcMutationHealth();
     }
 
     if (world == false) world = game.global.world;
