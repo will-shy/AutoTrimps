@@ -665,8 +665,7 @@ function rCalcMutationAttack() {
 function rMutationHealth(cell) {
     var baseHealth;
     var addHealth = 0;
-
-    baseHealth = RcalcEnemyBaseHealth('world', game.global.world, cell.level, cell.name, false);
+    baseHealth = RcalcEnemyBaseHealth(game.global.world, cell.level, cell.name);
     if (cell.cc) addHealth = u2Mutations.types.Compression.health(cell, baseHealth);
     if (cell.u2Mutation.indexOf('NVA') != -1) baseHealth *= 0.01;
     else if (cell.u2Mutation.indexOf('NVX') != -1) baseHealth *= 0.1;
