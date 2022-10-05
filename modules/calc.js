@@ -576,6 +576,49 @@ function calcEnemyHealthCore(type, zone, cell, name, customHealth) {
     return health;
 }
 
+function calcSpecificEnemyHealth(type, zone, cell, forcedName) {
+    //Pre-Init
+    if (!type) type = (!game.global.mapsActive) ? "world" : (getCurrentMapObject().location == "Void" ? "void" : "map");
+    if (!zone) zone = (type == "world" || !game.global.mapsActive) ? game.global.world : getCurrentMapObject().level;
+    if (!cell) cell = (type == "world" || !game.global.mapsActive) ? getCurrentWorldCell().level : (getCurrentMapCell() ? getCurrentMapCell().level : 1);
+
+    //Select our enemy
+    var enemy = (type == "world") ? game.global.gridArray[cell-1] : game.global.mapGridArray[cell-1];
+    if (!enemy) return -1;
+
+    //Init
+    var corrupt = enemy.corrupted && enemy.corrupted != "none";
+    var healthy = corrupt && enemy.corrupted.startsWith("healthy");
+    var name = corrupt ? "Chimp" : (forcedName) ? forcedName : enemy.name;
+    var health = calcEnemyHealthCore(type, zone, cell, name);
+
+    //Challenges - considers the actual scenario for this enemy
+    if (game.global.challengeActive == "Lead") health *= 1 + (0.04 * game.challenges.Lead.stacks);
+    if (game.global.challengeActive == "Domination") {
+        var lastCell = (type == "world") ? 100 : game.global.mapGridArray.length;
+        if (cell < lastCell) health /= 10;
+        else health *= 7.5;
+    }
+
+    //Map and Void Difficulty
+    if (type != "world") health *= getCurrentMapObject().difficulty;
+
+    //Corruption
+    else if (type == "world" && !healthy && (corrupt || mutations.Corruption.active() && cell == 100) && !game.global.spireActive) {
+        health *= calcCorruptionScale(zone, 10);
+        if (enemy.corrupted == "corruptTough") health *= 5;
+    }
+
+    //Healthy
+    else if (type == "world" && healthy) {
+        health *= calcCorruptionScale(zone, 14);
+        if (enemy.corrupted == "healthyTough") health *= 7.5;
+    }
+
+    return health;
+}
+
+
 function calcHDratio(map) {
     var ratio = 0;
     var ourBaseDamage = calcOurDmg("avg", false, true);
