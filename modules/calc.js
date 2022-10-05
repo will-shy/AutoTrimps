@@ -4,6 +4,29 @@ var trimpAA = 1;
 
 //Helium
 
+function addPoison(realDamage, zone) {
+    //Init
+    if (!zone) zone = game.global.world;
+
+    //Poison is inactive
+    if (getEmpowerment(zone) != "Poison") return 0;
+
+    //Real amount to be added in the next attack
+    if (realDamage) return game.empowerments.Poison.getDamage();
+
+    //Dynamically determines how much we are benefiting from poison based on Current Amount * Transfer Rate
+    if (getPageSetting("addpoison")) return game.empowerments["Poison"].getDamage() * getRetainModifier("Poison");
+
+    return 0;
+}
+
+function calcCorruptionScale(zone, base) {
+    var startPoint = (game.global.challengeActive == "Corrupted" || game.global.challengeActive == "Eradicated") ? 1 : 150;
+    var scales = Math.floor((zone - startPoint) / 6);
+    var realValue = base * Math.pow(1.05, scales);
+    return parseFloat(prettify(realValue));
+}
+
 function getTrimpAttack() {
     var dmg = 6;
     var equipmentList = ["Dagger", "Mace", "Polearm", "Battleaxe", "Greatsword", "Arbalest"];
@@ -487,6 +510,69 @@ function calcEnemyHealth(world, map) {
     if (game.global.spireActive) {
         health = calcSpire(99, game.global.gridArray[99].name, 'health');
     }
+    return health;
+}
+
+function calcEnemyHealthCore(type, zone, cell, name, customHealth) {
+    //Pre-Init
+    if (!type) type = (!game.global.mapsActive) ? "world" : (getCurrentMapObject().location == "Void" ? "void" : "map");
+    if (!zone) zone = (type == "world" || !game.global.mapsActive) ? game.global.world : getCurrentMapObject().level;
+    if (!cell) cell = (type == "world" || !game.global.mapsActive) ? getCurrentWorldCell().level : (getCurrentMapCell() ? getCurrentMapCell().level : 1);
+    if (!name) name = getCurrentEnemy() ? getCurrentEnemy().name : "Turtlimp";
+
+    //Init
+    var health = calcEnemyBaseHealth(zone, cell, name);
+
+    //Spire - Overrides the base health number
+    if (type == "world" && game.global.spireActive) health = calcSpire(99, "Snimp", "healh");
+
+    //Map and Void Corruption
+    if (type != "world") {
+        //Corruption
+        var corruptionScale = calcCorruptionScale(game.global.world, 10);
+        if (mutations.Magma.active()) health *= corruptionScale / (type == "void" ? 1 : 2);
+        else if (type == "void" && mutations.Corruption.active()) health *= corruptionScale / 2;
+    }
+
+    //Use a custom value instead
+    if (customHealth) health = customHealth;
+
+    //Challenges
+    if (game.global.challengeActive == "Balance")    health *= 2;
+    if (game.global.challengeActive == "Meditate")   health *= 2;
+    if (game.global.challengeActive == "Toxicity")   health *= 2;
+    if (game.global.challengeActive == "Life")       health *= 11;
+
+    //Coordinate
+    if (game.global.challengeActive == "Coordinate") {
+        var amt = 1;
+        for (var i=1; i<zone; i++) amt = Math.ceil(amt * 1.25);
+        health *= amt;
+    }
+
+    //Dailies
+    if (game.global.challengeActive == "Daily") {
+        //Empower
+        if (typeof game.global.dailyChallenge.empower !== "undefined")
+            health *= dailyModifiers.empower.getMult(game.global.dailyChallenge.empower.strength, game.global.dailyChallenge.empower.stacks)
+
+        //Bad Health
+        if (typeof game.global.dailyChallenge.badHealth !== "undefined")
+            health *= dailyModifiers.badHealth.getMult(game.global.dailyChallenge.badHealth.strength);
+
+        //Bad Map Health
+        if (typeof game.global.dailyChallenge.badMapHealth !== "undefined" && type != "world")
+            health *= dailyModifiers.badMapHealth.getMult(game.global.dailyChallenge.badMapHealth.strength);
+    }
+
+    //Obliterated + Eradicated
+    if (game.global.challengeActive == "Obliterated" || game.global.challengeActive == "Eradicated") {
+        var oblitMult = (game.global.challengeActive == "Eradicated") ? game.challenges.Eradicated.scaleModifier : 1e12;
+        var zoneModifier = Math.floor(game.global.world / game.challenges[game.global.challengeActive].zoneScaleFreq);
+        oblitMult *= Math.pow(game.challenges[game.global.challengeActive].zoneScaling, zoneModifier);
+        health *= oblitMult;
+    }
+
     return health;
 }
 
