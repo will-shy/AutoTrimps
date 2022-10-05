@@ -425,7 +425,7 @@ function directDamage(block, pierce, currentHealth, minDamage, critPower = 2) {
     if (!block) block = calcOurBlock(false);
     if (!pierce) pierce = (game.global.brokenPlanet && !game.global.mapsActive) ? getPierceAmt() : 0;
     if (!currentHealth) currentHealth = calcOurHealth(true) - (game.global.soldierHealthMax - game.global.soldierHealth);
-    if (!minDamage) minDamage = calcOurDmg("min", false, true + addPoison(true);
+    if (!minDamage) minDamage = calcOurDmg("min", false, true) + addPoison(true);
     
     //Enemy
     var enemy = getCurrentEnemy();
