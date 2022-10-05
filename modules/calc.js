@@ -358,6 +358,29 @@ function calcDailyAttackMod(number) {
     return number;
 }
 
+function badGuyChallengeMult() {
+    var number=1;
+
+    //WARNING! Something is afoot!
+    //A few challenges
+    if      (game.global.challengeActive == "Meditate")   number *= 1.5;
+    else if (game.global.challengeActive == "Watch")      number *= 1.25;
+    else if (game.global.challengeActive == "Corrupted")  number *= 3;
+    else if (game.global.challengeActive == "Domination") number *= 2.5;
+    else if (game.global.challengeActive == "Coordinate") number *= getBadCoordLevel();
+    else if (game.global.challengeActive == "Scientist" && getScientistLevel() == 5) number *= 10;
+
+    //Obliterated and Eradicated
+    else if (game.global.challengeActive == "Obliterated" || game.global.challengeActive == "Eradicated"){
+        var oblitMult = (game.global.challengeActive == "Eradicated") ? game.challenges.Eradicated.scaleModifier : 1e12;
+        var zoneModifier = Math.floor(game.global.world / game.challenges[game.global.challengeActive].zoneScaleFreq);
+        oblitMult *= Math.pow(game.challenges[game.global.challengeActive].zoneScaling, zoneModifier);
+        number *= oblitMult
+    }
+
+    return number;
+}
+
 function badGuyCritMult(enemy, critPower=2, block, health) {
     //Pre-Init
     if (getPageSetting('IgnoreCrits') == 2) return 1;
@@ -913,6 +936,16 @@ function calcCurrentStance() {
         }
     }
 }
+
+function calcBaseDamageInX() {
+    baseMinDamage = calcOurDmg("min", false, false);
+    baseMaxDamage = calcOurDmg("max", false, false);
+    baseDamage = calcOurDmg("avg", false, false);
+    baseHealth = calcOurHealth(false);
+    baseBlock  = calcOurBlock(false);
+}
+
+//Radon
 
 function rMutationAttack(cell) {
     var baseAttack;
