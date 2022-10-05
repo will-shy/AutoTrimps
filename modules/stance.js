@@ -366,8 +366,8 @@ function oneShotPower(specificStance, offset = 0, maxOrMin) {
 function challengeDamage(maxHealth, minDamage, maxDamage, missingHealth, block, pierce, critPower = 2) {
     //Pre-Init
     if (!maxHealth) maxHealth = calcOurHealth();
-    if (!minDamage) minDamage = calcOurDmg("min", false, true); + addPoison(true);
-    if (!maxDamage) maxDamage = calcOurDmg("max", false, true); + addPoison(true);
+    if (!minDamage) minDamage = calcOurDmg("min", false, true) + addPoison(true);
+    if (!maxDamage) maxDamage = calcOurDmg("max", false, true) + addPoison(true);
     if (!missingHealth) missingHealth = game.global.soldierHealthMax - game.global.soldierHealth;
     if (!pierce) pierce = (game.global.brokenPlanet && !game.global.mapsActive) ? getPierceAmt() : 0;
     if (!block) block = calcOurBlock(false);
