@@ -90,9 +90,6 @@ var $u2Graph = document.getElementById("graphFooterLine1"),
         "Embers",
     ],
     $u2graphSel = document.createElement("select");
-/* TODO Modify this to filter out graphs that are for challenges not in the current history
- * Will require an update to this selector whenever a new portal is started
-*/
 for (var item in (($u2graphSel.id = "u2graphSelection"), $u2graphSel.setAttribute("style", ""), $u2graphSel.setAttribute("onchange", "drawGraph()"), u2graphList)) {
     var $opt = document.createElement("option");
     ($opt.value = u2graphList[item]), ($opt.text = u2graphList[item]), $u2graphSel.appendChild($opt);
@@ -208,6 +205,7 @@ function loadGraphs() {
 function appendGraphs() {
     drawGraph();
 }
+
 var rememberSelectedVisible = [];
 function saveSelectedGraphs() {
     rememberSelectedVisible = [];
@@ -253,12 +251,14 @@ function clearData(portal, clrall = false) {
 
         allSaveData.splice(0, keepSaveDataIndex + 1);
     }
+    showHideUnusedGraphs();
 }
 function deleteSpecific() {
     var a = document.getElementById("deleteSpecificTextBox").value;
     if ("" != a)
         if (0 > parseInt(a)) clearData(Math.abs(a));
         else for (var b = allSaveData.length - 1; 0 <= b; b--) allSaveData[b].totalPortals == a && allSaveData.splice(b, 1);
+    showHideUnusedGraphs();
 }
 function autoToggleGraph() {
     game.options.displayed && toggleSettingsMenu();
@@ -337,6 +337,16 @@ function pushData() {
     });
     clearData(10);
     safeSetItems("allSaveData", JSON.stringify(allSaveData));
+    showHideUnusedGraphs();
+}
+
+function showHideUnusedGraphs() {
+    const graphedChallenges = [...new Set(allSaveData.map((data) => data = data.challenge))];
+    const perChallengeGraphs = {Hypothermia: ["Bonfires", "Embers"]};
+    for (const [challenge, graphs] of Object.entries(perChallengeGraphs)) {
+        const style = graphedChallenges.includes(challenge) ? "" : "none";
+        graphs.forEach((graph) => { document.querySelector(`#u2graphSelection [value=${graph}]`).style.display = style; })
+    }
 }
 
 var graphAnal = [];
