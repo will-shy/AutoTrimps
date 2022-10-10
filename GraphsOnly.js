@@ -85,8 +85,14 @@ var $u2Graph = document.getElementById("graphFooterLine1"),
         "Smithies",
         "Scruffy XP",
         "Scruffy XP PerHour",
+        "Worshippers",
+        "Bonfires",
+        "Embers",
     ],
     $u2graphSel = document.createElement("select");
+/* TODO Modify this to filter out graphs that are for challenges not in the current history
+ * Will require an update to this selector whenever a new portal is started
+*/
 for (var item in (($u2graphSel.id = "u2graphSelection"), $u2graphSel.setAttribute("style", ""), $u2graphSel.setAttribute("onchange", "drawGraph()"), u2graphList)) {
     var $opt = document.createElement("option");
     ($opt.value = u2graphList[item]), ($opt.text = u2graphList[item]), $u2graphSel.appendChild($opt);
@@ -321,6 +327,9 @@ function pushData() {
         rnhr: RgetPercent.toFixed(4),
         rnlife: Rlifetime.toFixed(4),
 		s3: game.global.lastRadonPortal,
+        worshippers: game.jobs.Worshipper.owned,
+        bonfires: game.challenges.Hypothermia.bonfires,
+        embers: game.challenges.Hypothermia.embers,
         universe: game.global.universe,
         universeSelection: document.getElementById('universeSelection').options[document.getElementById('universeSelection').options.selectedIndex].value,
         u1graphSelection: document.getElementById('u1graphSelection').options[document.getElementById('u1graphSelection').options.selectedIndex].value,
@@ -897,6 +906,27 @@ function setGraphData(graph) {
             title = "Overkilled Cells";
             xTitle = "Zone";
             yTitle = "Overkilled Cells";
+            yType = "Linear";
+            break;   
+        case "Worshippers":
+            graphData = allPurposeGraph("worshippers", true, "number");
+            title = "Worshipper History";
+            xTitle = "Zone";
+            yTitle = "Worshippers";
+            yType = "Linear";
+            break;
+        case "Embers":
+            graphData = allPurposeGraph("embers", true, "number");
+            title = "Ember History";
+            xTitle = "Zone";
+            yTitle = "Embers";
+            yType = "Linear";
+            break;
+        case "Bonfires":
+            graphData = allPurposeGraph("bonfires", true, "number");
+            title = "Bonfire History";
+            xTitle = "Zone";
+            yTitle = "Bonfires";
             yType = "Linear";
             break;
     }
