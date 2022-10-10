@@ -285,6 +285,8 @@ function initializeAllSettings() {
     createSetting('fastallocate', 'Fast Allocate', 'Turn on if your helium is above 500Qa. Not recommended for low amounts of helium. ', 'boolean', false, null, 'Core');
     createSetting('TrapTrimps', 'Trap Trimps', 'Automatically trap trimps when needed, including building traps. (when you turn this off, you may aswell turn off the in-game autotraps button, think of the starving trimps that could eat that food!)', 'boolean', true, null, "Core");
     createSetting('AutoEggs', 'AutoEggs', 'Click easter egg if it exists, upon entering a new zone. Warning: Quite overpowered. Please solemnly swear that you are up to no good.', 'boolean', false, null, 'Core');
+    createSetting('AutoBoneChargeMax', ['Manual Bone Charge', 'Bone Charge When Max', 'Bone Charge (Daily Only)'], 'Automatically uses a Bone Charge from the Bone Shrine if you are at max charges. The start zone can be configured under <i>Bone Charge Start Z.</i><br><br><b>Bone Charge (Daily Only)</b> as the name suggests; will only use a Bone Charge when at max and if on a daily challenge.<br><br><b>Default: Off (Manual Bone Charge).</b>', 'multitoggle', 0, null, "Core");
+    createSetting('AutoBoneChargeMaxStartZone', 'Bone Charge Start Z', 'Enter the zone number at which you wish to <i>start</i> using Bone Charges.<br><br>Alternatively, set it to <i><b>-1</b></i> to automatically update the zone to 10% of your highest zone cleared. For example, if your highest zone cleared was 400, bone charges would be automatically used from zone 360 onwards.<br><br><b>Default: Automated (-1).</b>', 'value', -1, null, "Core");
     document.getElementById('AutoEggs').parentNode.insertAdjacentHTML('afterend', '<br>');
 
     //RCore
@@ -370,7 +372,14 @@ function initializeAllSettings() {
     createSetting('dbwraidcell', 'Daily BW Raiding Cell', 'What Cell to start BW Raiding at. Recommend above your P Raiding cell if used together. -1 to Raid at cell 1. ', 'value', -1, null, 'Daily');
     createSetting('dBWraidingz', 'Daily Z to BW Raid', 'Raids BWs at zone specified in dailys. Example: 495, will raid all BWs for all gear starting from 495. Will skip lower BWs if you have enough damage. Once all gear is obtained, will return to regular farming. Accepts comma separated lists, and raids up to the value in the corrsponding position in the Max BW to raid setting. So if this is set to 480,495 and Daily Max BW to Raid is set to 500,515 AT will BW raid up to 500 from 480, and 515 from 495. Make sure these lists are the same length or BW raiding may fail.', 'multiValue', [-1], null, 'Daily');
     createSetting('dBWraidingmax', 'Daily Max BW to raid', 'Raids BWs until zone specified in dailys. Example: 515, will raid all BWs for all gear until 515. Will skip lower BWs if you have enough damage. Once all gear is obtained, will return to regular farming. Now accepts comma separated lists - see description of Daily Z to BW raid setting for details.', 'multiValue', [-1], null, 'Daily');
-
+    
+    //Shrine - U1 (Daily)
+    document.getElementById('dBWraidingmax').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Hdshrine', ['Daily AutoShrine Off', 'Daily AutoShrine On', 'DAS: Normal'], 'Turn this on if you want to use Shrines automatically in Dailies. Use DAS: Normal if you want to use the settings in the Maps tab if do not wish to copy them here. ', 'multitoggle', 0, null, 'Daily');
+    createSetting('Hdshrinemaz', 'Daily AutoShrine Settings', 'Click to open Daily AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10 in a Daily. ', 'infoclick', false, null, 'Daily');
+    createSetting('Hdshrinezone', 'AutoShrine: Zone', 'zone', 'multiValue', [-1], null, 'Daily');
+    createSetting('Hdshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Daily');
+    createSetting('Hdshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Daily');
 
     //RDaily
 
@@ -426,7 +435,7 @@ function initializeAllSettings() {
     createSetting('Rdhsmapstaff', 'DHSt: Map', '<b>Mapping staff</b><br><br>Enter the name of your mapping staff for Dailies.', 'textValue', 'undefined', null, 'Daily');
     createSetting('Rdhstributestaff', 'DHSt: Tribute', '<b>Tribute farming staff</b><br><br>Enter the name of the staff you would like to equip during tribute farming for Dailies', 'textValue', 'undefined', null, 'Daily');
     
-    //DShrine
+    //Shrine - U2 (Daily)
     document.getElementById('Rdhstributestaff').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rdshrine', ['Daily AutoShrine Off', 'Daily AutoShrine On', 'DAS: Normal'], 'Turn this on if you want to use Shrines automatically in Dailies. Use DAS: Normal if you want to use the settings in the Maps tab if do not wish to copy them here. ', 'multitoggle', 0, null, 'Daily');
     createSetting('Rdshrinemaz', 'Daily AutoShrine Settings', 'Click to open Daily AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10 in a Daily. ', 'infoclick', false, null, 'Daily');
@@ -651,6 +660,15 @@ function initializeAllSettings() {
     createSetting('maxExpZone', "Max XP Zone", 'Acquire Wonders from this zone down. <b>This must have a value or other Experience settings will not work.</b> If >z600, will complete Experience by running BW on this zone as well. For example, targeting three Wonders with a Max XP Zone of 600 will obtain the Wonders at: 600, 595, 590.', 'value', '600', null, 'Maps');
     createSetting('finishExpOnBw', 'Finish XP on BW', 'Finish Experience challenge by completing this level of BW. <b>This level of BW should already be in your inventory.</b> Use BW Raiding module if you want to raid to a specific level of BW before 601, or else you may accidentally complete the challenge at a lower or higher BW than intended using this setting. If this is an invalid BW value, it will run the next lowest valid BW zone (e.g. 606 will run 605).', 'value', '605', null, 'Maps');
 
+    //Shrine - U1
+    document.getElementById('finishExpOnBw').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Hshrine', 'AutoShrine', 'Turn this on if you want to use Shrines automatically. ', 'boolean', false, null, 'Maps');
+    createSetting('Hshrinemaz', 'AutoShrine Settings', 'Click to open AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10. ', 'infoclick', false, null, 'Maps');
+    createSetting('Hshrinezone', 'AutoShrine: Zone', 'zone', 'multiValue', [-1], null, 'Maps');
+    createSetting('Hshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Maps');
+    createSetting('Hshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Maps');
+    createSetting('Hshrinecharge', 'AutoShrine: Charge', 'charge count you will never see this setting hehehehe', 'value', 0, null, 'Maps');
+  
     //RMaps
 
     //Line 1
@@ -696,7 +714,7 @@ function initializeAllSettings() {
     createSetting('Rtributespecialselection', 'TrF: Special Selection', 'special', 'textValue', 'undefined', null, 'Maps');
     createSetting('Rtributegatherselection', 'TrF: Gather Selection', 'gather', 'textValue', 'undefined', null, 'Maps');
     
-    //Shrine
+    //Shrine - U2
     document.getElementById('Rtributegatherselection').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('Rshrine', 'AutoShrine', 'Turn this on if you want to use Shrines automatically. ', 'boolean', false, null, 'Maps');
     createSetting('Rshrinemaz', 'AutoShrine Settings', 'Click to open AutoShrine settings. <br> <b>Zone:</b> What zone to use Bone Shrine charges. <br> <b>Cell:</b> What cell to use Bone Shrine charges at, if you use it after cell 80 you will get the benefit of all the books. to use. <br> <b>Amount:</b> How many Bone Shrine charges you wish to use. <br> <b>Example:</b> If you put Zone: 40\, Cell: 10\, Amount: 3\, you will use 3 Bone Shrine Charges at zone 40 at cell 10. ', 'infoclick', false, null, 'Maps');
@@ -1093,8 +1111,10 @@ function initializeAllSettings() {
     document.getElementById('Rtimefarmmaz').setAttribute('onclick', 'MAZLookalike("Time Farm", "Rtimefarm")');
     document.getElementById('Rdtimefarmmaz').setAttribute('onclick', 'MAZLookalike("dTime Farm", "Rdtimefarm")');
     document.getElementById('Rtributefarmmaz').setAttribute('onclick', 'MAZLookalike("Tribute Farm", "Rtributefarm")');
-    document.getElementById('Rshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine", "Rshrine")');
-    document.getElementById('Rdshrinemaz').setAttribute('onclick', 'MAZLookalike("dShrine", "Rdshrine")');
+    document.getElementById('Hshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine - U1", "Hshrine")');
+    document.getElementById('Hdshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine - U1 (Daily)", "Hdshrine")');
+    document.getElementById('Rshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine - U2", "Rshrine")');
+    document.getElementById('Rdshrinemaz').setAttribute('onclick', 'MAZLookalike("Shrine - U2 (Daily)", "Rdshrine")');
     document.getElementById('Rblackbogmaz').setAttribute('onclick', 'MAZLookalike("Quagmire", "Rblackbog")');
     document.getElementById('Rinsanitymaz').setAttribute('onclick', 'MAZLookalike("Insanity", "Rinsanityon")');
     document.getElementById('Ralchfarmmaz').setAttribute('onclick', 'MAZLookalike("Alch", "Ralchon")');
@@ -1569,6 +1589,8 @@ function updateCustomButtons() {
 
     //Radon
     var radonon = getPageSetting('radonsettings') == 1;
+    //Bone Shrine
+    var boneShrinePurchased = game.permaBoneBonuses.boosts.owned > 0 ? true : false;
 
     //Tabs
     if (document.getElementById("tabSpire") != null) {
@@ -1609,6 +1631,8 @@ function updateCustomButtons() {
     !radonon && getPageSetting('amalcoord') == true ? turnOn("amalcoordz") : turnOff("amalcoordz");
     !radonon ? turnOn("AutoAllocatePerks") : turnOff("AutoAllocatePerks");
     !radonon && getPageSetting('AutoAllocatePerks') == 1 ? turnOn("fastallocate") : turnOff("fastallocate");
+    boneShrinePurchased ? turnOn('AutoBoneChargeMax') : turnOff("AutoBoneChargeMax");
+    boneShrinePurchased ? turnOn("AutoBoneChargeMaxStartZone") : turnOff("AutoBoneChargeMaxStartZone");
 
     //Portal
     !radonon ? turnOn("AutoPortal") : turnOff("AutoPortal");
@@ -1691,6 +1715,13 @@ function updateCustomButtons() {
     !radonon && getPageSetting('AutoPortalDaily') == 1 ? turnOn("dHeHrDontPortalBefore") : turnOff("dHeHrDontPortalBefore");
     !radonon && getPageSetting('AutoPortalDaily') == 1 ? turnOn("dHeliumHrBuffer") : turnOff("dHeliumHrBuffer");
     !radonon && getPageSetting('AutoPortalDaily') > 0 ? turnOn("dHeliumHourChallenge") : turnOff("dHeliumHourChallenge");
+    
+    //Shrine - U1 (Daily)
+    !radonon ? turnOn("Hdshrine") : turnOff("Hdshrine");
+    (!radonon && getPageSetting('Hdshrine') == 1) ? turnOn("Hdshrinemaz"): turnOff("Hdshrinemaz");
+    turnOff("Hdshrinezone");
+    turnOff("Hdshrinecell");
+    turnOff("Hdshrineamount");
 
 
     //RDaily
@@ -1741,7 +1772,7 @@ function updateCustomButtons() {
     radonon && dhson && dhsstaffon ? turnOn('Rdhsmapstaff') : turnOff('Rdhsmapstaff');
     radonon && dhson && dhsstaffon ? turnOn('Rdhstributestaff') : turnOff('Rdhstributestaff');
     
-    //RDShrine
+    //Shrine - U2 (Daily)
     radonon ? turnOn("Rdshrine") : turnOff("Rdshrine");
     (radonon && getPageSetting('Rdshrine') == 1) ? turnOn("Rdshrinemaz"): turnOff("Rdshrinemaz");
     turnOff("Rdshrinezone");
@@ -1914,6 +1945,14 @@ function updateCustomButtons() {
     (!radonon && getPageSetting("farmWonders")) ? turnOn("wondersAmount") : turnOff("wondersAmount");
     (!radonon && getPageSetting("farmWonders")) ? turnOn("maxExpZone") : turnOff("maxExpZone");
     (!radonon && getPageSetting("farmWonders")) ? turnOn("finishExpOnBw") : turnOff("finishExpOnBw");
+  
+    //Shrine - U1
+    !radonon ? turnOn("Hshrine") : turnOff("Hshrine");
+    (!radonon && getPageSetting('Hshrine') == true) ? turnOn("Hshrinemaz"): turnOff("Hshrinemaz");
+    turnOff("Hshrinezone");
+    turnOff("Hshrinecell");
+    turnOff("Hshrineamount");
+    turnOff("Hshrinecharge");
 
     //RMaps
     radonon ? turnOn("RAutoMaps") : turnOff("RAutoMaps");
@@ -1946,6 +1985,7 @@ function updateCustomButtons() {
     turnOff("Rtributespecialselection");
     turnOff("Rtributegatherselection");
     
+    // Shrine - U2
     radonon ? turnOn("Rshrine") : turnOff("Rshrine");
     (radonon && getPageSetting('Rshrine') == true) ? turnOn("Rshrinemaz"): turnOff("Rshrinemaz");
     turnOff("Rshrinezone");

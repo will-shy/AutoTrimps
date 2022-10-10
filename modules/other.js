@@ -4109,38 +4109,66 @@ function hypofrag() {
 }
 
 function autoshrine() {
-    if (getPageSetting('Rshrine') && game.permaBoneBonuses.boosts.charges > 0) {
-        var shrinezone = getPageSetting('Rshrinezone');
+    var universe;
+    var mode = game.global.challengeActive == "Daily" ? "Daily" : "Standard";
+  
+    switch (game.global.universe) {
+      case 1:
+        universe = "Helium";
+        break;
+      case 2:
+        universe = "Radon";
+        break;
+    }
+
+    var shrineSettings = {
+      Helium: {
+        Standard: {
+          core: "Hshrine",
+          zone: "Hshrinezone",
+          amount: "Hshrineamount",
+          cell: "Hshrinecell",
+          charge: "Hshrinecharge",
+        },
+        Daily: {
+          core: "Hdshrine",
+          zone: "Hdshrinezone",
+          amount: "Hdshrineamount",
+          cell: "Hdshrinecell",
+          charge: "Hshrinecharge",
+        },
+      },
+      Radon: {
+        Standard: {
+          core: "Rshrine",
+          zone: "Rshrinezone",
+          amount: "Rshrineamount",
+          cell: "Rshrinecell",
+          charge: "Rshrinecharge",
+        },
+        Daily: {
+          core: "Rdshrine",
+          zone: "Rdshrinezone",
+          amount: "Rdshrineamount",
+          cell: "Rdshrinecell",
+          charge: "Rshrinecharge",
+        },
+      },
+    };
+
+    if (getPageSetting(shrineSettings[universe][mode].core) && game.permaBoneBonuses.boosts.charges > 0) {
+      var shrinezone = getPageSetting(shrineSettings[universe][mode].zone);
         if (shrinezone.includes(game.global.world)) {
-            var shrineamount = getPageSetting('Rshrineamount');
+            var shrineamount = getPageSetting(shrineSettings[universe][mode].amount);
             var shrineindex = shrinezone.indexOf(game.global.world);
-            var shrinecell = getPageSetting('Rshrinecell')[shrineindex];
+            var shrinecell = getPageSetting(shrineSettings[universe][mode].cell)[shrineindex];
             var shrinezones = shrineamount[shrineindex];
 
-            shrinezones = shrinezones - autoTrimpSettings.Rshrinecharge.value;
+            shrinezones = shrinezones - autoTrimpSettings[shrineSettings[universe][mode].charge].value;
 
             if (game.global.lastClearedCell + 2 >= shrinecell && shrinezones > 0) {
                 game.permaBoneBonuses.boosts.consume();
-                autoTrimpSettings.Rshrinecharge.value++;
-            }
-        }
-    }
-}
-
-function dautoshrine() {
-    if (getPageSetting('Rdshrine') && game.permaBoneBonuses.boosts.charges > 0) {
-        var dshrinezone = getPageSetting('Rdshrinezone');
-        if (dshrinezone.includes(game.global.world)) {
-            var dshrineamount = getPageSetting('Rdshrineamount');
-            var dshrineindex = dshrinezone.indexOf(game.global.world);
-            var dshrinecell = getPageSetting('Rdshrinecell')[dshrineindex];
-            var dshrinezones = dshrineamount[dshrineindex];
-
-            dshrinezones = dshrinezones - autoTrimpSettings.Rshrinecharge.value;
-
-            if (game.global.lastClearedCell + 2 >= dshrinecell && dshrinezones > 0) {
-                game.permaBoneBonuses.boosts.consume();
-                autoTrimpSettings.Rshrinecharge.value++;
+                autoTrimpSettings[shrineSettings[universe][mode].charge].value += 1;
             }
         }
     }
@@ -4149,6 +4177,45 @@ function dautoshrine() {
 var old_nextWorld = nextWorld;
 nextWorld = function() {
     var retVal = old_nextWorld(...arguments);
+    autoTrimpSettings.Hshrinecharge.value = 0;
     autoTrimpSettings.Rshrinecharge.value = 0;
     return retVal;
+}
+
+function autoBoneChargeWhenMax() {
+  // Uses bone charges when they are at max charges automatically.
+
+  // If "Daily Only" was chosen and we're not on a daily challenge, exit.
+  if (
+    getPageSetting("AutoBoneChargeMax") === 2 &&
+    !(game.global.challengeActive == "Daily")
+  ) {
+    return;
+  }
+
+  // If the option is enabled but no zone is specified, set a default value to
+  // the highest zone cleared - 10% or 60 (broken planet equipment discount)
+  // if the HZC value would be less than 60. Otherwise use the user value.
+  const autoBoneChargeEnabled =
+    getPageSetting("AutoBoneChargeMax") > 0 ? true : false;
+  const autoBoneChargeZoneSet =
+    getPageSetting("AutoBoneChargeMaxStartZone") > 0 ? true : false;
+  const highestZoneCleared = game.global.highestLevelCleared;
+  const percentOfHZC = Math.round((10 / 100) * highestZoneCleared);
+  const optimalChargeZone =
+    highestZoneCleared - percentOfHZC > 60
+      ? highestZoneCleared - percentOfHZC
+      : 60;
+  const chargeZone = !autoBoneChargeZoneSet
+    ? optimalChargeZone
+    : autoTrimpSettings.AutoBoneChargeMaxStartZone.value;
+  const boneChargesAvailable = game.permaBoneBonuses.boosts.charges;
+  const currentZone = game.global.world;
+
+  // If we have more than 10 bone charges and our current world zone is
+  // greater than or equal to the charge zone set; use a bone charge.
+  if (boneChargesAvailable === 10 && currentZone >= chargeZone) {
+    game.permaBoneBonuses.boosts.consume();
+    debug("Max bone charges reached! Used a bone charge.", "general", "*bolt");
+  }
 }

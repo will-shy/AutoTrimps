@@ -49,6 +49,7 @@ for (var item in (($u1graphSel.id = "u1graphSelection"), $u1graphSel.setAttribut
 var $u2Graph = document.getElementById("graphFooterLine1"),
     u2graphList = [
         "Radon - Rn/Hr",
+        "Radon - Rn/Hr Normalized",
         "Radon - Total",
         "RnHr % / LifetimeRn",
         "Rn % / LifetimeRn",
@@ -269,12 +270,16 @@ function pushData() {
     var RgetPercent = (game.stats.heliumHour.value() / (game.global.totalRadonEarned - (game.global.radonLeftover + game.resources.radon.owned))) * 100;
     var Rlifetime = (game.resources.radon.owned / (game.global.totalRadonEarned - game.resources.radon.owned)) * 100;
 
+	if (game.global.challengeActive === 'Daily') {
+		var dailyString = getCurrentChallengePane().split('.');
+		var dailyDate = dailyString[0].substr(13).slice(0, 16);
+	}
     allSaveData.push({
         totalPortals: getTotalPortals(true),
         currentTime: new Date().getTime(),
         portalTime: game.global.portalTime,
         world: game.global.world,
-        challenge: game.global.challengeActive == 'Daily' ? game.global.challengeActive + " " + getDailyTimeString().toString().replace(/(\d{4})(\d{2})(\d+)/, '$1-$2-$3') : game.global.challengeActive,
+		challenge: game.global.challengeActive === 'Daily' ? dailyDate : game.global.challengeActive,
         voids: game.global.totalVoidMaps,
         heirlooms: { value: game.stats.totalHeirlooms.value, valueTotal: game.stats.totalHeirlooms.valueTotal },
         nullifium: recycleAllExtraHeirlooms(true),
@@ -297,6 +302,7 @@ function pushData() {
         radonOwned: game.resources.radon.owned,
         rnhr: RgetPercent.toFixed(4),
         rnlife: Rlifetime.toFixed(4),
+        s3: game.global.lastRadonPortal,
         universe: game.global.universe,
         universeSelection: document.getElementById('universeSelection').options[document.getElementById('universeSelection').options.selectedIndex].value,
         u1graphSelection: document.getElementById('u1graphSelection').options[document.getElementById('u1graphSelection').options.selectedIndex].value,
@@ -683,6 +689,17 @@ function setGraphData(graph) {
                 return Math.floor(e1.radonOwned / ((e1.currentTime - e1.portalTime) / 3600000));
             });
             title = "Radon/Hour (Cumulative)";
+            xTitle = "Zone";
+            yTitle = "Radon/Hour";
+            yType = "Linear";
+            yminFloor = 0;
+            precision = 2;
+            break;
+        case "Radon - Rn/Hr Normalized":
+            graphData = allPurposeGraph("radonhr", true, null, function specialCalc(e1, e2) {
+                return Math.floor(e1.radonOwned / 1.03**e1.s3 / ((e1.currentTime - e1.portalTime) / 3600000));
+            });
+            title = "Radon/Hour (Cumulative, S3 Normalized)";
             xTitle = "Zone";
             yTitle = "Radon/Hour";
             yType = "Linear";
