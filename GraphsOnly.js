@@ -307,7 +307,7 @@ function pushData() {
         voids: game.global.totalVoidMaps,
         heirlooms: { value: game.stats.totalHeirlooms.value, valueTotal: game.stats.totalHeirlooms.valueTotal },
         nullifium: recycleAllExtraHeirlooms(true),
-        coord: game.upgrades.Coordination.done,
+        coord: game.upgrades.Coordination.allowed - game.upgrades.Coordination.done,
         lastwarp: game.global.lastWarp,
         essence: getTotalDarkEssenceCount(),
         heliumOwned: game.resources.helium.owned,
@@ -341,11 +341,21 @@ function pushData() {
 }
 
 function showHideUnusedGraphs() {
+    // Hide challenge graphs that are not in the saved data
     const graphedChallenges = [...new Set(allSaveData.map((data) => data = data.challenge))];
     const perChallengeGraphs = {Hypothermia: ["Bonfires", "Embers"]};
     for (const [challenge, graphs] of Object.entries(perChallengeGraphs)) {
         const style = graphedChallenges.includes(challenge) ? "" : "none";
         graphs.forEach((graph) => { document.querySelector(`#u2graphSelection [value=${graph}]`).style.display = style; })
+    }
+    // Hide specific graphs that are constant (either not unlocked yet, or maxed)
+    const emptyGraphs = {"u2": [["OverkillCells", "overkill"], ["Worshippers", "worshippers"]], 
+                         "u1": [["OverkillCells", "overkill"], ["Fluffy XP", "fluffy"], ["Fluffy XP PerHour", "fluffy"], ["Amalgamators", "amals"]]};
+    for (const [universe, graphs] of Object.entries(emptyGraphs)) {
+        for (const [graphName, dataName] of graphs) {
+            const style = [...new Set(allSaveData.map((data) => data = data[dataName]))].length == 1 ? "none" : "";
+            document.querySelector(`#${universe}graphSelection [value="${graphName}"]`).style.display = style;
+        }
     }
 }
 
@@ -786,7 +796,7 @@ function setGraphData(graph) {
             break;
         case "Coordinations":
             graphData = allPurposeGraph("coord", true, "number");
-            title = "Coordination History";
+            title = "Unpurchased Coordinations History";
             xTitle = "Zone";
             yTitle = "Coordination";
             yType = "Linear";
