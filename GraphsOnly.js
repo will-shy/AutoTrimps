@@ -63,6 +63,7 @@ var $u1Graph = document.getElementById("graphFooterLine1"),
         "Fluffy XP PerHour",
         "Amalgamators",
         "Wonders",
+        "Empower",
     ],
     $u1graphSel = document.createElement("select");
 for (var item in (($u1graphSel.id = "u1graphSelection"), $u1graphSel.setAttribute("style", ""), $u1graphSel.setAttribute("onchange", "drawGraph()"), u1graphList)) {
@@ -89,6 +90,8 @@ var $u2Graph = document.getElementById("graphFooterLine1"),
         "Worshippers",
         "Bonfires",
         "Embers",
+        "Cruffys",
+        "Empower"
     ],
     $u2graphSel = document.createElement("select");
 for (var item in (($u2graphSel.id = "u2graphSelection"), $u2graphSel.setAttribute("style", ""), $u2graphSel.setAttribute("onchange", "drawGraph()"), u2graphList)) {
@@ -332,6 +335,8 @@ function pushData() {
         bonfires: game.challenges.Hypothermia.bonfires,
         embers: game.challenges.Hypothermia.embers,
         wonders: game.challenges.Experience.wonders,
+        empower: game.global.dailyChallenge?.empower?.stacks,
+        cruffys: game.challenges.Nurture.level,
         universe: game.global.universe,
         universeSelection: document.getElementById('universeSelection').options[document.getElementById('universeSelection').options.selectedIndex].value,
         u1graphSelection: document.getElementById('u1graphSelection').options[document.getElementById('u1graphSelection').options.selectedIndex].value,
@@ -346,6 +351,7 @@ function showHideUnusedGraphs() {
     // Hide challenge graphs that are not in the saved data
     const graphedChallenges = [...new Set(allSaveData.map((data) => data = data.challenge))];
     const perChallengeGraphs = {Hypothermia: {graphs: ["Bonfires", "Embers"], universe: "u2"},
+                                Nurture: {graphs: ["Cruffys"], universe: "u2"},
                                 Experience: {graphs: ["Wonders"], universe: "u1"}};
     for (const [challenge, data] of Object.entries(perChallengeGraphs)) {
         const graphs = data.graphs;
@@ -353,17 +359,20 @@ function showHideUnusedGraphs() {
         graphs.forEach((graph) => { document.querySelector(`#${data.universe}graphSelection [value=${graph}]`).style.display = style; })
     }
     // Hide specific graphs that are constant (either not unlocked yet, or maxed)
-    const emptyGraphs = {OverkillCells: {dataName: "overkill", universe: "u1"},
-                         OverkillCells: {dataName: "overkill", universe: "u2"},
+    const emptyGraphs = {OverkillCells: {dataName: "overkill"},
                          Worshippers: {universe: "u2"}, 
                          "Fluffy XP": {dataName: "fluffy", universe: "u1"}, 
                          "Fluffy XP PerHour": {dataName: "fluffy", universe: "u1"},
                          Amalgamators: {dataName: "amals", universe: "u1"}, 
+                         Empower: {},
                          }
     for (const [graphName, data] of Object.entries(emptyGraphs)) {
         const dataName = data.dataName ? data.dataName : graphName.toLowerCase();
-        const style = [...new Set(allSaveData.map((graphs) => graphs = graphs[dataName]))].length == 1 ? "none" : "";
-        document.querySelector(`#${data.universe}graphSelection [value="${graphName}"]`).style.display = style;
+        const universes = data.universe ? [data.universe] : ["u1", "u2"]
+        for (universe of universes) {
+            const style = [...new Set(allSaveData.map((graphs) => graphs = graphs[dataName]))].length == 1 ? "none" : "";
+            document.querySelector(`#${universe}graphSelection [value="${graphName}"]`).style.display = style;
+        }
         
     }
 }
