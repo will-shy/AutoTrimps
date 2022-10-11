@@ -62,6 +62,7 @@ var $u1Graph = document.getElementById("graphFooterLine1"),
         "Fluffy XP",
         "Fluffy XP PerHour",
         "Amalgamators",
+        "Wonders",
     ],
     $u1graphSel = document.createElement("select");
 for (var item in (($u1graphSel.id = "u1graphSelection"), $u1graphSel.setAttribute("style", ""), $u1graphSel.setAttribute("onchange", "drawGraph()"), u1graphList)) {
@@ -330,6 +331,7 @@ function pushData() {
         worshippers: game.jobs.Worshipper.owned,
         bonfires: game.challenges.Hypothermia.bonfires,
         embers: game.challenges.Hypothermia.embers,
+        wonders: game.challenges.Experience.wonders,
         universe: game.global.universe,
         universeSelection: document.getElementById('universeSelection').options[document.getElementById('universeSelection').options.selectedIndex].value,
         u1graphSelection: document.getElementById('u1graphSelection').options[document.getElementById('u1graphSelection').options.selectedIndex].value,
@@ -343,19 +345,26 @@ function pushData() {
 function showHideUnusedGraphs() {
     // Hide challenge graphs that are not in the saved data
     const graphedChallenges = [...new Set(allSaveData.map((data) => data = data.challenge))];
-    const perChallengeGraphs = {Hypothermia: ["Bonfires", "Embers"]};
-    for (const [challenge, graphs] of Object.entries(perChallengeGraphs)) {
+    const perChallengeGraphs = {Hypothermia: {graphs: ["Bonfires", "Embers"], universe: "u2"},
+                                Experience: {graphs: ["Wonders"], universe: "u1"}};
+    for (const [challenge, data] of Object.entries(perChallengeGraphs)) {
+        const graphs = data.graphs;
         const style = graphedChallenges.includes(challenge) ? "" : "none";
-        graphs.forEach((graph) => { document.querySelector(`#u2graphSelection [value=${graph}]`).style.display = style; })
+        graphs.forEach((graph) => { document.querySelector(`#${data.universe}graphSelection [value=${graph}]`).style.display = style; })
     }
     // Hide specific graphs that are constant (either not unlocked yet, or maxed)
-    const emptyGraphs = {"u2": [["OverkillCells", "overkill"], ["Worshippers", "worshippers"]], 
-                         "u1": [["OverkillCells", "overkill"], ["Fluffy XP", "fluffy"], ["Fluffy XP PerHour", "fluffy"], ["Amalgamators", "amals"]]};
-    for (const [universe, graphs] of Object.entries(emptyGraphs)) {
-        for (const [graphName, dataName] of graphs) {
-            const style = [...new Set(allSaveData.map((data) => data = data[dataName]))].length == 1 ? "none" : "";
-            document.querySelector(`#${universe}graphSelection [value="${graphName}"]`).style.display = style;
-        }
+    const emptyGraphs = {OverkillCells: {dataName: "overkill", universe: "u1"},
+                         OverkillCells: {dataName: "overkill", universe: "u2"},
+                         Worshippers: {universe: "u2"}, 
+                         "Fluffy XP": {dataName: "fluffy", universe: "u1"}, 
+                         "Fluffy XP PerHour": {dataName: "fluffy", universe: "u1"},
+                         Amalgamators: {dataName: "amals", universe: "u1"}, 
+                         }
+    for (const [graphName, data] of Object.entries(emptyGraphs)) {
+        const dataName = data.dataName ? data.dataName : graphName.toLowerCase();
+        const style = [...new Set(allSaveData.map((graphs) => graphs = graphs[dataName]))].length == 1 ? "none" : "";
+        document.querySelector(`#${data.universe}graphSelection [value="${graphName}"]`).style.display = style;
+        
     }
 }
 
@@ -890,13 +899,6 @@ function setGraphData(graph) {
             yType = "Linear";
             xminFloor = 1;
             break;
-        case "Smithies":
-            graphData = allPurposeGraph("smithies", true, "number");
-            title = "Smithy History";
-            xTitle = "Zone";
-            yTitle = "Smithies";
-            yType = "Linear";
-            break;
         case "OverkillCells":
             var currentPortal = -1;
             graphData = [];
@@ -928,25 +930,11 @@ function setGraphData(graph) {
             yTitle = "Overkilled Cells";
             yType = "Linear";
             break;   
-        case "Worshippers":
-            graphData = allPurposeGraph("worshippers", true, "number");
-            title = "Worshipper History";
+        default:
+            graphData = allPurposeGraph(graph.toLowerCase(), true, "number");
+            title = `${graph} History`;
             xTitle = "Zone";
-            yTitle = "Worshippers";
-            yType = "Linear";
-            break;
-        case "Embers":
-            graphData = allPurposeGraph("embers", true, "number");
-            title = "Ember History";
-            xTitle = "Zone";
-            yTitle = "Embers";
-            yType = "Linear";
-            break;
-        case "Bonfires":
-            graphData = allPurposeGraph("bonfires", true, "number");
-            title = "Bonfire History";
-            xTitle = "Zone";
-            yTitle = "Bonfires";
+            yTitle = graph;
             yType = "Linear";
             break;
     }
