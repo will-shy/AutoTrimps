@@ -316,7 +316,7 @@ function pushData() {
         bonfires: game.challenges.Hypothermia.bonfires,
         embers: game.challenges.Hypothermia.embers,
         wonders: game.challenges.Experience.wonders,
-        empower: game.global.challengeActive === 'Daily' ? game.global.dailyChallenge.empower.stacks : 0,
+        empower: typeof game.global.dailyChallenge.empower !== "undefined" ? game.global.dailyChallenge.empower.stacks : 0,
         cruffys: game.challenges.Nurture.level,
         universe: game.global.universe,
         universeSelection: document.getElementById('universeSelection').options[document.getElementById('universeSelection').options.selectedIndex].value,
