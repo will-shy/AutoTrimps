@@ -1830,8 +1830,8 @@ function updateCustomButtons() {
     (!radonon && !fuckbuilding) ? turnOn("FirstGigastation"): turnOff("FirstGigastation");
     (!radonon && !fuckbuilding) ? turnOn("DeltaGigastation"): turnOff("DeltaGigastation");
     (!radonon && !fuckbuilding) ? turnOn("AutoGigas"): turnOff("AutoGigas");
-    (!radonon && !fuckbuilding && bwRewardUnlocked("AutoGigas") == true) ? turnOn("CustomTargetZone"): turnOff("CustomTargetZone");
-    (!radonon && !fuckbuilding && bwRewardUnlocked("AutoGigas") == true) ? turnOn("CustomDeltaFactor"): turnOff("CustomDeltaFactor");
+    (!radonon && !fuckbuilding && getPageSetting("AutoGigas") == true) ? turnOn("CustomTargetZone"): turnOff("CustomTargetZone");
+    (!radonon && !fuckbuilding && getPageSetting("AutoGigas") == true) ? turnOn("CustomDeltaFactor"): turnOff("CustomDeltaFactor");
     (!radonon && !fuckbuilding) ? turnOn("WarpstationWall3"): turnOff("WarpstationWall3");
 
 
