@@ -6,6 +6,10 @@ MODULES["buildings"].storageLowlvlCutoff2 = 0.5;
 //Helium
 var housingList = ['Hut', 'House', 'Mansion', 'Hotel', 'Resort', 'Gateway', 'Collector', 'Warpstation'];
 
+function needGymystic() {
+    return game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done > 0;
+}
+
 function safeBuyBuilding(building) {
     if (isBuildingInQueue(building))
         return false;
@@ -211,7 +215,7 @@ function buyBuildings() {
             if (currentEnemyDamageOK && zoneEnemyDamageOK && challengeOK) skipGym = true;
 	    }
 	
-	    //Gym Wall
+	//Gym Wall
         var gymwallpct = getPageSetting('GymWall');
         if (gymwallpct > 1) {
             if (getBuildingItemPrice(game.buildings.Gym, "wood", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level)
@@ -227,7 +231,7 @@ function buyBuildings() {
                 skipGym = true;
         }
 	
-	    //Buy Gym
+	//Buy Gym
         if (!needGymystic() && !skipGym) safeBuyBuilding('Gym');
     }
     
