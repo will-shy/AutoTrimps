@@ -573,7 +573,7 @@ function initializeAllSettings() {
 
     //Ships
     document.getElementById('RMaxExplorers').parentNode.insertAdjacentHTML('afterend', '<br>');
-    createSetting('Rshipfarmon', 'Ship Farming', 'Turn Ship Farming off or on. ', 'boolean', 'false', null, "Jobs");
+    createSetting('Rshipfarmon', 'Ship Farming', 'Turn Ship Farming off or on. You need to have unlocked Large Savory Cache to use this. If you have not I would recommend Time Farm instead. ', 'boolean', 'false', null, "Jobs");
     createSetting('Rshipfarmzone', 'SF: Zone', 'Farms for specified worshippers in SF: Amount at zone according to this settings value. Can use 59,61,62. ', 'multiValue', [-1], null, 'Jobs');
     createSetting('Rshipfarmcell', 'SF: Cell', 'Ship Farm at this Cell. -1 to run them at the default value, which is 1. ', 'value', '-1', null, 'Jobs');
     createSetting('Rshipfarmamount', 'SF: Amount', 'How many Worshippers to farm up to at zone specified in SF. Can use 50,45,40. These values should match up to your SF zones. If using SF and SF: Amount examples (59 and 50 respectively) it will farm at z59 up to 50 Worshippers. Just use one 50 if you want it to farm to 50 everytime. ', 'multiValue', [-1], null, 'Jobs');
