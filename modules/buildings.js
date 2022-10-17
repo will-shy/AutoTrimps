@@ -6,7 +6,7 @@ MODULES["buildings"].storageLowlvlCutoff2 = 0.5;
 //Helium
 var housingList = ['Hut', 'House', 'Mansion', 'Hotel', 'Resort', 'Gateway', 'Collector', 'Warpstation'];
 
-function needGymystic() {
+function needGymystic() {fi
     return game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done > 0;
 }
 
@@ -232,7 +232,7 @@ function buyBuildings() {
         }
 	
 	//Buy Gym
-        if (!needGymystic() && !skipGym) safeBuyBuilding('Gym');
+        if (!((game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done) > 0) && !skipGym) safeBuyBuilding('Gym');
     }
     
     //Tributes:
