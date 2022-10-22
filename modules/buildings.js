@@ -251,10 +251,7 @@ function buyBuildings() {
 
     //Nurseries
     if (game.buildings.Nursery.locked == 0 && !hidebuild && (nurseryZoneOk && maxNurseryOk || nurseryPreSpire || dailyNurseryPreSpire)) {
-        //Nursery Wall
-        var nurseryWallpct = getPageSetting('NurseryWall');
-        if (nurseryWallpct <= 1 || getBuildingItemPrice(game.buildings.Nursery, "gems", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level) < (game.resources.gems.owned / nurseryWallpct))
-            safeBuyBuilding('Nursery');
+        safeBuyBuilding('Nursery');
     }
 
     postBuy2(oldBuy);
