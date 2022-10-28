@@ -33,7 +33,7 @@ var changelogList = [];
 changelogList.push({
     date: "28/10/2022",
     version: "v5.2.0",
-    description: "<b>Trimps v5.8.0</b> Changed AM Portal in Maps so check that setting. Autogiga, Better stance swap, U1 Calc fixed. ",
+    description: "<b>Trimps v5.8.0</b> Changed AM Portal to AM Always in Maps so check that setting. Autogiga, Better stance swap, U1 Calc fixed. ",
     isNew: true
 });
 changelogList.push({
