@@ -633,7 +633,7 @@ function initializeAllSettings() {
     createSetting('AMUprison', 'AMU: Prison', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUbw', 'AMU: BW', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUstar', 'AMU: Imploding Star', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
-    createSetting('automapsportal', 'AM Always', 'Makes sure Auto Maps is on after portalling. Turn this off to disable this and remember your choice. ', 'boolean', false, null, 'Maps');
+    createSetting('automapsportal', 'AM Always', 'Makes sure Auto Maps is on <b>ALWAYS</b>. Sometimes AT will turn off Automaps during timewarp. This will impact stuff like BW Raiding and Praiding so turn this off if you intend to raid.', 'boolean', false, null, 'Maps');
     document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
     
     //Line 2
