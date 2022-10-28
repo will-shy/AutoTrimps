@@ -31,21 +31,21 @@ function initializeAutoTrimps() {
 
 var changelogList = [];
 changelogList.push({
+    date: "28/10/2022",
+    version: "v5.2.0",
+    description: "<b>Trimps v5.8.0</b> Changed AM Portal in Maps so check that setting. Autogiga, Better stance swap, U1 Calc fixed. ",
+    isNew: true
+});
+changelogList.push({
     date: "17/08/2022",
     version: "v5.1.1",
     description: "<b>Trimps v5.8.0</b> AutoShrine added. Daily Heirloom Swap added. Various bug fixes. ",
-    isNew: true
+    isNew: false
 });
 changelogList.push({
     date: "01/08/2022",
     version: "v5.1.0",
     description: "<b>Trimps v5.8.0</b> Calc updated for 5.8. Some Mutation settings in combat. A few changes to ship farming so it always uses a LSC. ",
-    isNew: true
-});
-changelogList.push({
-    date: "16/05/2022",
-    version: "v5.0.0",
-    description: "<b>Trimps v5.7.1</b> Daily versions of settings added. Daily BW Raiding for U2 removed. Old Praiding for U2 removed. Added MaZ like inputs for various settings. Please check your settings in Maps\, Jobs\, and Daily tabs! Various bug fixes. Huge thanks to <b>August</b> for the base code for the MaZ like inputs! ",
     isNew: false
 });
 
