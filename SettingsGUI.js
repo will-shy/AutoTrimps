@@ -678,7 +678,7 @@ function initializeAllSettings() {
 
     //Line 1
     createSetting('RAutoMaps', ["Auto Maps Off", "Auto Maps On", "Auto Maps No Unique"], 'Automaps. The no unique setting will not run unique maps such as dimensions of rage. Recommended ON. Do not use MaZ, it will not work. ', 'multitoggle', 1, null, "Maps");
-    createSetting('Rautomapsportal', 'AM Portal', 'Makes sure Auto Maps is on after portalling. Turn this off to disable this and remember your choice. ', 'boolean', true, null, 'Maps');
+    createSetting('Rautomapsportal', 'AM Portal', 'Makes sure Auto Maps is on <b>ALWAYS</b>. Sometimes AT will turn off Automaps during timewarp. ', 'boolean', false, null, 'Maps');
     createSetting('Rmapselection', 'Map Selection', 'Select which you prefer to use. Recommend Plentiful (Gardens) if you have unlocked it. ', 'dropdown', 'Mountain', ["Random", "Mountain", "Forest", "Sea", "Depths", "Plentiful", "Farmlands"], 'Maps');
     createSetting('RMaxMapBonusAfterZone', 'Max MapBonus After', 'Always gets Max Map Bonus from this zone on. (inclusive and after).<br><b>NOTE:</b> Set -1 to disable entirely (default). Set 0 to use it always. ', 'value', '-1', null, 'Maps');
     createSetting('RMaxMapBonuslimit', 'Max MapBonus Limit', 'Limit the amount of Map Bonuses you get. Default is 10. ', 'value', '10', null, 'Maps');
