@@ -1110,6 +1110,7 @@ function RautoMap() {
     var ourBaseHealth = RcalcOurHealth();
     var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
     var enemyHealth = RcalcEnemyHealth(game.global.world);
+    var mapenoughdamagecutoff = getPageSetting("Rmapcuntoff");
 
     if (getPageSetting('RDisableFarm') > 0) {
         RshouldFarm = (RcalcHDratio() >= getPageSetting('RDisableFarm'));
