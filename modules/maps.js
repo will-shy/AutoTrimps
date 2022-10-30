@@ -1105,7 +1105,7 @@ function RtributeFarm(should, level, map, special) {
     var tributefarmzone = getPageSetting('Rtributefarmzone');
     var tributefarmindex = tributefarmzone.indexOf(game.global.world);
     
-    var tributefarmlevel = getPageSetting('Rtributefarmlevel');
+    var tributefarmlevel = getPageSetting('Rtributefarmlevel')[tributefarmindex];
     if (level) return tributefarmlevel;
     
     var tributefarmmap = autoTrimpSettings.Rtributemapselection.value[tributefarmindex];
