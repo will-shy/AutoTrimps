@@ -1224,6 +1224,7 @@ function RcalcOurHealth() {
     //Health
 
     var health = 50;
+
     if (game.resources.trimps.maxSoldiers > 0) {
         var equipmentList = ["Shield", "Boots", "Helmet", "Pants", "Shoulderguards", "Breastplate", "Gambeson"];
         for (var i = 0; i < equipmentList.length; i++) {
@@ -1233,52 +1234,74 @@ function RcalcOurHealth() {
             health += healthBonus * level;
         }
     }
+
     health *= game.resources.trimps.maxSoldiers;
     if (game.buildings.Smithy.owned > 0) {
-        health *= Math.pow(1.25, game.buildings.Smithy.owned);
+        health *= game.buildings.Smithy.getMult()
     }
+
     //Antenna Array
     health *= game.buildings.Antenna.owned >= 10 ? game.jobs.Meteorologist.getExtraMult() : 1;
+    
     if (game.portal.Toughness.radLevel > 0) {
         health *= ((game.portal.Toughness.radLevel * game.portal.Toughness.modifier) + 1);
     }
+
     if (game.portal.Resilience.radLevel > 0) {
         health *= (Math.pow(game.portal.Resilience.modifier + 1, game.portal.Resilience.radLevel));
     }
-    if (game.portal.Observation.radLevel > 0) {
-        health *= game.portal.Observation.getMult();
-    }
-    if (game.portal.Championism.radLevel > 0) {
-        health *= game.portal.Championism.getMult();
-    }
+
     if (Fluffy.isRewardActive("healthy")) {
         health *= 1.5;
     }
-    health = calcHeirloomBonus("Shield", "trimpHealth", health);
-    if (game.goldenUpgrades.Battle.currentBonus > 0) {
-        health *= game.goldenUpgrades.Battle.currentBonus + 1;
+
+    if (game.portal.Observation.radLevel > 0) {
+        health *= game.portal.Observation.getMult();
     }
-    if (game.global.totalSquaredReward > 0) {
-        health *= (1 + (game.global.totalSquaredReward / 100));
-    }
-    if (game.global.challengeActive == "Revenge" && game.challenges.Revenge.stacks > 0) {
-        health *= game.challenges.Revenge.getMult();
-    }
-    if (game.global.challengeActive == "Wither" && game.challenges.Wither.trimpStacks > 0) {
-        health *= game.challenges.Wither.getTrimpHealthMult();
-    }
+
     if (game.global.mayhemCompletions > 0) {
         health *= game.challenges.Mayhem.getTrimpMult();
     }
+
     if (game.global.pandCompletions > 0) {
         health *= game.challenges.Pandemonium.getTrimpMult();
     }
+
+    //AutoBattle
+    health *= autoBattle.bonuses.Stats.getMult();
+
+    //Shield
+    health = calcHeirloomBonus("Shield", "trimpHealth", health);
+
+    if (game.portal.Championism.radLevel > 0) {
+        health *= game.portal.Championism.getMult();
+    }
+
+    if (game.goldenUpgrades.Battle.currentBonus > 0) {
+        health *= game.goldenUpgrades.Battle.currentBonus + 1;
+    }
+
+    if (game.global.totalSquaredReward > 0) {
+        health *= (1 + (game.global.totalSquaredReward / 100));
+    }
+
     if (u2Mutations.tree.Health.purchased)	{
 		health *= 1.5;
     }
+
+    //Challenges
+    if (game.global.challengeActive == "Revenge" && game.challenges.Revenge.stacks > 0) {
+        health *= game.challenges.Revenge.getMult();
+    }
+
+    if (game.global.challengeActive == "Wither" && game.challenges.Wither.trimpStacks > 0) {
+        health *= game.challenges.Wither.getTrimpHealthMult();
+    }
+
     if (game.global.challengeActive == "Insanity") {
         health *= game.challenges.Insanity.getHealthMult();
     }
+
     if (game.global.challengeActive == "Berserk") {
         if (game.challenges.Berserk.frenzyStacks > 0) {
             health *= 0.5;
@@ -1287,19 +1310,16 @@ function RcalcOurHealth() {
             health *= game.challenges.Berserk.getHealthMult(true);
         }
     }
+
     if (game.challenges.Nurture.boostsActive() == true) {
         health *= game.challenges.Nurture.getStatBoost();
     }
 
-    //Alchemy Mult
     health *= alchObj.getPotionEffect('Potion of Strength');
 	
     if (game.global.challengeActive === 'Smithless') {
 	if (game.challenges.Smithless.fakeSmithies > 0) health *= Math.pow(1.25, game.challenges.Smithless.fakeSmithies);
     }
-
-    //AutoBattle
-    health *= autoBattle.bonuses.Stats.getMult();
 
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
