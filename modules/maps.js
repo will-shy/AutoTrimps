@@ -1049,13 +1049,17 @@ var contractVoid = false;
 
 //RAutoMap Functions
 
-function RtimeFarm(should, level, daily) {
+function RtimeFarm(should, level, map, special, daily) {
     var timefarmzone = daily ? getPageSetting('Rdtimefarmzone') : getPageSetting('Rtimefarmzone');
     var timefarmindex = timefarmzone.indexOf(game.global.world);
-	var timefarmlevel = daily ? getPageSetting('Rdtimefarmlevel')[timefarmindex] : getPageSetting('Rtimefarmlevel')[timefarmindex];
-	if (level) return timefarmlevel;
-	var timefarmcell = daily ? getPageSetting('Rdtimefarmcell')[timefarmindex] : getPageSetting('Rtimefarmcell')[timefarmindex];
-	var timefarmtime = daily ? getPageSetting('Rdtimefarmtime') : getPageSetting('Rtimefarmtime');
+    var timefarmlevel = daily ? getPageSetting('Rdtimefarmlevel')[timefarmindex] : getPageSetting('Rtimefarmlevel')[timefarmindex];
+    if (level) return timefarmlevel;
+    var timefarmmap = daily ? autoTrimpSettings.Rdtimefarmmap.value[timefarmindex] : autoTrimpSettings.Rtimefarmmap.value[timefarmindex];
+    if (map) return timefarmmap;
+    var timefarmspecial = daily ? autoTrimpSettings.Rdtimefarmspecial.value[timefarmindex] : autoTrimpSettings.Rtimefarmspecial.value[timefarmindex];
+    if (special) return timefarmspecial;
+    var timefarmcell = daily ? getPageSetting('Rdtimefarmcell')[timefarmindex] : getPageSetting('Rtimefarmcell')[timefarmindex];
+    var timefarmtime = daily ? getPageSetting('Rdtimefarmtime') : getPageSetting('Rtimefarmtime');
     var time = ((new Date().getTime() - game.global.zoneStarted) / 1000 / 60);
 
     var timefarmindex = timefarmzone.indexOf(game.global.world);
@@ -1086,6 +1090,8 @@ function RtimeFarmMap(daily) {
     document.getElementById("advSpecialSelect").value = daily ? RtimeFarm(false, false, false, true, true) : RtimeFarm(false, false, false, true, false);
     updateMapCost();
 }
+
+//RAutoMaps
 
 function RautoMap() {
 
