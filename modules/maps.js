@@ -1255,13 +1255,13 @@ function RautoMap() {
     //MAZ
     if (game.options.menu.mapAtZone.enabled && game.global.canMapAtZone) {
         for (const option of game.options.menu.mapAtZone.setZone) {
-            if (z < option.world || z > option.through) {
+            if (game.global.world < option.world || game.global.world > option.through) {
                 continue;
             }
-            if (option.times === -1 && z !== option.world) {
+            if (option.times === -1 && game.global.world !== option.world) {
                 continue;
             }
-            if (option.times > 0 && (z - option.world) % option.times !== 0) {
+            if (option.times > 0 && (game.global.world - option.world) % option.times !== 0) {
                 continue;
             }
             if (option.cell === game.global.lastClearedCell + 2) {
