@@ -932,11 +932,13 @@ var RshouldDoMaps = false;
 var RlastMapWeWereIn = null;
 var RdoMaxMapBonus = false;
 var RvanillaMAZ = false;
+var contractVoid = false;
+var RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
 
 var Rtimefarm = false;
 var Rdtimefarm = false;
 
-var RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
+
 
 var Rshouldtimefarm = false;
 var Rdshouldtimefarm = false;
@@ -1045,21 +1047,20 @@ var hypoprefragmappy = undefined;
 var hypofragmappybought = false;
 
 var Rhyposhouldwood = true;
-var contractVoid = false;
 
 //RAutoMap Functions
 
 function RtimeFarm(should, level, map, special, daily) {
     var timefarmzone = daily ? getPageSetting('Rdtimefarmzone') : getPageSetting('Rtimefarmzone');
     var timefarmindex = timefarmzone.indexOf(game.global.world);
-    var timefarmlevel = daily ? getPageSetting('Rdtimefarmlevel')[timefarmindex] : getPageSetting('Rtimefarmlevel')[timefarmindex];
-    if (level) return timefarmlevel;
-    var timefarmmap = daily ? autoTrimpSettings.Rdtimefarmmap.value[timefarmindex] : autoTrimpSettings.Rtimefarmmap.value[timefarmindex];
-    if (map) return timefarmmap;
-    var timefarmspecial = daily ? autoTrimpSettings.Rdtimefarmspecial.value[timefarmindex] : autoTrimpSettings.Rtimefarmspecial.value[timefarmindex];
-    if (special) return timefarmspecial;
-    var timefarmcell = daily ? getPageSetting('Rdtimefarmcell')[timefarmindex] : getPageSetting('Rtimefarmcell')[timefarmindex];
-    var timefarmtime = daily ? getPageSetting('Rdtimefarmtime') : getPageSetting('Rtimefarmtime');
+	var timefarmlevel = daily ? getPageSetting('Rdtimefarmlevel')[timefarmindex] : getPageSetting('Rtimefarmlevel')[timefarmindex];
+	if (level) return timefarmlevel;
+	var timefarmmap = daily ? autoTrimpSettings.Rdtimefarmmap.value[timefarmindex] : autoTrimpSettings.Rtimefarmmap.value[timefarmindex];
+	if (map) return timefarmmap;
+	var timefarmspecial = daily ? autoTrimpSettings.Rdtimefarmspecial.value[timefarmindex] : autoTrimpSettings.Rtimefarmspecial.value[timefarmindex];
+	if (special) return timefarmspecial;
+	var timefarmcell = daily ? getPageSetting('Rdtimefarmcell')[timefarmindex] : getPageSetting('Rtimefarmcell')[timefarmindex];
+	var timefarmtime = daily ? getPageSetting('Rdtimefarmtime') : getPageSetting('Rtimefarmtime');
     var time = ((new Date().getTime() - game.global.zoneStarted) / 1000 / 60);
 
     var timefarmindex = timefarmzone.indexOf(game.global.world);
@@ -1965,22 +1966,6 @@ function RautoMap() {
         };
         var suffixkeys = Object.keys(suffixlist);
 
-        /*if (game.global.challengeActive != "Daily" && getPageSetting('Ronlystackedvoids') == true) {
-            for (var map in game.global.mapsOwnedArray) {
-                var theMap = game.global.mapsOwnedArray[map];
-                if (theMap.location == 'Void' && theMap.stacked > 0) {
-                    for (var pre in prefixkeys) {
-                        if (theMap.name.includes(prefixkeys[pre]))
-                            theMap.sortByDiff = 1 * prefixlist[prefixkeys[pre]];
-                    }
-                    for (var suf in suffixkeys) {
-                        if (theMap.name.includes(suffixkeys[suf]))
-                            theMap.sortByDiff += 1 * suffixlist[suffixkeys[suf]];
-                    }
-                    voidArray.push(theMap);
-                }
-            }
-        } else {*/
         for (var map in game.global.mapsOwnedArray) {
             var theMap = game.global.mapsOwnedArray[map];
             if (theMap.location == 'Void') {
@@ -1995,7 +1980,6 @@ function RautoMap() {
                 voidArray.push(theMap);
             }
         }
-        //}
 
         var voidArraySorted = voidArray.sort(function(a, b) {
             return a.sortByDiff - b.sortByDiff;
@@ -2378,7 +2362,7 @@ function RautoMap() {
             (Rshouldinsanityfarm || (Rshouldinsanityfarm && Rinsanityfragfarming)) ||
             (Rshouldalchfarm || (Rshouldalchfarm && Ralchfragfarming)) ||
             (Rshouldhypofarm || (Rshouldhypofarm && Rhypofragfarming)) ||
-            (selectedMap == game.global.currentMapId && (!getCurrentMapObject().noRecycle && (doDefaultMapBonus || RvanillaMapatZone || RdoMaxMapBonus || RshouldFarm || Rshouldtimefarm || Rdshouldtimefarm || Rshouldtributefarm || Rshoulddobogs || Rshoulddoquest > 0 || Rshouldmayhem > 0 || Rshouldpanda || Rshouldstormfarm || Rshouldequipfarm ||
+            (selectedMap == game.global.currentMapId && (!getCurrentMapObject().noRecycle && (doDefaultMapBonus || RvanillaMAZ || RdoMaxMapBonus || RshouldFarm || Rshouldtimefarm || Rdshouldtimefarm || Rshouldtributefarm || Rshoulddobogs || Rshoulddoquest > 0 || Rshouldmayhem > 0 || Rshouldpanda || Rshouldstormfarm || Rshouldequipfarm ||
                 (Rshouldshipfarm || (Rshouldshipfarm && Rshipfragfarming)))))) {
             if (!game.global.repeatMap) {
                 repeatClicked();
