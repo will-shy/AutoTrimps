@@ -2561,4 +2561,5 @@ function toggleAutoMaps() {
         }
         document.getElementById('autoMapBtn').setAttribute('class', 'noselect settingsBtn settingBtn' + autoTrimpSettings.RAutoMaps.value);
     }
+    saveSettings();
 }
