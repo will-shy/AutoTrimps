@@ -859,7 +859,6 @@ function autoMap() {
             selectedMap = "world";
         }
     }
-
 }
 
 //Radon
@@ -922,129 +921,6 @@ function RupdateAutoMapsStatus(get) {
         document.getElementById('hiderStatus').innerHTML = hiderStatus;
     }
 }
-
-//RAutoMap Global Vars
-
-var RdoVoids = false;
-var RneedToVoid = false;
-var RneedPrestige = false;
-var RshouldDoMaps = false;
-var RlastMapWeWereIn = null;
-var RdoMaxMapBonus = false;
-var RvanillaMAZ = false;
-var contractVoid = false;
-var RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
-
-var Rtimefarm = false;
-var Rdtimefarm = false;
-
-var Rshouldtimefarm = false;
-var Rdshouldtimefarm = false;
-
-var Rshouldtributefarm = false;
-
-var Rshoulddobogs = false;
-
-var Rshouldcastle = false;
-
-var Rshoulddopraid = false;
-var Rdshoulddopraid = false;
-
-var Rshoulddoquest = false;
-var Rquestequalityscale = false;
-var Rquestshieldzone = 0;
-
-var RAMPpMap1 = undefined;
-var RAMPpMap2 = undefined;
-var RAMPpMap3 = undefined;
-var RAMPpMap4 = undefined;
-var RAMPpMap5 = undefined;
-var RAMPfragmappy = undefined;
-var RAMPrepMap1 = undefined;
-var RAMPrepMap2 = undefined;
-var RAMPrepMap3 = undefined;
-var RAMPrepMap4 = undefined;
-var RAMPrepMap5 = undefined;
-var RAMPprefragmappy = undefined;
-var RAMPmapbought1 = false;
-var RAMPmapbought2 = false;
-var RAMPmapbought3 = false;
-var RAMPmapbought4 = false;
-var RAMPmapbought5 = false;
-var RAMPfragmappybought = false;
-
-var RAMPdone = false;
-var RAMPfragfarming = false;
-
-var RdAMPpMap1 = undefined;
-var RdAMPpMap2 = undefined;
-var RdAMPpMap3 = undefined;
-var RdAMPpMap4 = undefined;
-var RdAMPpMap5 = undefined;
-var RdAMPfragmappy = undefined;
-var RdAMPrepMap1 = undefined;
-var RdAMPrepMap2 = undefined;
-var RdAMPrepMap3 = undefined;
-var RdAMPrepMap4 = undefined;
-var RdAMPrepMap5 = undefined;
-var RdAMPprefragmappy = undefined;
-var RdAMPmapbought1 = false;
-var RdAMPmapbought2 = false;
-var RdAMPmapbought3 = false;
-var RdAMPmapbought4 = false;
-var RdAMPmapbought5 = false;
-var RdAMPfragmappybought = false;
-var RdAMPdone = false;
-var RdAMPfragfarming = false;
-
-var Rshouldmayhem = 0;
-var Rmayhemextraglobal = -1;
-
-var Rshouldpanda = 0;
-var Rpandaextraglobal = 1;
-
-var Rinsanityfarm = false;
-var Rshouldinsanityfarm = false;
-
-var Rinsanityfragfarming = false;
-var insanityfragmappy = undefined;
-var insanityprefragmappy = undefined;
-var insanityfragmappybought = false;
-
-var Rstormfarm = false;
-var Rshouldstormfarm = false;
-
-var Requipfarm = false;
-var Rshouldequipfarm = false;
-var Requipminusglobal = -1;
-
-var Rshipfarm = false;
-var Rshouldshipfarm = false;
-
-var Rshipfragfarming = false;
-var shipfragmappy = undefined;
-var shipprefragmappy = undefined;
-var shipfragmappybought = false;
-
-var Ralchfarm = false;
-
-var Rshouldalchfarm = false;
-var Rshouldhypofarm = false;
-
-var Ralchfragfarming = false;
-var alchfragmappy = undefined;
-var alchprefragmappy = undefined;
-var alchfragmappybought = false;
-
-var Rhypofarm = false;
-var Rshouldhypofarm = false;
-
-var Rhypofragfarming = false;
-var hypofragmappy = undefined;
-var hypoprefragmappy = undefined;
-var hypofragmappybought = false;
-
-var Rhyposhouldwood = true;
 
 //RAutoMaps
 
@@ -1211,7 +1087,6 @@ function RautoMap() {
     }
 
     //MAZ
-
     if (game.options.menu.mapAtZone.enabled && game.global.canMapAtZone) {
         let setZone = game.options.menu.mapAtZone.getSetZone();
         for (var x = 0; x < setZone.length; x++) {
