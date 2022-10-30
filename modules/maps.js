@@ -864,6 +864,15 @@ function autoMap() {
 
 //Radon
 
+MODULES.maps.RMapTierZone = [72, 47, 16];
+MODULES.maps.RMapTier0Sliders = [9, 9, 9, "Mountain"];
+MODULES.maps.RMapTier1Sliders = [9, 9, 9, "Depths"];
+MODULES.maps.RMapTier2Sliders = [9, 9, 9, "Random"];
+MODULES.maps.RMapTier3Sliders = [9, 9, 9, "Random"];
+MODULES.maps.RshouldFarmCell = 59;
+MODULES.maps.RSkipNumUnboughtPrestiges = 2;
+MODULES.maps.RUnearnedPrestigesRequired = 2;
+
 function RupdateAutoMapsStatus(get) {
 
     var status;
