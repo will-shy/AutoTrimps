@@ -1072,7 +1072,10 @@ function RtimeFarm(should, level, map, special, daily) {
 			
 	if (should && timefarmzone.includes(game.global.world)) {
         if (game.global.lastClearedCell + 2 >= timefarmcell && timezones > time && timezones > 0) {
-            daily ? Rdshouldtimefarm = true : Rshouldtimefarm = true;
+            if (daily) {
+                Rdshouldtimefarm = true;
+            }
+            else Rshouldtimefarm = true;
         }
         if (!daily && game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') != 2) {
             Rshouldtimefarm = false;
@@ -3190,7 +3193,8 @@ function RautoMap() {
                 RtimeFarmMap(true);
             }
             if (Rshouldtributefarm && !Rshoulddoquest) {
-                RributeFarmMap();
+                RtributeFarmMap();
+            }
             if (Rshoulddoquest) {
                 biomeAdvMapsSelect.value = "Plentiful";
                 if (Rshoulddoquest == 4) {
