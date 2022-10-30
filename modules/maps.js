@@ -864,115 +864,6 @@ function autoMap() {
 
 //Radon
 
-MODULES.maps.RMapTierZone = [72, 47, 16];
-MODULES.maps.RMapTier0Sliders = [9, 9, 9, "Mountain"];
-MODULES.maps.RMapTier1Sliders = [9, 9, 9, "Depths"];
-MODULES.maps.RMapTier2Sliders = [9, 9, 9, "Random"];
-MODULES.maps.RMapTier3Sliders = [9, 9, 9, "Random"];
-MODULES.maps.RshouldFarmCell = 59;
-MODULES.maps.RSkipNumUnboughtPrestiges = 2;
-MODULES.maps.RUnearnedPrestigesRequired = 2;
-
-var RdoVoids = !1;
-var RneedToVoid = !1;
-var RneedPrestige = !1;
-var RskippedPrestige = !1;
-var RscryerStuck = !1;
-var RshouldDoMaps = !1;
-var RmapTimeEstimate = 0;
-var RlastMapWeWereIn = null;
-var RdoMaxMapBonus = !1;
-var RvanillaMapatZone = !1;
-var Rtimefarm = !1;
-var Rdtimefarm = !1;
-var RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
-var Rshouldtimefarm = !1;
-var Rdshouldtimefarm = !1;
-var Rshouldtributefarm = !1;
-var Rshoulddobogs = false;
-var Rshouldcastle = false;
-var Rshoulddopraid = false;
-var Rdshoulddopraid = false;
-var Rshoulddoquest = false;
-var Rquestequalityscale = false;
-var Rquestshieldzone = 0;
-var RAMPpMap1 = undefined;
-var RAMPpMap2 = undefined;
-var RAMPpMap3 = undefined;
-var RAMPpMap4 = undefined;
-var RAMPpMap5 = undefined;
-var RAMPfragmappy = undefined;
-var RAMPrepMap1 = undefined;
-var RAMPrepMap2 = undefined;
-var RAMPrepMap3 = undefined;
-var RAMPrepMap4 = undefined;
-var RAMPrepMap5 = undefined;
-var RAMPprefragmappy = undefined;
-var RAMPmapbought1 = false;
-var RAMPmapbought2 = false;
-var RAMPmapbought3 = false;
-var RAMPmapbought4 = false;
-var RAMPmapbought5 = false;
-var RAMPfragmappybought = false;
-var RAMPdone = false;
-var RAMPfragfarming = false;
-var RdAMPpMap1 = undefined;
-var RdAMPpMap2 = undefined;
-var RdAMPpMap3 = undefined;
-var RdAMPpMap4 = undefined;
-var RdAMPpMap5 = undefined;
-var RdAMPfragmappy = undefined;
-var RdAMPrepMap1 = undefined;
-var RdAMPrepMap2 = undefined;
-var RdAMPrepMap3 = undefined;
-var RdAMPrepMap4 = undefined;
-var RdAMPrepMap5 = undefined;
-var RdAMPprefragmappy = undefined;
-var RdAMPmapbought1 = false;
-var RdAMPmapbought2 = false;
-var RdAMPmapbought3 = false;
-var RdAMPmapbought4 = false;
-var RdAMPmapbought5 = false;
-var RdAMPfragmappybought = false;
-var RdAMPdone = false;
-var RdAMPfragfarming = false;
-var Rshouldmayhem = 0;
-var Rmayhemextraglobal = -1;
-var Rshouldpanda = 0;
-var Rpandaextraglobal = 1;
-var Rinsanityfarm = !1;
-var Rshouldinsanityfarm = !1;
-var Rinsanityfragfarming = false;
-var insanityfragmappy = undefined;
-var insanityprefragmappy = undefined;
-var insanityfragmappybought = false;
-var Rstormfarm = !1;
-var Rshouldstormfarm = !1;
-var Requipfarm = !1;
-var Rshouldequipfarm = !1;
-var Requipminusglobal = -1;
-var Rshipfarm = !1;
-var Rshouldshipfarm = !1;
-var Rshipfragfarming = false;
-var shipfragmappy = undefined;
-var shipprefragmappy = undefined;
-var shipfragmappybought = false;
-var Ralchfarm = !1;
-var Rshouldalchfarm = !1;
-var Rshouldhypofarm = !1;
-var Ralchfragfarming = false;
-var alchfragmappy = undefined;
-var alchprefragmappy = undefined;
-var alchfragmappybought = false;
-var Rhypofarm = !1;
-var Rshouldhypofarm = !1;
-var Rhypofragfarming = false;
-var hypofragmappy = undefined;
-var hypoprefragmappy = undefined;
-var hypofragmappybought = false;
-var Rhyposhouldwood = true;
-var contractVoid = false;
-
 function RupdateAutoMapsStatus(get) {
 
     var status;
@@ -999,6 +890,7 @@ function RupdateAutoMapsStatus(get) {
     else if (Rshouldtributefarm) status = 'Tribute Farming';
     else if (Rshoulddobogs) status = 'Black Bogs';
     else if (RdoMaxMapBonus) status = 'Max Map Bonus After Zone';
+    else if (RvanillaMAZ) status = 'Vanilla MAZing';
     else if (!game.global.mapsUnlocked) status = '&nbsp;';
     else if (RneedPrestige && !RdoVoids) status = 'Prestige';
     else if (RdoVoids) {
@@ -1025,26 +917,171 @@ function RupdateAutoMapsStatus(get) {
     }
 }
 
+//RAutoMap Global Vars
 
+var RdoVoids = false;
+var RneedToVoid = false;
+var RneedPrestige = false;
+var RshouldDoMaps = false;
+var RlastMapWeWereIn = null;
+var RdoMaxMapBonus = false;
+var RvanillaMAZ = false;
+
+var Rtimefarm = false;
+var Rdtimefarm = false;
+
+var RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
+
+var Rshouldtimefarm = false;
+var Rdshouldtimefarm = false;
+
+var Rshouldtributefarm = false;
+
+var Rshoulddobogs = false;
+
+var Rshouldcastle = false;
+
+var Rshoulddopraid = false;
+var Rdshoulddopraid = false;
+
+var Rshoulddoquest = false;
+var Rquestequalityscale = false;
+var Rquestshieldzone = 0;
+
+var RAMPpMap1 = undefined;
+var RAMPpMap2 = undefined;
+var RAMPpMap3 = undefined;
+var RAMPpMap4 = undefined;
+var RAMPpMap5 = undefined;
+var RAMPfragmappy = undefined;
+var RAMPrepMap1 = undefined;
+var RAMPrepMap2 = undefined;
+var RAMPrepMap3 = undefined;
+var RAMPrepMap4 = undefined;
+var RAMPrepMap5 = undefined;
+var RAMPprefragmappy = undefined;
+var RAMPmapbought1 = false;
+var RAMPmapbought2 = false;
+var RAMPmapbought3 = false;
+var RAMPmapbought4 = false;
+var RAMPmapbought5 = false;
+var RAMPfragmappybought = false;
+
+var RAMPdone = false;
+var RAMPfragfarming = false;
+
+var RdAMPpMap1 = undefined;
+var RdAMPpMap2 = undefined;
+var RdAMPpMap3 = undefined;
+var RdAMPpMap4 = undefined;
+var RdAMPpMap5 = undefined;
+var RdAMPfragmappy = undefined;
+var RdAMPrepMap1 = undefined;
+var RdAMPrepMap2 = undefined;
+var RdAMPrepMap3 = undefined;
+var RdAMPrepMap4 = undefined;
+var RdAMPrepMap5 = undefined;
+var RdAMPprefragmappy = undefined;
+var RdAMPmapbought1 = false;
+var RdAMPmapbought2 = false;
+var RdAMPmapbought3 = false;
+var RdAMPmapbought4 = false;
+var RdAMPmapbought5 = false;
+var RdAMPfragmappybought = false;
+var RdAMPdone = false;
+var RdAMPfragfarming = false;
+
+var Rshouldmayhem = 0;
+var Rmayhemextraglobal = -1;
+
+var Rshouldpanda = 0;
+var Rpandaextraglobal = 1;
+
+var Rinsanityfarm = false;
+var Rshouldinsanityfarm = false;
+
+var Rinsanityfragfarming = false;
+var insanityfragmappy = undefined;
+var insanityprefragmappy = undefined;
+var insanityfragmappybought = false;
+
+var Rstormfarm = false;
+var Rshouldstormfarm = false;
+
+var Requipfarm = false;
+var Rshouldequipfarm = false;
+var Requipminusglobal = -1;
+
+var Rshipfarm = false;
+var Rshouldshipfarm = false;
+
+var Rshipfragfarming = false;
+var shipfragmappy = undefined;
+var shipprefragmappy = undefined;
+var shipfragmappybought = false;
+
+var Ralchfarm = false;
+
+var Rshouldalchfarm = false;
+var Rshouldhypofarm = false;
+
+var Ralchfragfarming = false;
+var alchfragmappy = undefined;
+var alchprefragmappy = undefined;
+var alchfragmappybought = false;
+
+var Rhypofarm = false;
+var Rshouldhypofarm = false;
+
+var Rhypofragfarming = false;
+var hypofragmappy = undefined;
+var hypoprefragmappy = undefined;
+var hypofragmappybought = false;
+
+var Rhyposhouldwood = true;
+var contractVoid = false;
+
+//RAutoMap Functions
+
+function RtimeFarm(should, level, daily) {
+    var timefarmzone = daily ? getPageSetting('Rdtimefarmzone') : getPageSetting('Rtimefarmzone');
+    var timefarmindex = timefarmzone.indexOf(game.global.world);
+	var timefarmlevel = daily ? getPageSetting('Rdtimefarmlevel')[timefarmindex] : getPageSetting('Rtimefarmlevel')[timefarmindex];
+	if (level) return timefarmlevel;
+	var timefarmcell = daily ? getPageSetting('Rdtimefarmcell')[timefarmindex] : getPageSetting('Rtimefarmcell')[timefarmindex];
+	var timefarmtime = daily ? getPageSetting('Rdtimefarmtime') : getPageSetting('Rtimefarmtime');
+    var time = ((new Date().getTime() - game.global.zoneStarted) / 1000 / 60);
+
+    var timefarmindex = timefarmzone.indexOf(game.global.world);
+    var timezones = timefarmtime[timefarmindex];
+			
+	if (should && timefarmzone.includes(game.global.world)) {
+        if (game.global.lastClearedCell + 2 >= timefarmcell && timezones > time && timezones > 0) {
+            daily ? Rdshouldtimefarm = true : Rshouldtimefarm = true;
+        }
+        if (!daily && game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') != 2) {
+            Rshouldtimefarm = false;
+        }
+    }
+}
+
+function RtimeFarmMap(daily) {
+	if (getPageSetting('Rtimefarmlevel') != 0 || (daily && getPageSetting('Rdtimefarmlevel') != 0)) {
+		levelzones = daily ? RtimeFarm(false, true, false, false, true) : RtimeFarm(false, true, false, false, false);
+        if (levelzones > 0) {
+            document.getElementById("mapLevelInput").value = game.global.world;
+            document.getElementById("advExtraLevelSelect").value = levelzones;
+        } else if (levelzones < 0) {
+            document.getElementById("mapLevelInput").value = (game.global.world + levelzones);
+        }
+    }
+    
+	biomeAdvMapsSelect.value = daily ? RtimeFarm(false, false, true, false, true) : RtimeFarm(false, false, true, false, false);
+    document.getElementById("advSpecialSelect").value = daily ? RtimeFarm(false, false, false, true, true) : RtimeFarm(false, false, false, true, false);
+    updateMapCost();
+}
 
 function RautoMap() {
-
-    //Quest
-    var Rquestfarming = false;
-    Rshoulddoquest = false;
-    Rquestfarming = (game.global.world > 5 && game.global.challengeActive == "Quest" && questcheck() > 0);
-
-    if (Rquestfarming) {
-        if (questcheck() == 3) Rshoulddoquest = 3;
-        else if (questcheck() == 4 && RcalcHDratio() > 0.95 && (((new Date().getTime() - game.global.zoneStarted) / 1000 / 60) < 121)) Rshoulddoquest = 4;
-        else if (questcheck() == 6) Rshoulddoquest = 6;
-        else if (questcheck() == 7 && !canAffordBuilding('Smithy')) Rshoulddoquest = 7;
-        else if (questcheck() == 10 || questcheck() == 20) Rshoulddoquest = 10;
-        else if (questcheck() == 11 || questcheck() == 21) Rshoulddoquest = 11;
-        else if (questcheck() == 12 || questcheck() == 22) Rshoulddoquest = 12;
-        else if (questcheck() == 13 || questcheck() == 23) Rshoulddoquest = 13;
-        else if (questcheck() == 14 || questcheck() == 24) Rshoulddoquest = 14;
-    }
 
     //Failsafes
     if (!game.global.mapsUnlocked || RcalcOurDmg("avg", false, true) <= 0 || Rshoulddoquest == 6) {
@@ -1055,16 +1092,31 @@ function RautoMap() {
         return;
     }
 
-    //Vars
+    //Calc
+    var ourBaseDamage = RcalcOurDmg("avg", false, true);
+    var ourBaseHealth = RcalcOurHealth();
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
+    var enemyHealth = RcalcEnemyHealth(game.global.world);
+
+    if (getPageSetting('RDisableFarm') > 0) {
+        RshouldFarm = (RcalcHDratio() >= getPageSetting('RDisableFarm'));
+        if (game.options.menu.repeatUntil.enabled == 1 && RshouldFarm)
+            toggleSetting('repeatUntil');
+    }
+    var hitsSurvived = 10;
+    if (getPageSetting("Rhitssurvived") > 0) hitsSurvived = getPageSetting("Rhitssurvived");
+    RenoughHealth = (ourBaseHealth > (hitsSurvived * enemyDamage));
+    RenoughDamage = (RcalcHDratio() <= mapenoughdamagecutoff);
+
+    RupdateAutoMapsStatus();
+
+    //Map Options
     var mapenoughdamagecutoff = getPageSetting("Rmapcuntoff");
     var customVars = MODULES["maps"];
     if (game.global.repeatMap == true && !game.global.mapsActive && !game.global.preMapsActive) repeatClicked();
     if ((game.options.menu.repeatUntil.enabled == 1 || game.options.menu.repeatUntil.enabled == 2 || game.options.menu.repeatUntil.enabled == 3) && !game.global.mapsActive && !game.global.preMapsActive) toggleSetting('repeatUntil');
     if (game.options.menu.exitTo.enabled != 0) toggleSetting('exitTo');
     if (game.options.menu.repeatVoids.enabled != 0) toggleSetting('repeatVoids');
-    var extraMapLevels = 0;
-    var hitsSurvived = 10;
-    if (getPageSetting("Rhitssurvived") > 0) hitsSurvived = getPageSetting("Rhitssurvived");
 
     //Void Vars
     var voidMapLevelSetting = 0;
@@ -1118,19 +1170,22 @@ function RautoMap() {
         }
     }
 
-    //Calc
-    var ourBaseDamage = RcalcOurDmg("avg", false, true);
-    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
-    var enemyHealth = RcalcEnemyHealth(game.global.world);
+    //Quest
+    var Rquestfarming = false;
+    Rshoulddoquest = false;
+    Rquestfarming = (game.global.world > 5 && game.global.challengeActive == "Quest" && questcheck() > 0);
 
-    if (getPageSetting('RDisableFarm') > 0) {
-        RshouldFarm = (RcalcHDratio() >= getPageSetting('RDisableFarm'));
-        if (game.options.menu.repeatUntil.enabled == 1 && RshouldFarm)
-            toggleSetting('repeatUntil');
+    if (Rquestfarming) {
+        if (questcheck() == 3) Rshoulddoquest = 3;
+        else if (questcheck() == 4 && RcalcHDratio() > 0.95 && (((new Date().getTime() - game.global.zoneStarted) / 1000 / 60) < 121)) Rshoulddoquest = 4;
+        else if (questcheck() == 6) Rshoulddoquest = 6;
+        else if (questcheck() == 7 && !canAffordBuilding('Smithy')) Rshoulddoquest = 7;
+        else if (questcheck() == 10 || questcheck() == 20) Rshoulddoquest = 10;
+        else if (questcheck() == 11 || questcheck() == 21) Rshoulddoquest = 11;
+        else if (questcheck() == 12 || questcheck() == 22) Rshoulddoquest = 12;
+        else if (questcheck() == 13 || questcheck() == 23) Rshoulddoquest = 13;
+        else if (questcheck() == 14 || questcheck() == 24) Rshoulddoquest = 14;
     }
-    RenoughHealth = (RcalcOurHealth() > (hitsSurvived * enemyDamage));
-    RenoughDamage = (RcalcHDratio() <= mapenoughdamagecutoff);
-    RupdateAutoMapsStatus();
 
     //Quest Shield
     if (game.global.world < 6 && (Rquestshieldzone != 0 || Rquestequalityscale != false)) {
@@ -1149,6 +1204,7 @@ function RautoMap() {
 
     //Farming
     var selectedMap = "world";
+
     RshouldDoMaps = false;
     Rshouldtimefarm = false;
     Rdshouldtimefarm = false;
@@ -1163,8 +1219,10 @@ function RautoMap() {
     contractVoid = false;
     Rshouldmayhem = 0;
     Rshouldpanda = false;
+    RvanillaMAZ = false;
+
     if (ourBaseDamage > 0) {
-        RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
+        RshouldDoMaps = (!RenoughDamage || RshouldFarm);
     }
     var shouldDoHealthMaps = false;
     if (game.global.mapBonus >= getPageSetting('RMaxMapBonuslimit') && !RshouldFarm)
@@ -1182,60 +1240,38 @@ function RautoMap() {
         RshouldDoMaps = true;
     }
 
-    //Maps
-    RvanillaMapatZone = (game.options.menu.mapAtZone.enabled && game.global.canMapAtZone);
-    if (RvanillaMapatZone) {
-        for (var x = 0; x < game.options.menu.mapAtZone.setZoneU2.length; x++) {
-            if (game.global.world == game.options.menu.mapAtZone.setZoneU2[x].world)
-                RshouldDoMaps = true;
+    //MAZ
+    if (game.options.menu.mapAtZone.enabled && game.global.canMapAtZone) {
+        for (const option of game.options.menu.mapAtZone.setZone) {
+            if (z < option.world || z > option.through) {
+                continue;
+            }
+            if (option.times === -1 && z !== option.world) {
+                continue;
+            }
+            if (option.times > 0 && (z - option.world) % option.times !== 0) {
+                continue;
+            }
+            if (option.cell === game.global.lastClearedCell + 2) {
+                RvanillaMAZ = true;
+                break;
+            }
+        }
+
+        //MAZ is active
+        if (RvanillaMAZ) {
+            return updateAutoMapsStatus(false);
         }
     }
 
     //Time Farm
     if (getPageSetting('Rtimefarm') || (game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') == 2)) {
-        var timefarmzone = getPageSetting('Rtimefarmzone');
-        if (timefarmzone.includes(game.global.world)) {
-            var timefarmzone;
-            var timefarmtime;
-            var timefarmindex = timefarmzone.indexOf(game.global.world);
-            var timefarmcell = getPageSetting('Rtimefarmcell')[timefarmindex];
-            var time = ((new Date().getTime() - game.global.zoneStarted) / 1000 / 60);
-
-            timefarmzone = getPageSetting('Rtimefarmzone');
-            timefarmtime = getPageSetting('Rtimefarmtime');
-
-            var timefarmindex = timefarmzone.indexOf(game.global.world);
-            var timezones = timefarmtime[timefarmindex];
-
-            if (game.global.lastClearedCell + 2 >= timefarmcell && timezones > time && timezones > 0) {
-                Rshouldtimefarm = true;
-            }
-            if (game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') != 2) {
-                Rshouldtimefarm = false;
-            }
-        }
+        RtimeFarm(true, false, false, false, false);
     }
 
     //dTime Farm
     if (game.global.challengeActive == 'Daily' && getPageSetting('Rdtimefarm') == 1) {
-        var dtimefarmzone = getPageSetting('Rdtimefarmzone');
-        if (dtimefarmzone.includes(game.global.world)) {
-            var dtimefarmzone;
-            var dtimefarmtime;
-            var dtimefarmindex = dtimefarmzone.indexOf(game.global.world);
-            var dtimefarmcell = getPageSetting('Rdtimefarmcell')[dtimefarmindex];
-            var dtime = ((new Date().getTime() - game.global.zoneStarted) / 1000 / 60);
-
-            dtimefarmzone = getPageSetting('Rdtimefarmzone');
-            dtimefarmtime = getPageSetting('Rdtimefarmtime');
-
-            var dtimefarmindex = dtimefarmzone.indexOf(game.global.world);
-            var dtimezones = dtimefarmtime[dtimefarmindex];
-
-            if (game.global.lastClearedCell + 2 >= dtimefarmcell && dtimezones > dtime && dtimezones > 0) {
-                Rdshouldtimefarm = true;
-            }
-        }
+        RtimeFarm(true, false, false, false, true);
     }
 
     //Tribute Farm
@@ -2196,9 +2232,7 @@ function RautoMap() {
                         }
                     }
                 } else if (getPageSetting('Rtimefarmlevel') != 0) {
-                    var timefarmlevel = getPageSetting('Rtimefarmlevel');
-                    var timefarmlevelindex = timefarmzone.indexOf(game.global.world);
-                    var levelzones = timefarmlevel[timefarmlevelindex];
+                    var levelzones = RtimeFarm(false, true, false, false, false);
                     if (levelzones > 0) {
                         for (var map in game.global.mapsOwnedArray) {
                             if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
@@ -2239,9 +2273,7 @@ function RautoMap() {
                         }
                     }
                 } else if (getPageSetting('Rdtimefarmlevel') != 0) {
-                    var dtimefarmlevel = getPageSetting('Rdtimefarmlevel');
-                    var dtimefarmlevelindex = dtimefarmzone.indexOf(game.global.world);
-                    var dlevelzones = dtimefarmlevel[dtimefarmlevelindex];
+                    var dlevelzones = RtimeFarm(false, true, false, false, true);
                     if (dlevelzones > 0) {
                         for (var map in game.global.mapsOwnedArray) {
                             if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + dlevelzones) == game.global.mapsOwnedArray[map].level)) {
@@ -3119,46 +3151,10 @@ function RautoMap() {
                 updateMapCost();
             }
             if (Rshouldtimefarm && !Rdshouldtimefarm && !Rshouldtributefarm && !Rshoulddoquest) {
-                if (getPageSetting('Rtimefarmlevel') != 0) {
-
-                    var timefarmlevel = getPageSetting('Rtimefarmlevel');
-
-                    var timefarmlevelindex = timefarmzone.indexOf(game.global.world);
-                    var levelzones = timefarmlevel[timefarmlevelindex];
-
-                    if (timefarmzone.includes(game.global.world)) {
-                        if (levelzones > 0) {
-                            document.getElementById("mapLevelInput").value = game.global.world;
-                            document.getElementById("advExtraLevelSelect").value = levelzones;
-                        } else if (levelzones < 0) {
-                            document.getElementById("mapLevelInput").value = (game.global.world - 1);
-                        }
-                    }
-                }
-                biomeAdvMapsSelect.value = autoTrimpSettings.Rtimefarmmap.value[timefarmlevelindex];
-                document.getElementById("advSpecialSelect").value = autoTrimpSettings.Rtimefarmspecial.value[timefarmlevelindex];
-                updateMapCost();
+                RtimeFarmMap(false);
             }
             if (Rdshouldtimefarm && !Rshouldtributefarm && !Rshoulddoquest) {
-                if (getPageSetting('Rdtimefarmlevel') != 0) {
-
-                    var dtimefarmlevel = getPageSetting('Rdtimefarmlevel');
-
-                    var dtimefarmlevelindex = dtimefarmzone.indexOf(game.global.world);
-                    var dlevelzones = dtimefarmlevel[dtimefarmlevelindex];
-
-                    if (dtimefarmzone.includes(game.global.world)) {
-                        if (dlevelzones > 0) {
-                            document.getElementById("mapLevelInput").value = game.global.world;
-                            document.getElementById("advExtraLevelSelect").value = dlevelzones;
-                        } else if (dlevelzones < 0) {
-                            document.getElementById("mapLevelInput").value = (game.global.world - 1);
-                        }
-                    }
-                }
-                biomeAdvMapsSelect.value = autoTrimpSettings.Rdtimefarmmap.value[dtimefarmlevelindex];
-                document.getElementById("advSpecialSelect").value = autoTrimpSettings.Rdtimefarmspecial.value[dtimefarmlevelindex];
-                updateMapCost();
+                RtimeFarmMap(true);
             }
             if (Rshouldtributefarm && !Rshoulddoquest) {
                 if (getPageSetting('Rtributefarmlevel') != 0) {
