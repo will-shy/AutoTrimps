@@ -1309,12 +1309,11 @@ function RautoMap() {
         let setZone = game.options.menu.mapAtZone.getSetZone();
         for (var x = 0; x < setZone.length; x++) {
             if (!setZone[x].on) continue;
-            //if (option.done === getTotalPortals() + "_" + game.global.world + "_" + option.cell) continue;
             if (game.global.world < setZone[x].world || game.global.world > setZone[x].through) continue;
             if (setZone[x].times === -1 && game.global.world !== setZone[x].world) continue;
             if (setZone[x].times > 0 && (game.global.world - setZone[x].world) % setZone[x].times !== 0) continue;
             if (setZone[x].cell === game.global.lastClearedCell + 2) {
-                rVanillaMAZ = true;
+                RvanillaMAZ = true;
                 if (setZone.until == 6) game.global.mapCounterGoal = 25;
                 if (setZone.until == 7) game.global.mapCounterGoal = 50;
                 if (setZone.until == 8) game.global.mapCounterGoal = 100;
