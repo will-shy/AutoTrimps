@@ -2357,7 +2357,8 @@ function RautoMap() {
     //Getting to Map Creation and Repeat.
     if (!game.global.preMapsActive && game.global.mapsActive) {
         var doDefaultMapBonus = game.global.mapBonus < getPageSetting('RMaxMapBonuslimit') - 1;
-        if ((Rshoulddopraid || (Rshoulddopraid && RAMPfragfarming)) ||
+        if ((RvanillaMAZ) ||
+            (Rshoulddopraid || (Rshoulddopraid && RAMPfragfarming)) ||
             (Rdshoulddopraid || (Rdshoulddopraid && RdAMPfragfarming)) ||
             (Rshouldinsanityfarm || (Rshouldinsanityfarm && Rinsanityfragfarming)) ||
             (Rshouldalchfarm || (Rshouldalchfarm && Ralchfragfarming)) ||
