@@ -1265,7 +1265,7 @@ function RautoMap() {
     //Uniques
     var runUniques = (getPageSetting('RAutoMaps') == 1);
     if (runUniques || Rshoulddobogs || Rshouldcastle) {
-        if (Runqiues() != false) selectedMap = Runiques();
+        if (Runiques() != false) selectedMap = Runiques();
     }
 
     //Voids
