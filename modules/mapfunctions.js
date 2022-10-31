@@ -1418,6 +1418,7 @@ function RequipExtra() {
 //Unqiues
 
 function Runiques() {
+    var runUniques = (getPageSetting('RAutoMaps') == 1);
     var selectedMap = false;
     for (var map in game.global.mapsOwnedArray) {
         var theMap = game.global.mapsOwnedArray[map];
