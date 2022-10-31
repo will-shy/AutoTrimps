@@ -1603,7 +1603,7 @@ function RautoMap() {
                         }
                     } else if (levelzones < 0) {
                         for (var map in game.global.mapsOwnedArray) {
-                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world - 1) == game.global.mapsOwnedArray[map].level)) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
                                 selectedMap = game.global.mapsOwnedArray[map].id;
                                 break;
                             } else {
@@ -1644,7 +1644,7 @@ function RautoMap() {
                         }
                     } else if (dlevelzones < 0) {
                         for (var map in game.global.mapsOwnedArray) {
-                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world - 1) == game.global.mapsOwnedArray[map].level)) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + dlevelzones) == game.global.mapsOwnedArray[map].level)) {
                                 selectedMap = game.global.mapsOwnedArray[map].id;
                                 break;
                             } else {
@@ -1675,7 +1675,7 @@ function RautoMap() {
                     }
                 } else if (levelzones < 0) {
                     for (var map in game.global.mapsOwnedArray) {
-                        if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world - 1) == game.global.mapsOwnedArray[map].level)) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
                             selectedMap = game.global.mapsOwnedArray[map].id;
                             break;
                         } else {
