@@ -1265,7 +1265,50 @@ function RautoMap() {
     //Uniques
     var runUniques = (getPageSetting('RAutoMaps') == 1);
     if (runUniques || Rshoulddobogs || Rshouldcastle) {
-        if (Runiques() != false) selectedMap = Runiques();
+         for (var map in game.global.mapsOwnedArray) {
+            var theMap = game.global.mapsOwnedArray[map];
+            if (Rshoulddobogs && theMap.name == 'The Black Bog') {
+                selectedMap = theMap.id;
+                break;
+            } else if (runUniques && theMap.noRecycle) {
+                if (theMap.name == 'Big Wall' && !game.upgrades.Bounty.allowed && !game.upgrades.Bounty.done && game.global.highestRadonLevelCleared < 40) {
+                    if (game.global.world < 8 && RcalcHDratio() > 4) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                if (theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && game.upgrades.Rage.done == 1) {
+                    if (game.global.challenge != "Unlucky" && (game.global.world < 16 || RcalcHDratio() < 2)) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                if (getPageSetting('Rprispalace') == true && theMap.name == 'Prismatic Palace' && game.mapUnlocks.Prismalicious.canRunOnce) {
+                    if (game.global.world < 21 || RcalcHDratio() > 25) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                var meltingpoint = [10000, 10000];
+                if (getPageSetting('Rmeltpoint')[0] > 0 && getPageSetting('Rmeltpoint')[1] >= 0) meltingpoint = getPageSetting('Rmeltpoint');
+                if (theMap.name == 'Melting Point' && ((game.global.challengeActive == "Trappapalooza" && game.global.world >= meltingpoint[0] && ((game.global.lastClearedCell + 1) >= meltingpoint[1])) || (game.global.challengeActive == "Melt" && game.global.world >= meltingpoint[0] && ((game.global.lastClearedCell + 1) >= meltingpoint[1])) || (getPageSetting('Rmeltsmithy') > 0 && getPageSetting('Rmeltsmithy') <= game.buildings.Smithy.owned && game.mapUnlocks.SmithFree.canRunOnce))) {
+                    if (game.global.world < 50 || (game.global.world == 50 && game.global.lastClearedCell < 55)) continue;
+                    selectedMap = theMap.id;
+                    break;
+                }
+                if (game.global.challengeActive == "Hypothermia" && getPageSetting('Rhypocastle') > 0 && theMap.name == 'Frozen Castle' && game.global.world >= getPageSetting('Rhypocastle')) {
+                    if (getPageSetting('Rhypovoids') == true && game.global.totalVoidMaps <= 0) {
+                        selectedMap = theMap.id;
+                        break;
+                    }
+                    if (getPageSetting('Rhypovoids') == false) {
+                        selectedMap = theMap.id;
+                        break;
+                    }
+                }
+                if (game.global.challengeActive != "Hypothermia" && getPageSetting('Rfrozencastle') != -1 && theMap.name == 'Frozen Castle' && game.global.world >= getPageSetting('Rfrozencastle')[0] && ((game.global.lastClearedCell + 1) >= getPageSetting('Rfrozencastle')[1])) {
+                    selectedMap = theMap.id;
+                    break;
+                }
+            }
+        }
     }
 
     //Voids
