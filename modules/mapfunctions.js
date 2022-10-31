@@ -1075,7 +1075,7 @@ function RshipMap() {
 
         var shiplevelzones = Rship(false, true, false);
 
-        if (shipfarmzone.includes(game.global.world)) {
+        if (Rshouldshipfarm) {
             if (shiplevelzones > 0) {
                 shipfragmin(shiplevelzones);
                 document.getElementById("mapLevelInput").value = game.global.world;
