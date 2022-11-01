@@ -1374,7 +1374,7 @@ function RautoMap() {
     }
 
     //Everything else - mostly stuff from mapfunctions.js but also some important bits like voids or general farming
-    RselectMap(selectedMap);
+    selectedMap = RselectMap(selectedMap);
 
     //Getting to Map Creation and Repeat.
     if (!game.global.preMapsActive && game.global.mapsActive) {
