@@ -177,6 +177,9 @@ function mainLoop() {
             setScienceNeeded();
             autoLevelEquipment();
         }
+        
+        //Heirloom Shield Swap Check
+		if (shieldEquipped !== game.global.ShieldEquipped.id) HeirloomShieldSwapped();
 
         //Core
         if (getPageSetting('AutoMaps') > 0 && game.global.mapsUnlocked) autoMap();
@@ -273,6 +276,9 @@ function mainLoop() {
         if (!usingRealTimeOffline) {
             RsetScienceNeeded();
         }
+        
+        //Heirloom Shield Swap Check
+		if (shieldEquipped !== game.global.ShieldEquipped.id) HeirloomShieldSwapped();
 
         if (!(game.global.challengeActive == "Quest" && game.global.world > 5 && game.global.lastClearedCell < 90 && ([14, 24].indexOf(questcheck()) >= 0))) {
             if (getPageSetting('RBuyUpgradesNew') != 0) RbuyUpgrades();
