@@ -1792,6 +1792,7 @@ function RselectMap(map) {
                 }
             }
         }
+        else selectedMap = map;
     }
     if (selectedMap != null) return selectedMap;
     else return "world";
