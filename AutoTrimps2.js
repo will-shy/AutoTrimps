@@ -133,6 +133,10 @@ var magmiteSpenderChanged = false;
 var lastHeliumZone = 0;
 var lastRadonZone = 0;
 
+//Get Gamma burst % value
+gammaBurstPct = (getHeirloomBonus("Shield", "gammaBurst") / 100) > 0 ? (getHeirloomBonus("Shield", "gammaBurst") / 100) : 1;
+shieldEquipped = game.global.ShieldEquipped.id;
+
 function mainLoop() {
     if (ATrunning == false) return;
     if (getPageSetting('PauseScript') || game.options.menu.pauseGame.enabled || game.global.viewingUpgrades) return;
