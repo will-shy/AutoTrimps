@@ -324,12 +324,12 @@ function calcOurDmg(minMaxAvg, incStance, incFlucts) {
     // Gamma Burst
     if (autoBattle.oneTimers.Burstier.owned == false) {
         if (gammaBurstPct > 0 && (calcOurHealth() / (calcBadGuyDmg(null, getEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 5)) {
-		attack *= (gammaBurstPct + 1) / 5;
+		number *= (gammaBurstPct + 1) / 5;
 	}
     }
     if (autoBattle.oneTimers.Burstier.owned == true) {
         if (gammaBurstPct > 0 && (calcOurHealth() / (calcBadGuyDmg(null, getEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 4)) {
-		attack *= (gammaBurstPct + 1) / 4;
+		number *= (gammaBurstPct + 1) / 4;
 	}
     }
 
@@ -1207,12 +1207,12 @@ function RcalcOurDmg(minMaxAvg, equality) {
     // Gamma Burst
     if (autoBattle.oneTimers.Burstier.owned == false) {
         if (gammaBurstPct > 0 && (RcalcOurHealth() / (RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 5)) {
-		attack *= (gammaBurstPct + 1) / 5;
+		number *= (gammaBurstPct + 1) / 5;
 	}
     }
     if (autoBattle.oneTimers.Burstier.owned == true) {
         if (gammaBurstPct > 0 && (RcalcOurHealth() / (RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 4)) {
-		attack *= (gammaBurstPct + 1) / 4;
+		number *= (gammaBurstPct + 1) / 4;
 	}
     }
 
