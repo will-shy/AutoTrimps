@@ -1,4 +1,4 @@
-//### RAutoMap Global Vars
+//### RAutoMap Global VarsRshouldDoMaps
 var RshouldFarm = false;
 var RdoVoids = false;
 var RneedToVoid = false;
@@ -1422,4 +1422,377 @@ function RequipExtra() {
         }
     }
     return equipminus;
+}
+
+function Rshould(any, one) {
+    if (any) {
+        if (!Rshoulddopraid && !Rdshoulddopraid 
+        && (RshouldDoMaps || 
+            RdoVoids || 
+            Rshouldtimefarm || 
+            Rdshouldtimefarm || 
+            Rshouldtributefarm || 
+            Rshoulddoquest > 0 || 
+            Rshouldmayhem > 0 || 
+            Rshouldpanda || 
+            Rshouldinsanityfarm || 
+            Rshouldstormfarm || 
+            Rshouldequipfarm || 
+            Rshouldshipfarm || 
+            Rshouldalchfarm || 
+            Rshouldhypofarm)
+        ) return true;
+        else return false;
+    }
+    
+    var should = "no";
+    if (one && !Rshoulddopraid && !Rdshoulddopraid) {
+        if (Rshouldmayhem) should = "mayhem";
+        else if (Rshouldpanda) should = "panda";
+        else if (Rshouldinsanityfarm) should = "insanity";
+        else if (Rshouldalchfarm) should = "alch";
+        else if (Rshouldhypofarm) should = "hypo";
+        else if (Rshouldshipfarm) should = "ship";
+        else if (Rshouldtimefarm) should = "time";
+        else if (Rdshouldtimefarm) should = "dtime";
+        else if (Rshouldtributefarm) should = "tribute";
+        else if (Rshouldequipfarm) should = "equip";
+    }
+    if (should != "no") return should;
+}
+
+function RselectMap(map) {
+    var selectedMap = null;
+    if (Rshould(true, false)) {
+        if (map == "world") {
+            if (Rshould(false, true) == "mayhem") {
+                if (getPageSetting('Rmayhemmap') == 2) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && RmayhemExtra() >= 0 && ((game.global.world + RmayhemExtra()) == game.global.mapsOwnedArray[map].level)) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "panda") {
+                if (getPageSetting('Rpandamaps') == true) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && RpandaExtra() >= 0 && ((game.global.world + RpandaExtra()) == game.global.mapsOwnedArray[map].level)) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "insanity") {
+                if (getPageSetting('Rinsanityfarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rinsanityfarmlevel') != 0) {
+                    var insanitylevelzones = Rinsanity(false, true, false);
+                    if (insanitylevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + insanitylevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (insanitylevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (insanitylevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + insanitylevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "alch") {
+                if (getPageSetting('Ralchfarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Ralchfarmlevel') != 0) {
+                    var alchlevelzones = Ralch(false, true, false);
+                    if (alchlevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + alchlevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (alchlevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (alchlevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + alchlevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "hypo") {
+                if (getPageSetting('Rhypofarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rhypofarmlevel') != 0) {
+                    var hypolevelzones = Rhypo(false, true, false);
+                    if (hypolevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + hypolevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (hypolevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (hypolevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + hypolevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "ship") {
+                if (getPageSetting('Rshipfarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level && game.global.mapsOwnedArray[map].bonus == "lsc") {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rshipfarmlevel') != 0) {
+                    var shiplevelzones = Rship(false, true, false);
+                    if (shiplevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level) && game.global.mapsOwnedArray[map].bonus == "lsc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (shiplevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level && game.global.mapsOwnedArray[map].bonus == "lsc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (shiplevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + shiplevelzones) == game.global.mapsOwnedArray[map].level) && game.global.mapsOwnedArray[map].bonus == "lsc") {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "time") {
+                if (getPageSetting('Rtimefarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rtimefarmlevel') != 0) {
+                    var levelzones = RtimeFarm(false, true, false, false, false);
+                    if (levelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (levelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (levelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "dtime") {
+                if (getPageSetting('Rdtimefarmlevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rdtimefarmlevel') != 0) {
+                    var dlevelzones = RtimeFarm(false, true, false, false, true);
+                    if (dlevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + dlevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (dlevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (dlevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + dlevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                                break;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "tribute") {
+                var levelzones = RtributeFarm(false, true, false, false);
+                if (levelzones > 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (levelzones == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (levelzones < 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + levelzones) == game.global.mapsOwnedArray[map].level)) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                            break;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                }
+            } else if (Rshould(false, true) == "equip") {
+                for (var map in game.global.mapsOwnedArray) {
+                    if (!game.global.mapsOwnedArray[map].noRecycle && RequipExtra() <= 0 && ((game.global.world + RequipExtra()) == game.global.mapsOwnedArray[map].level)) {
+                        selectedMap = game.global.mapsOwnedArray[map].id;
+                        break;
+                    } else {
+                        selectedMap = "create";
+                    }
+                }
+            } else {
+                for (var map in game.global.mapsOwnedArray) {
+                    if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                        selectedMap = game.global.mapsOwnedArray[map].id;
+                        break;
+                    } else {
+                        selectedMap = "create";
+                    }
+                }
+            }
+        }
+    }
+    if (selectedMap != null) return selectedMap;
+    else return "world";
 }
