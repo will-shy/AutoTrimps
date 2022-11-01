@@ -731,13 +731,16 @@ function RmayhemExtra() {
     var mayhemextra = 0;
     if (Rshouldmayhem > 0 && getPageSetting('Rmayhemmap') == 2) {
         mayhemextra = 0;
+        var health = (RcalcOurHealth() * 2);
+        var attack = RcalcOurDmg("avg", false, true);
+        var boss = game.challenges.Mayhem.getBossMult();
         var hitsmap = (getPageSetting('Rmayhemamcut') > 0) ? getPageSetting('Rmayhemamcut') : 100;
         var hitssurv = (getPageSetting('Rmayhemhcut') > 0) ? getPageSetting('Rmayhemhcut') : 1;
         var mlevels = 6;
         var go = false;
         if (
-            (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-            ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+            (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+            ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
         ) {
             mayhemextra = mlevels;
             go = true;
@@ -745,8 +748,8 @@ function RmayhemExtra() {
         if (!go) {
             mlevels = 5;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
             ) {
                 mayhemextra = mlevels;
                 go = true;
@@ -755,8 +758,8 @@ function RmayhemExtra() {
         if (!go) {
             mlevels = 4;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
             ) {
                 mayhemextra = mlevels;
                 go = true;
@@ -765,8 +768,8 @@ function RmayhemExtra() {
         if (!go) {
             mlevels = 3;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
             ) {
                 mayhemextra = mlevels;
                 go = true;
@@ -775,8 +778,8 @@ function RmayhemExtra() {
         if (!go) {
             mlevels = 2;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
             ) {
                 mayhemextra = mlevels;
                 go = true;
@@ -785,8 +788,8 @@ function RmayhemExtra() {
         if (!go) {
             mlevels = 1;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Mayhem.getBossMult())) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Mayhem.getBossMult() * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss)) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss * 1.3) * (hitssurv)) <= health)
             ) {
                 mayhemextra = mlevels;
                 go = true;
@@ -806,13 +809,17 @@ function RpandaExtra() {
     var pandaextra = 1;
     if (Rshouldpanda == true && getPageSetting('Rpandamaps') == true) {
         pandaextra = 1;
+        var health = (RcalcOurHealth() * 2);
+        var attack = RcalcOurDmg("avg", false, true);
+        var mult = (game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult());
+        var boss = game.challenges.Pandemonium.getBossMult();
         var hitsmap = (getPageSetting('Rpandahits') > 0) ? getPageSetting('Rpandahits') : 10;
         var hitssurv = 1;
         var mlevels = 6;
         var go = false;
         if (
-            (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-            ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+            (((RcalcEnemyHealth(game.global.world + mlevels) / boss) * mult) <= (attack * (hitsmap * (mlevels + 1)))) &&
+            ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss) * mult) * 1.3) * (hitssurv)) <= health)
         ) {
             pandaextra = mlevels;
             go = true;
@@ -820,8 +827,8 @@ function RpandaExtra() {
         if (!go) {
             mlevels = 5;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss) * mult) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss) * mult) * 1.3) * (hitssurv)) <= health)
             ) {
                 pandaextra = mlevels;
                 go = true;
@@ -830,8 +837,8 @@ function RpandaExtra() {
         if (!go) {
             mlevels = 4;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss) * mult) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss) * mult) * 1.3) * (hitssurv)) <= health)
             ) {
                 pandaextra = mlevels;
                 go = true;
@@ -840,8 +847,8 @@ function RpandaExtra() {
         if (!go) {
             mlevels = 3;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss) * mult) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss) * mult) * 1.3) * (hitssurv)) <= health)
             ) {
                 pandaextra = mlevels;
                 go = true;
@@ -850,8 +857,8 @@ function RpandaExtra() {
         if (!go) {
             mlevels = 2;
             if (
-                (((RcalcEnemyHealth(game.global.world + mlevels) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) <= (RcalcOurDmg("avg", false, true) * (hitsmap * (mlevels + 1)))) &&
-                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / game.challenges.Pandemonium.getBossMult()) * game.challenges.Pandemonium.getEnemyMult() * game.challenges.Pandemonium.getPandMult()) * 1.3) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                (((RcalcEnemyHealth(game.global.world + mlevels) / boss) * mult) <= (attack * (hitsmap * (mlevels + 1)))) &&
+                ((((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) / boss) * mult) * 1.3) * (hitssurv)) <= health)
             ) {
                 pandaextra = mlevels;
                 go = true;
@@ -1346,13 +1353,15 @@ function RequipExtra() {
     var equipminus = 0;
     if (Rshouldequipfarm) {
         equipminus = 0;
+        var health = (RcalcOurHealth() * 2);
+        var attack = RcalcOurDmg("avg", false, true);
         var hits = (getPageSetting('Requipfarmhits') > 0) ? getPageSetting('Requipfarmhits') : 10;
         var hitssurv = (getPageSetting('Rhitssurvived') > 0) ? getPageSetting('Rhitssurvived') : 1;
         var mlevels = 0;
         var go = false;
         if (
-            ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-            ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+            ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+            ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
         ) {
             equipminus = mlevels;
             go = true;
@@ -1360,8 +1369,8 @@ function RequipExtra() {
         if (!go) {
             mlevels = -1;
             if (
-                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
             ) {
                 equipminus = mlevels;
                 go = true;
@@ -1370,8 +1379,8 @@ function RequipExtra() {
         if (!go) {
             mlevels = -2;
             if (
-                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
             ) {
                 equipminus = mlevels;
                 go = true;
@@ -1380,8 +1389,8 @@ function RequipExtra() {
         if (!go) {
             mlevels = -3;
             if (
-                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
             ) {
                 equipminus = mlevels;
                 go = true;
@@ -1390,8 +1399,8 @@ function RequipExtra() {
         if (!go) {
             mlevels = -4;
             if (
-                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
             ) {
                 equipminus = mlevels;
                 go = true;
@@ -1400,8 +1409,8 @@ function RequipExtra() {
         if (!go) {
             mlevels = -5;
             if (
-                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (RcalcOurDmg("avg", false, true) * hits)) &&
-                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (RcalcOurHealth() * 2))
+                ((RcalcEnemyHealth(game.global.world + mlevels)) <= (attack * hits)) &&
+                ((((RcalcBadGuyDmg(null, RgetEnemyMaxAttack((game.global.world + mlevels), 20, 'Snimp', 1.0))) * 0.8) * (hitssurv)) <= (health))
             ) {
                 equipminus = mlevels;
                 go = true;
