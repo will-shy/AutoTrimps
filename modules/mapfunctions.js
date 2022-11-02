@@ -131,6 +131,140 @@ var hypofragmappy = undefined;
 var hypoprefragmappy = undefined;
 var hypofragmappybought = false;
 
+function RresetVars() {
+    RshouldFarm = false;
+    RdoVoids = false;
+    RneedToVoid = false;
+    RneedPrestige = false;
+    RshouldDoMaps = false;
+    RlastMapWeWereIn = null;
+    RdoMaxMapBonus = false;
+    RvanillaMAZ = false;
+    contractVoid = false;
+    RadditionalCritMulti = 2 < getPlayerCritChance() ? 25 : 5;
+
+    //### Quest
+    Rshoulddoquest = false;
+    Rquestequalityscale = false;
+    Rquestshieldzone = 0;
+
+    //### Map Modules
+
+    //Time Farm
+    Rtimefarm = false;
+    Rshouldtimefarm = false;
+
+    //dTime Farm
+    Rdtimefarm = false;
+    Rdshouldtimefarm = false;
+
+    //Tribute
+    Rshouldtributefarm = false;
+
+    //Bog
+    Rshoulddobogs = false;
+
+    //Frozen Castle
+    Rshouldcastle = false;
+
+    //Praid
+    Rshoulddopraid = false;
+    RAMPpMap1 = undefined;
+    RAMPpMap2 = undefined;
+    RAMPpMap3 = undefined;
+    RAMPpMap4 = undefined;
+    RAMPpMap5 = undefined;
+    RAMPfragmappy = undefined;
+    RAMPrepMap1 = undefined;
+    RAMPrepMap2 = undefined;
+    RAMPrepMap3 = undefined;
+    RAMPrepMap4 = undefined;
+    RAMPrepMap5 = undefined;
+    RAMPprefragmappy = undefined;
+    RAMPmapbought1 = false;
+    RAMPmapbought2 = false;
+    RAMPmapbought3 = false;
+    RAMPmapbought4 = false;
+    RAMPmapbought5 = false;
+    RAMPfragmappybought = false;
+    RAMPdone = false;
+    RAMPfragfarming = false;
+
+    //dPraid
+    Rdshoulddopraid = false;
+    RdAMPpMap1 = undefined;
+    RdAMPpMap2 = undefined;
+    RdAMPpMap3 = undefined;
+    RdAMPpMap4 = undefined;
+    RdAMPpMap5 = undefined;
+    RdAMPfragmappy = undefined;
+    RdAMPrepMap1 = undefined;
+    RdAMPrepMap2 = undefined;
+    RdAMPrepMap3 = undefined;
+    RdAMPrepMap4 = undefined;
+    RdAMPrepMap5 = undefined;
+    RdAMPprefragmappy = undefined;
+    RdAMPmapbought1 = false;
+    RdAMPmapbought2 = false;
+    RdAMPmapbought3 = false;
+    RdAMPmapbought4 = false;
+    RdAMPmapbought5 = false;
+    RdAMPfragmappybought = false;
+    RdAMPdone = false;
+    RdAMPfragfarming = false;
+
+    //Mayhem
+    Rshouldmayhem = 0;
+    Rmayhemextraglobal = -1;
+
+    //Panda
+    Rshouldpanda = 0;
+    Rpandaextraglobal = 1;
+
+    //Insanity
+    Rinsanityfarm = false;
+    Rshouldinsanityfarm = false;
+    Rinsanityfragfarming = false;
+    insanityfragmappy = undefined;
+    insanityprefragmappy = undefined;
+    insanityfragmappybought = false;
+
+    //Storm
+    Rstormfarm = false;
+    Rshouldstormfarm = false;
+
+    //Equip Farm
+    Requipfarm = false;
+    Rshouldequipfarm = false;
+    Requipminusglobal = -1;
+
+    //Ships
+    Rshipfarm = false;
+    Rshouldshipfarm = false;
+    Rshipfragfarming = false;
+    shipfragmappy = undefined;
+    shipprefragmappy = undefined;
+    shipfragmappybought = false;
+
+    //Alch
+    Ralchfarm = false;
+    Rshouldalchfarm = false;
+    Rshouldhypofarm = false;
+    Ralchfragfarming = false;
+    alchfragmappy = undefined;
+    alchprefragmappy = undefined;
+    alchfragmappybought = false;
+
+    //Hypo
+    Rhypofarm = false;
+    Rhyposhouldwood = true;
+    Rshouldhypofarm = false;
+    Rhypofragfarming = false;
+    hypofragmappy = undefined;
+    hypoprefragmappy = undefined;
+    hypofragmappybought = false;
+}
+
 
 //###RAutoMap Functions
 
