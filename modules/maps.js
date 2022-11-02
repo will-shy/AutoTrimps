@@ -1373,7 +1373,7 @@ function RautoMap() {
 
     //Repeat
     if (!game.global.preMapsActive && game.global.mapsActive) {
-        RmapRepeat(selectedMap, restartVoidMap);
+        RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap);
     }
 
     //Maps please
