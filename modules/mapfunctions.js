@@ -1798,7 +1798,7 @@ function RselectMap(map) {
     else return "world";
 }
 
-function RmapRepeat(selectedMap, restartVoidMap) {
+function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
     var doDefaultMapBonus = game.global.mapBonus < getPageSetting('RMaxMapBonuslimit') - 1;
     if ((RvanillaMAZ) ||
         (Rshoulddopraid || (Rshoulddopraid && RAMPfragfarming)) ||
