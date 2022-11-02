@@ -1384,6 +1384,7 @@ function RautoMap() {
     }
 
     //### Creating Map Section
+
     else if (game.global.preMapsActive) {
 
         //Back to world
@@ -1516,7 +1517,7 @@ function RautoMap() {
                 }
             }
 
-            //We created the map, selectedMap is the map we want
+        //We created the map, selectedMap is the map we want
         } else {
             selectMap(selectedMap);
             var themapobj = game.global.mapsOwnedArray[getMapIndex(selectedMap)];
