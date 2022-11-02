@@ -1598,7 +1598,7 @@ function Rshould(any, one) {
 
 function RselectMap(selectedMap) {
     if (Rshould(true, false)) {
-        if (map == "world") {
+        if (selectedMap == "world") {
             if (Rshould(false, true) == "mayhem") {
                 if (getPageSetting('Rmayhemmap') == 2) {
                     for (var map in game.global.mapsOwnedArray) {
