@@ -1462,10 +1462,9 @@ function Rshould(any, one) {
     if (should != "no") return should;
 }
 
-function RselectMap(map) {
-    var selectedMap = null;
+function RselectMap(selectedMap) {
     if (Rshould(true, false)) {
-        if (map == "world") {
+        if (selectedMap == "world") {
             if (Rshould(false, true) == "mayhem") {
                 if (getPageSetting('Rmayhemmap') == 2) {
                     for (var map in game.global.mapsOwnedArray) {
@@ -1792,10 +1791,9 @@ function RselectMap(map) {
                     }
                 }
             }
-        } else selectedMap = map;
+        }
     }
-    if (selectedMap != null) return selectedMap;
-    else return "world";
+    return selectedMap;
 }
 
 function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
