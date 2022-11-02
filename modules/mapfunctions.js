@@ -1598,7 +1598,7 @@ function Rshould(any, one) {
 
 function RselectMap(selectedMap) {
     if (Rshould(true, false)) {
-        if (selectedMap == "world") {
+        if (map == "world") {
             if (Rshould(false, true) == "mayhem") {
                 if (getPageSetting('Rmayhemmap') == 2) {
                     for (var map in game.global.mapsOwnedArray) {
@@ -1932,36 +1932,84 @@ function RselectMap(selectedMap) {
 
 function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
     var doDefaultMapBonus = game.global.mapBonus < getPageSetting('RMaxMapBonuslimit') - 1;
-    if ((RvanillaMAZ) ||
+    if (
+        (RvanillaMAZ) ||
         (Rshoulddopraid || (Rshoulddopraid && RAMPfragfarming)) ||
         (Rdshoulddopraid || (Rdshoulddopraid && RdAMPfragfarming)) ||
         (Rshouldinsanityfarm || (Rshouldinsanityfarm && Rinsanityfragfarming)) ||
         (Rshouldalchfarm || (Rshouldalchfarm && Ralchfragfarming)) ||
         (Rshouldhypofarm || (Rshouldhypofarm && Rhypofragfarming)) ||
-        (selectedMap == game.global.currentMapId && (!getCurrentMapObject().noRecycle && (doDefaultMapBonus || RvanillaMAZ || RdoMaxMapBonus || RshouldFarm || Rshouldtimefarm || Rdshouldtimefarm || Rshouldtributefarm || Rshoulddobogs || Rshoulddoquest > 0 || Rshouldmayhem > 0 || Rshouldpanda || Rshouldstormfarm || Rshouldequipfarm ||
-            (Rshouldshipfarm || (Rshouldshipfarm && Rshipfragfarming)))))) {
+        (Rshouldshipfarm || (Rshouldshipfarm && Rshipfragfarming)) ||
+        (selectedMap == game.global.currentMapId && 
+         (!getCurrentMapObject().noRecycle && 
+          (doDefaultMapBonus || 
+           RvanillaMAZ || 
+           RdoMaxMapBonus || 
+           RshouldFarm || 
+           Rshouldtimefarm || 
+           Rdshouldtimefarm || 
+           Rshouldtributefarm || 
+           Rshoulddobogs || 
+           (Rshoulddoquest > 0) || 
+           (Rshouldmayhem > 0) || 
+           Rshouldpanda || 
+           Rshouldstormfarm || 
+           Rshouldequipfarm
+          )
+         )
+        )
+       ) 
+    {
         if (!game.global.repeatMap) {
             repeatClicked();
         }
-        if (Rshoulddopraid && !RAMPfragfarming) {
+        if (
+            (Rshoulddopraid && !RAMPfragfarming) || 
+            (Rdshoulddopraid && !RdAMPfragfarming)
+           ) 
+        {
             if (game.options.menu.repeatUntil.enabled != 2) {
                 game.options.menu.repeatUntil.enabled = 2;
             }
-        } else if ((Rshoulddopraid && RAMPfragfarming) || (Rshouldinsanityfarm && Rinsanityfragfarming) || (Rshouldalchfarm && Ralchfragfarming) || (Rshouldhypofarm && Rhypofragfarming) || (Rshouldshipfarm && Rshipfragfarming)) {
+
+        } else if (
+            ((Rshoulddopraid && RAMPfragfarming) || (Rdshoulddopraid && RdAMPfragfarming)) || 
+            (Rshouldinsanityfarm && Rinsanityfragfarming) || 
+            (Rshouldalchfarm && Ralchfragfarming) || 
+            (Rshouldhypofarm && Rhypofragfarming) || 
+            (Rshouldshipfarm && Rshipfragfarming)
+        )
+        {
             if (game.options.menu.repeatUntil.enabled != 0) {
                 game.options.menu.repeatUntil.enabled = 0;
             }
         }
-        if (Rdshoulddopraid && !RdAMPfragfarming) {
-            if (game.options.menu.repeatUntil.enabled != 2) {
-                game.options.menu.repeatUntil.enabled = 2;
-            }
-        } else if ((Rdshoulddopraid && RdAMPfragfarming) || (Rshouldinsanityfarm && Rinsanityfragfarming) || (Rshouldalchfarm && Ralchfragfarming) || (Rshouldhypofarm && Rhypofragfarming) || (Rshouldshipfarm && Rshipfragfarming)) {
-            if (game.options.menu.repeatUntil.enabled != 0) {
-                game.options.menu.repeatUntil.enabled = 0;
-            }
-        }
-        if (!Rshoulddopraid && !RAMPfragfarming && !Rdshoulddopraid && !RdAMPfragfarming && !Rshouldinsanityfarm && !Rinsanityfragfarming && !Rshouldalchfarm && !Rshouldhypofarm && !Rhypofragfarming && !Ralchfragfarming && !Rshoulddobogs && !RshouldDoMaps && !Rshouldtimefarm && !Rdshouldtimefarm && !Rshouldtributefarm && Rshoulddoquest <= 0 && Rshouldmayhem <= 0 && !Rshouldpanda && !Rshouldstormfarm && !Rshouldequipfarm && !Rshouldshipfarm && !Rshipfragfarming) {
+
+        if (
+            !Rshoulddopraid && 
+            !RAMPfragfarming && 
+            !Rdshoulddopraid && 
+            !RdAMPfragfarming && 
+            !Rshouldinsanityfarm && 
+            !Rinsanityfragfarming && 
+            !Rshouldalchfarm && 
+            !Rshouldhypofarm && 
+            !Rhypofragfarming && 
+            !Ralchfragfarming && 
+            !Rshoulddobogs && 
+            !RshouldDoMaps && 
+            !Rshouldtimefarm && 
+            !Rdshouldtimefarm && 
+            !Rshouldtributefarm && 
+            Rshoulddoquest <= 0 && 
+            Rshouldmayhem <= 0 && 
+            !Rshouldpanda && 
+            !Rshouldstormfarm && 
+            !Rshouldequipfarm && 
+            !Rshouldshipfarm && 
+            !Rshipfragfarming
+           ) 
+        {
             repeatClicked();
         }
         if (shouldDoHealthMaps && game.global.mapBonus >= getPageSetting('RMaxMapBonushealth')) {
@@ -1972,29 +2020,22 @@ function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
             repeatClicked();
             RdoMaxMapBonus = false;
         }
-        if (game.global.repeatMap && Rshoulddoquest == 3 && game.global.mapBonus >= 4) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rshoulddopraid && RAMPfragfarming && RAMPfrag() == true) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rdshoulddopraid && RdAMPfragfarming && RdAMPfrag() == true) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rshouldinsanityfarm && Rinsanityfragfarming && insanityfrag() == true) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rshouldalchfarm && Ralchfragfarming && alchfrag() == true) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rshouldhypofarm && Rhypofragfarming && hypofrag() == true) {
-            repeatClicked();
-        }
-        if (game.global.repeatMap && Rshouldshipfarm && Rshipfragfarming && shipfrag() == true) {
+        if (game.global.repeatMap &&
+            (Rshoulddoquest == 3 && game.global.mapBonus >= 4) ||
+            (Rshoulddopraid && RAMPfragfarming && RAMPfrag() == true) ||
+            (Rdshoulddopraid && RdAMPfragfarming && RdAMPfrag() == true) ||
+            (Rshouldinsanityfarm && Rinsanityfragfarming && insanityfrag() == true) ||
+            (Rshouldalchfarm && Ralchfragfarming && alchfrag() == true) ||
+            (Rshouldhypofarm && Rhypofragfarming && hypofrag() == true) ||
+            (Rshouldshipfarm && Rshipfragfarming && shipfrag() == true)
+           ) 
+        {
             repeatClicked();
         }
 
-    } else {
+    } 
+    
+    else {
         if (game.global.repeatMap) {
             repeatClicked();
         }
