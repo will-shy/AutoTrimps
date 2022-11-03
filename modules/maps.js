@@ -1453,7 +1453,7 @@ function RautoMap() {
                 RtributeFarmMap();
             }
             if (Rshoulddoquest) {
-                questMap(Rshoulddoquest);
+                RquestMap(Rshoulddoquest);
             }
             if (Rshouldmayhem > 0 && getPageSetting('Rmayhemmap') == 2 && !Rshouldtimefarm && !Rdshouldtimefarm) {
                 RlevelMap("mayhem");
