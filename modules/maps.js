@@ -869,7 +869,9 @@ function RupdateAutoMapsStatus(get) {
 
     //Fail Safes
     if (getPageSetting('RAutoMaps') == 0) status = 'Off';
+    else if (!game.global.mapsUnlocked) status = 'Maps Locked';
 
+    //Status
     else if (Rshouldcastle && game.global.totalVoidMaps <= 0) status = 'Frozen Castle';
     else if (contractVoid) status = 'Contract';
     else if (Rshouldshipfarm) status = 'Ship Farming';
