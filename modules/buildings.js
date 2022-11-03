@@ -6,7 +6,7 @@ MODULES["buildings"].storageLowlvlCutoff2 = 0.5;
 //Helium
 var housingList = ['Hut', 'House', 'Mansion', 'Hotel', 'Resort', 'Gateway', 'Collector', 'Warpstation'];
 
-function needGymystic() {fi
+function needGymystic() {
     return game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done > 0;
 }
 
