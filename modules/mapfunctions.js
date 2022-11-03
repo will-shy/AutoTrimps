@@ -1100,17 +1100,14 @@ function RinsanityMap() {
     if (insanityfragcheck && getPageSetting('Rinsanityfarmlevel') != 0) {
 
         var insanitylevelzones = Rinsanity(false, true, false);
-
-        if (insanityfarmzone.includes(game.global.world)) {
-            if (insanitylevelzones > 0) {
-                insanityfragmin(insanitylevelzones);
-                document.getElementById("mapLevelInput").value = game.global.world;
-                document.getElementById("advExtraLevelSelect").value = insanitylevelzones;
-            } else if (insanitylevelzones < 0) {
-                insanityfragmin(insanitylevelzones);
-                document.getElementById("mapLevelInput").value = (game.global.world + insanitylevelzones);
-                document.getElementById("advExtraLevelSelect").value = 0;
-            }
+        if (insanitylevelzones > 0) {
+            insanityfragmin(insanitylevelzones);
+            document.getElementById("mapLevelInput").value = game.global.world;
+            document.getElementById("advExtraLevelSelect").value = insanitylevelzones;
+        } else if (insanitylevelzones < 0) {
+            insanityfragmin(insanitylevelzones);
+            document.getElementById("mapLevelInput").value = (game.global.world + insanitylevelzones);
+            document.getElementById("advExtraLevelSelect").value = 0;
         }
     }
     updateMapCost();
@@ -1341,23 +1338,21 @@ function RalchMap() {
         }
     }
     if (alchfragcheck && getPageSetting('Ralchfarmlevel') != 0) {
-        if (alchfarmzone.includes(game.global.world)) {
-            if (Rshouldalchfarm) {
+        if (Rshouldalchfarm) {
 
-                var alchfarmzone = getPageSetting('Ralchfarmzone');
-                var alchfarmselection = getPageSetting('Ralchfarmselection')
-                var alchlevelzones = Ralch(false, true, false);
-                var alchfarmselectionindex = alchfarmzone.indexOf(game.global.world);
-                var selection = alchfarmselection[alchfarmselectionindex];
-                if (selection == 'Mountain') selection = "Mountain";
-                else if (selection == 'Forest') selection = "Forest";
-                else if (selection == 'Sea') selection = "Sea";
-                else if (selection == 'Depths') selection = "Depths";
-                else if (selection == 'Plentiful') selection = "Plentiful";
-                else if (selection == 'Farmlands') selection = "Farmlands";
+            var alchfarmzone = getPageSetting('Ralchfarmzone');
+            var alchfarmselection = getPageSetting('Ralchfarmselection')
+            var alchlevelzones = Ralch(false, true, false);
+            var alchfarmselectionindex = alchfarmzone.indexOf(game.global.world);
+            var selection = alchfarmselection[alchfarmselectionindex];
+            if (selection == 'Mountain') selection = "Mountain";
+            else if (selection == 'Forest') selection = "Forest";
+            else if (selection == 'Sea') selection = "Sea";
+            else if (selection == 'Depths') selection = "Depths";
+            else if (selection == 'Plentiful') selection = "Plentiful";
+            else if (selection == 'Farmlands') selection = "Farmlands";
 
-                alchfragmin(alchlevelzones, selection);
-            }
+            alchfragmin(alchlevelzones, selection);
         }
     }
     updateMapCost();
@@ -1463,20 +1458,18 @@ function RhypoMap() {
 
         var hypolevelzones = Rhypo(false, true, false);
 
-        if (hypofarmzone.includes(game.global.world)) {
-            if (hypolevelzones > 0) {
-                hypofragmin(hypolevelzones);
-                document.getElementById("mapLevelInput").value = game.global.world;
-                document.getElementById("advExtraLevelSelect").value = hypolevelzones;
-            } else if (hypolevelzones == 0) {
-                hypofragmin(hypolevelzones);
-                document.getElementById("mapLevelInput").value = game.global.world;
-                document.getElementById("advExtraLevelSelect").value = 0;
-            } else if (hypolevelzones < 0) {
-                hypofragmin(hypolevelzones);
-                document.getElementById("mapLevelInput").value = (game.global.world + hypolevelzones);
-                document.getElementById("advExtraLevelSelect").value = 0;
-            }
+        if (hypolevelzones > 0) {
+            hypofragmin(hypolevelzones);
+            document.getElementById("mapLevelInput").value = game.global.world;
+            document.getElementById("advExtraLevelSelect").value = hypolevelzones;
+        } else if (hypolevelzones == 0) {
+            hypofragmin(hypolevelzones);
+            document.getElementById("mapLevelInput").value = game.global.world;
+            document.getElementById("advExtraLevelSelect").value = 0;
+        } else if (hypolevelzones < 0) {
+            hypofragmin(hypolevelzones);
+            document.getElementById("mapLevelInput").value = (game.global.world + hypolevelzones);
+            document.getElementById("advExtraLevelSelect").value = 0;
         }
     }
     updateMapCost();
@@ -1643,29 +1636,23 @@ function RselectOther(other) {
     if (other == "insanity") {
         level = getPageSetting('Rinsanityfarmlevel');
         levelzones = Rinsanity(false, true, false);
-    }
-    else if (other == "alch") {
+    } else if (other == "alch") {
         level = getPageSetting('Ralchfarmlevel');
         levelzones = Ralch(false, true, false);
-    }
-    else if (other == "hypo") {
+    } else if (other == "hypo") {
         level = getPageSetting('Rhypofarmlevel');
         levelzones = Rhypo(false, true, false);
-    }
-    else if (other == "ship") {
+    } else if (other == "ship") {
         level = getPageSetting('Rshipfarmlevel');
         levelzones = Rship(false, true, false);
         ship = false;
-    }
-    else if (other == "time") {
+    } else if (other == "time") {
         level = getPageSetting('Rtimefarmlevel');
         levelzones = RtimeFarm(false, true, false, false, false);
-    }
-    else if (other == "dtime") {
+    } else if (other == "dtime") {
         level = getPageSetting('Rdtimefarmlevel');
         levelzones = RtimeFarm(false, true, false, false, true);
-    }
-    else if (other == "tribute") {
+    } else if (other == "tribute") {
         level = getPageSetting('Rtributefarmlevel');
         levelzones = RtributeFarm(false, true, false, false);
     }
@@ -1680,9 +1667,7 @@ function RselectOther(other) {
                 selectedMap = "create";
             }
         }
-    } 
-    
-    else if (level != 0) {
+    } else if (level != 0) {
         if (levelzones > 0) {
             for (var map in game.global.mapsOwnedArray) {
                 if (!ship && game.global.mapsOwnedArray[map].bonus == "lsc") ship = true;
@@ -1724,33 +1709,23 @@ function RselectMap(selectedMap) {
 
             if (Rshould(false, true) == "mayhem") {
                 selectedMap = RselectMayhem();
-            }
-            else if (Rshould(false, true) == "panda") {
+            } else if (Rshould(false, true) == "panda") {
                 selectedMap = RselectPanda();
-            }
-            else if (Rshould(false, true) == "insanity") {
+            } else if (Rshould(false, true) == "insanity") {
                 selectedMap = RselectOther("insanity");
-            }
-            else if (Rshould(false, true) == "alch") {
+            } else if (Rshould(false, true) == "alch") {
                 selectedMap = RselectOther("alch");
-            } 
-            else if (Rshould(false, true) == "hypo") {
+            } else if (Rshould(false, true) == "hypo") {
                 selectedMap = RselectOther("hypo");
-            } 
-            else if (Rshould(false, true) == "ship") {
+            } else if (Rshould(false, true) == "ship") {
                 selectedMap = RselectOther("ship");
-            } 
-            else if (Rshould(false, true) == "time") {
+            } else if (Rshould(false, true) == "time") {
                 selectedMap = RselectOther("time");
-            } 
-            else if (Rshould(false, true) == "dtime") {
+            } else if (Rshould(false, true) == "dtime") {
                 selectedMap = RselectOther("dtime");
-            } 
-            else if (Rshould(false, true) == "tribute") {
+            } else if (Rshould(false, true) == "tribute") {
                 selectedMap = RselectOther("tribute");
-            } 
-            
-            else if (Rshould(false, true) == "equip") {
+            } else if (Rshould(false, true) == "equip") {
                 for (var map in game.global.mapsOwnedArray) {
                     if (!game.global.mapsOwnedArray[map].noRecycle && RequipExtra() <= 0 && ((game.global.world + RequipExtra()) == game.global.mapsOwnedArray[map].level)) {
                         selectedMap = game.global.mapsOwnedArray[map].id;
@@ -1759,9 +1734,7 @@ function RselectMap(selectedMap) {
                         selectedMap = "create";
                     }
                 }
-            }
-            
-            else {
+            } else {
                 for (var map in game.global.mapsOwnedArray) {
                     if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
                         selectedMap = game.global.mapsOwnedArray[map].id;
@@ -1786,76 +1759,72 @@ function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
         (Rshouldalchfarm || (Rshouldalchfarm && Ralchfragfarming)) ||
         (Rshouldhypofarm || (Rshouldhypofarm && Rhypofragfarming)) ||
         (Rshouldshipfarm || (Rshouldshipfarm && Rshipfragfarming)) ||
-        (selectedMap == game.global.currentMapId && 
-         (!getCurrentMapObject().noRecycle && 
-          (doDefaultMapBonus || 
-           RvanillaMAZ || 
-           RdoMaxMapBonus || 
-           RshouldFarm || 
-           Rshouldtimefarm || 
-           Rdshouldtimefarm || 
-           Rshouldtributefarm || 
-           Rshoulddobogs || 
-           (Rshoulddoquest > 0) || 
-           (Rshouldmayhem > 0) || 
-           Rshouldpanda || 
-           Rshouldstormfarm || 
-           Rshouldequipfarm
-          )
-         )
+        (selectedMap == game.global.currentMapId &&
+            (!getCurrentMapObject().noRecycle &&
+                (doDefaultMapBonus ||
+                    RvanillaMAZ ||
+                    RdoMaxMapBonus ||
+                    RshouldFarm ||
+                    Rshouldtimefarm ||
+                    Rdshouldtimefarm ||
+                    Rshouldtributefarm ||
+                    Rshoulddobogs ||
+                    (Rshoulddoquest > 0) ||
+                    (Rshouldmayhem > 0) ||
+                    Rshouldpanda ||
+                    Rshouldstormfarm ||
+                    Rshouldequipfarm
+                )
+            )
         )
-       ) 
-    {
+    ) {
         if (!game.global.repeatMap) {
             repeatClicked();
         }
         if (
-            (Rshoulddopraid && !RAMPfragfarming) || 
+            (Rshoulddopraid && !RAMPfragfarming) ||
             (Rdshoulddopraid && !RdAMPfragfarming)
-           ) 
-        {
+        ) {
             if (game.options.menu.repeatUntil.enabled != 2) {
                 game.options.menu.repeatUntil.enabled = 2;
             }
 
         } else if (
-            ((Rshoulddopraid && RAMPfragfarming) || (Rdshoulddopraid && RdAMPfragfarming)) || 
-            (Rshouldinsanityfarm && Rinsanityfragfarming) || 
-            (Rshouldalchfarm && Ralchfragfarming) || 
-            (Rshouldhypofarm && Rhypofragfarming) || 
+            ((Rshoulddopraid && RAMPfragfarming) || (Rdshoulddopraid && RdAMPfragfarming)) ||
+            (Rshouldinsanityfarm && Rinsanityfragfarming) ||
+            (Rshouldalchfarm && Ralchfragfarming) ||
+            (Rshouldhypofarm && Rhypofragfarming) ||
             (Rshouldshipfarm && Rshipfragfarming)
-        )
-        {
+        ) {
             if (game.options.menu.repeatUntil.enabled != 0) {
                 game.options.menu.repeatUntil.enabled = 0;
             }
         }
 
         if (
-            !Rshoulddopraid && 
-            !RAMPfragfarming && 
-            !Rdshoulddopraid && 
-            !RdAMPfragfarming && 
-            !Rshouldinsanityfarm && 
-            !Rinsanityfragfarming && 
-            !Rshouldalchfarm && 
-            !Rshouldhypofarm && 
-            !Rhypofragfarming && 
-            !Ralchfragfarming && 
-            !Rshoulddobogs && 
-            !RshouldDoMaps && 
-            !Rshouldtimefarm && 
-            !Rdshouldtimefarm && 
-            !Rshouldtributefarm && 
-            Rshoulddoquest <= 0 && 
-            Rshouldmayhem <= 0 && 
-            !Rshouldpanda && 
-            !Rshouldstormfarm && 
-            !Rshouldequipfarm && 
-            !Rshouldshipfarm && 
+            !Rshoulddopraid &&
+            !RAMPfragfarming &&
+            !Rdshoulddopraid &&
+            !RdAMPfragfarming &&
+            !Rshouldinsanityfarm &&
+            !Rinsanityfragfarming &&
+            !Rshouldalchfarm &&
+            !Rshouldhypofarm &&
+            !Rhypofragfarming &&
+            !Ralchfragfarming &&
+            !Rshoulddobogs &&
+            !RshouldDoMaps &&
+            !Rshouldtimefarm &&
+            !Rdshouldtimefarm &&
+            !Rshouldtributefarm &&
+            Rshoulddoquest <= 0 &&
+            Rshouldmayhem <= 0 &&
+            !Rshouldpanda &&
+            !Rshouldstormfarm &&
+            !Rshouldequipfarm &&
+            !Rshouldshipfarm &&
             !Rshipfragfarming
-           ) 
-        {
+        ) {
             repeatClicked();
         }
         if (shouldDoHealthMaps && game.global.mapBonus >= getPageSetting('RMaxMapBonushealth')) {
@@ -1874,14 +1843,11 @@ function RmapRepeat(selectedMap, shouldDoHealthMaps, restartVoidMap) {
             (Rshouldalchfarm && Ralchfragfarming && alchfrag() == true) ||
             (Rshouldhypofarm && Rhypofragfarming && hypofrag() == true) ||
             (Rshouldshipfarm && Rshipfragfarming && shipfrag() == true)
-           ) 
-        {
+        ) {
             repeatClicked();
         }
 
-    } 
-    
-    else {
+    } else {
         if (game.global.repeatMap) {
             repeatClicked();
         }
