@@ -1959,14 +1959,15 @@ function RquestMap(quest) {
 
 function RlevelMap(what) {
     var extra = 0;
+    var globalextra = 0;
     if (what == "mayhem") {
         extra = RmayhemExtra();
     } else if (what == "panda") {
         extra = RpandaExtra();
     } else if (what == "equip") {
-        extra = RequipExtra();
+        globalextra = RequipExtra();
     }
-    mapLevelInput.value = (game.global.world + extra);
+    mapLevelInput.value = (game.global.world + globalextra);
     biomeAdvMapsSelect.value = "Random";
     document.getElementById("advSpecialSelect").value = (what == "equip") ? "lmc" : "fa";
     document.getElementById("advExtraLevelSelect").value = extra;
