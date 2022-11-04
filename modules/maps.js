@@ -1090,10 +1090,10 @@ function RautoMap() {
             if (setZone[x].times > 0 && (game.global.world - setZone[x].world) % setZone[x].times !== 0) continue;
             if (setZone[x].cell === game.global.lastClearedCell + 2) {
                 RvanillaMAZ = true;
-                if (setZone.until == 6) game.global.mapCounterGoal = 25;
-                if (setZone.until == 7) game.global.mapCounterGoal = 50;
-                if (setZone.until == 8) game.global.mapCounterGoal = 100;
-                if (setZone.until == 9) game.global.mapCounterGoal = setZone.rx;
+                if (setZone[x].until == 6) game.global.mapCounterGoal = 25;
+                if (setZone[x].until == 7) game.global.mapCounterGoal = 50;
+                if (setZone[x].until == 8) game.global.mapCounterGoal = 100;
+                if (setZone[x].until == 9) game.global.mapCounterGoal = setZone[x].rx;
                 break;
             }
         }
