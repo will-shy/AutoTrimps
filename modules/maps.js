@@ -1082,10 +1082,15 @@ function RautoMap() {
 
     //MAZ
     if (game.options.menu.mapAtZone.enabled && game.global.canMapAtZone) {
+        var nextCell = game.global.lastClearedCell;
+        if (nextCell == -1) nextCell = 1;
+        else nextCell += 2;
+        var totalPortals = getTotalPortals();
         let setZone = game.options.menu.mapAtZone.getSetZone();
         for (var x = 0; x < setZone.length; x++) {
             if (!setZone[x].on) continue;
             if (game.global.world < setZone[x].world || game.global.world > setZone[x].through) continue;
+            if (game.global.preMapsActive && setZone[x].done == totalPortals + "_" + game.global.world + "_" + nextCell) continue;
             if (setZone[x].times === -1 && game.global.world !== setZone[x].world) continue;
             if (setZone[x].times > 0 && (game.global.world - setZone[x].world) % setZone[x].times !== 0) continue;
             if (setZone[x].cell === game.global.lastClearedCell + 2) {
