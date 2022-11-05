@@ -16,8 +16,6 @@ function ATscriptUnload(a) {
 }
 ATscriptLoad(modulepath, 'utils');
 
-//var isSteam = false;
-
 function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('', 'SettingsGUI');
@@ -33,7 +31,7 @@ var changelogList = [];
 changelogList.push({
     date: "28/10/2022",
     version: "v5.2.0",
-    description: "<b>Trimps v5.8.0</b> Changed AM Portal to AM Always in Maps so check that setting. Autogiga, Better stance swap, U1 Calc fixed. ",
+    description: "<b>Trimps v5.8.0</b> Changed U2 Automaps so there might be problems, let me know if there is. Autogiga, Better stance swap, U1 Calc fixed. ",
     isNew: true
 });
 changelogList.push({
@@ -183,6 +181,7 @@ function mainLoop() {
 
         //Core
         if (getPageSetting('AutoMaps') > 0 && game.global.mapsUnlocked) autoMap();
+	if (getPageSetting('automapsalways') == true && autoTrimpSettings.AutoMaps.value != 1) autoTrimpSettings.AutoMaps.value = 1;
         if (getPageSetting('showautomapstatus') == true) updateAutoMapsStatus();
         if (getPageSetting('ManualGather2') == 1) manualLabor2();
         if (getPageSetting('TrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
@@ -287,6 +286,7 @@ function mainLoop() {
         //RCore
         if (getPageSetting('RAutoMaps') > 0 && game.global.mapsUnlocked) RautoMap();
         if (getPageSetting('Rshowautomapstatus') == true) RupdateAutoMapsStatus();
+	if (getPageSetting('Rautomapsalways') == true && autoTrimpSettings.RAutoMaps.value != 1) autoTrimpSettings.RAutoMaps.value = 1;
         if (getPageSetting('RManualGather2') == 1) RmanualLabor2();
         if (getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
         if (game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');

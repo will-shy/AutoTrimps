@@ -634,6 +634,7 @@ function initializeAllSettings() {
     createSetting('AMUbw', 'AMU: BW', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('AMUstar', 'AMU: Imploding Star', 'Turn on to run this map every run. ', 'boolean', false, null, 'Maps');
     createSetting('automapsportal', 'AM Portal', 'Makes sure Auto Maps is on on portal. ', 'boolean', false, null, 'Maps');
+    createSetting('automapsalways', 'AM Always', 'Makes sure Auto Maps is on always. ', 'boolean', false, null, 'Maps');
     document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
     
     //Line 2
@@ -679,6 +680,7 @@ function initializeAllSettings() {
     //Line 1
     createSetting('RAutoMaps', ["Auto Maps Off", "Auto Maps On", "Auto Maps No Unique"], 'Automaps. The no unique setting will not run unique maps such as dimensions of rage. Recommended ON. Do not use MaZ, it will not work. ', 'multitoggle', 1, null, "Maps");
     createSetting('Rautomapsportal', 'AM Portal', 'Makes sure Auto Maps is on portal. ', 'boolean', false, null, 'Maps');
+    createSetting('Rautomapsalways', 'AM Always', 'Makes sure Auto Maps is on always. ', 'boolean', false, null, 'Maps');
     createSetting('Rmapselection', 'Map Selection', 'Select which you prefer to use. Recommend Plentiful (Gardens) if you have unlocked it. ', 'dropdown', 'Mountain', ["Random", "Mountain", "Forest", "Sea", "Depths", "Plentiful", "Farmlands"], 'Maps');
     createSetting('RMaxMapBonusAfterZone', 'Max MapBonus After', 'Always gets Max Map Bonus from this zone on. (inclusive and after).<br><b>NOTE:</b> Set -1 to disable entirely (default). Set 0 to use it always. ', 'value', '-1', null, 'Maps');
     createSetting('RMaxMapBonuslimit', 'Max MapBonus Limit', 'Limit the amount of Map Bonuses you get. Default is 10. ', 'value', '10', null, 'Maps');
@@ -1928,6 +1930,7 @@ function updateCustomButtons() {
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUbw") : turnOff("AMUbw");
     (!radonon && getPageSetting('AutoMaps') == 2) ? turnOn("AMUstar") : turnOff("AMUstar");
     !radonon ? turnOn("automapsportal") : turnOff("automapsportal");
+    !radonon ? turnOn("automapsalways") : turnOff("automapsalways");
     
     
     !radonon ? turnOn("mapselection") : turnOff("mapselection");
@@ -1965,6 +1968,7 @@ function updateCustomButtons() {
     //RMaps
     radonon ? turnOn("RAutoMaps") : turnOff("RAutoMaps");
     radonon ? turnOn("Rautomapsportal") : turnOff("Rautomapsportal");
+    radonon ? turnOn("Rautomapsalways") : turnOff("Rautomapsalways");
     radonon ? turnOn("Rmapselection") : turnOff("Rmapselection");
     radonon ? turnOn("RMaxMapBonusAfterZone") : turnOff("RMaxMapBonusAfterZone");
     radonon ? turnOn("RMaxMapBonuslimit") : turnOff("RMaxMapBonuslimit");
@@ -2482,6 +2486,7 @@ function updateCustomButtons() {
         var item = autoTrimpSettings[setting];
         if (item.type == 'value' || item.type == 'valueNegative' || item.type == 'multitoggle' || item.type == 'multiValue' || item.type == 'textValue') {
             var elem = document.getElementById(item.id);
+            if (elem.parentNode.style.display === 'none') continue;
             if (elem != null) {
                 if (item.type == 'multitoggle')
                     elem.textContent = item.name[item.value];
